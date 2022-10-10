@@ -37,7 +37,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"'],
+    browsers: ['google-chrome'],
     singleRun: false,
     restartOnFileChange: true
   });
