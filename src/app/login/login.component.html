@@ -15,14 +15,14 @@
                <form>
                   <div class="form-group">
                      <label>Usuario</label>
-                     <input type="text" class="form-control" placeholder="Nombre de usuario">
+                     <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Nombre de usuario">
                   </div>
                   <div class="form-group">
                      <label>Contraseña</label>
-                     <input type="password" class="form-control" placeholder="Contraseña">
+                     <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Contraseña">
                   </div>
                   <div>
-                    <button type="submit" class="btn btn-black">Acceder</button>
+                    <button type="submit" (click)="login()" class="btn btn-black">Acceder</button>
                   </div>
                   <hr/>
                   <div>
