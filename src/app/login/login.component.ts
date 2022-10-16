@@ -10,7 +10,12 @@ import axios from 'axios';
 })
 export class LoginComponent implements OnInit {
   username: string = "";
-  password: string= "";
+  password: string = "";
+
+  // Possible errors:
+  emptyName: boolean = false;
+  emptyPassword: boolean = false;
+  errors: boolean = false;
 
   constructor(public router: Router) { }
 
@@ -18,17 +23,33 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    axios.post("https://selldesign-backend.onrender.com/users/login", {
-      username: this.username,
-      password: this.password,
-    })
-    .then((res) => {
-      if (res.status == 200) {
-        this.router.navigate(['/mainPage']);
-      }
+    this.errors = false;
+    this.emptyName = false;
+    this.emptyPassword = false;
+    
+    if (this.username == "") {
+      this.emptyName = true;
+      this.errors = true;
+    }
+    if (this.password == "") {
+      this.emptyPassword = true;
+      this.errors = true;
+    }
 
-    }).catch((error) => {
-      console.log(error);
-    })
+    if (!this.errors) {
+      axios.post("https://selldesign-backend.onrender.com/users/login", {
+        username: this.username,
+        password: this.password,
+      })
+        .then((res) => {
+          if (res.status == 200) {
+            this.router.navigate(['/mainPage']);
+          }
+
+        }).catch((error) => {
+          console.log(error);
+        })
+    }
   }
+
 }
