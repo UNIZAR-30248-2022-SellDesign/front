@@ -20,13 +20,13 @@
     </nav>
 
     <div class="container p-1">
-        <div class="card" style="width: 18rem;">
-            <p>Hola</p>
-            <img src={{viewProduct.mainImage}} class="card-img-top" alt="...">
-            <div class="card-body">
-            <p class="card-text">{{viewProduct.productName}} --- {{viewProduct.designName}}</p>
-            <p class="card-text"><strong>{{viewProduct.price}}€</strong></p>
-        </div>        
+        <img src={{viewProduct.mainImage}} class="card-img-left"  alt="...">
+        <div style="display:inline-block;vertical-align:top; width: 600px; height: 380px;padding: 5px;">
+            {{viewProduct.productName}} --- {{viewProduct.designName}}
+            <strong>{{viewProduct.price}}€</strong>
+            {{viewProduct.description}}
+        </div>
+        
     </div>
 
     <footer>
