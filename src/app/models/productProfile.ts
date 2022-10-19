@@ -4,5 +4,8 @@ export interface ProductProfile {
     description:String,
     price: Number,
     mainImage: String,
+    designerName:String,
+    favourite:boolean,
+    favouriteImage:String,
     images: String[]
 }
