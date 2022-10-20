@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../models/product';
+import { Product } from '../../models/product';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class HomepageComponent implements OnInit {
-
-
+export class HomeComponent implements OnInit {
 
   products: Product[] = [
     {productName:"Sudadera",designName:"buah",price:10,image:"https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530"},
