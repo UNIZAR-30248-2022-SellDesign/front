@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 import {HomeComponent} from './components/home/home.component';
 import {PerfilComponent} from './components/perfil/perfil.component';
@@ -15,8 +18,10 @@ const routes: Routes = [
   {path: 'MisDiseños', component: MisDisenosComponent},
   {path: 'MisProductos', component: MisProductosComponent},
   {path: 'MiCarrito/:nombre', component: MiCarritoComponent},
-  {path: '**', component: ErrorComponent}
-  
+  {path: '**', component: ErrorComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+
 ];
 
 export const AppRoutingProviders: any[] = [];
