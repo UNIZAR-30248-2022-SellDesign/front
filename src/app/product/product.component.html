@@ -22,9 +22,10 @@
     <div class="container p-1" style="width: 100%;">
         <div style="width: 30%;float: left;align-items: center;">
             <img src={{viewProduct.mainImage}} class="card-img-left"  alt="..." style="width: 100%;">
-            <!--{% if {{viewProduct.favourite}}==true %} 
-            <img src={{viewProduct.favouriteImage}} class="card-img-left"  alt="..." style="width: 5%;margin:auto;">
-            {% endif %}-->
+            <div style="text-align:center;">
+                <img src={{viewProduct.favouriteImage}} class="card-img-left"  alt="..." style="width: 5%;margin:auto;">
+            </div>
+            
             <div>
                 <ul class="row row-cols-4" style="align-items: center;">
                     <li *ngFor="let image of viewProduct.images" class="list-group-item p-2" s>
