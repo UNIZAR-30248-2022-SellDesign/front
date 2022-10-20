@@ -11,9 +11,9 @@ import { MisProductosComponent } from './components/mis-productos/mis-productos.
 import { MiCarritoComponent } from './components/mi-carrito/mi-carrito.component';
 import { ErrorComponent } from './components/error/error.component';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

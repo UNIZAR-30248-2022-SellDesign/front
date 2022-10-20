@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
         password: this.password,
       })
         .then((res) => {
-          if (res.status == 200) {
-            this.router.navigate(['/mainPage']);
+          if (res.status == 201) {
+            this.router.navigate(['/Perfil']);
           }
 
         }).catch((error) => {

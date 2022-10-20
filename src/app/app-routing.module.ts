@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import {HomeComponent} from './components/home/home.component';
 import {PerfilComponent} from './components/perfil/perfil.component';
@@ -13,14 +13,14 @@ import { ErrorComponent } from './components/error/error.component';
 import { BarraNavegacionComponent } from './components/barra-navegacion/barra-navegacion.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'Perfil', component: PerfilComponent},
   {path: 'MisDiseños', component: MisDisenosComponent},
   {path: 'MisProductos', component: MisProductosComponent},
   {path: 'MiCarrito/:nombre', component: MiCarritoComponent},
   {path: '**', component: ErrorComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
 
 ];
 
