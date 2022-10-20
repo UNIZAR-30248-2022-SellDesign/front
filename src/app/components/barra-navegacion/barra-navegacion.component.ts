@@ -23,7 +23,7 @@ import axios from 'axios';
   }
 
   cerrarSesion(){
-      axios.post("https://selldesign-backend.onrender.com/users/logout", { 
+      axios.get("https://selldesign-backend.onrender.com/users/logout", { 
       }).catch((error) => {
           console.log(error);
           alert("No se ha podido cerrar sesión");
