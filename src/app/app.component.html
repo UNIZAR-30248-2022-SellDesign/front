@@ -1,4 +1,4 @@
 <div>
-  <barra-navegacion></barra-navegacion>
+  <barra-navegacion *ngIf="router.url != '/login' && router.url != '/register'"></barra-navegacion>
   <router-outlet></router-outlet>
 </div>
