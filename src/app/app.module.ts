@@ -10,7 +10,11 @@ import { MisDisenosComponent } from './components/mis-disenos/mis-disenos.compon
 import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
 import { MiCarritoComponent } from './components/mi-carrito/mi-carrito.component';
 import { ErrorComponent } from './components/error/error.component';
-
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,10 +26,13 @@ import { ErrorComponent } from './components/error/error.component';
     MisProductosComponent,
     MiCarritoComponent,
     ErrorComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [AppRoutingProviders],
   bootstrap: [AppComponent]

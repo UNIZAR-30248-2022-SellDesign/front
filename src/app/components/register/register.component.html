@@ -1,0 +1,74 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>SellDesign</h2>
+        <p>¡Gana dinero vendiendo tus diseños!</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="register-form">
+            <form>
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" [(ngModel)]="username" name="username" class="form-control"
+                        placeholder="Nombre de usuario">
+                        <div class="text-danger" *ngIf=emptyUser>
+                            Campo obligatorio
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label>Correo</label>
+                    <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="Correo">
+                    <div class="text-danger" *ngIf=emptyMail>
+                        Campo obligatorio
+                     </div>
+                     <div class="text-danger" *ngIf=invalidEmail>
+                        Dirección no válida
+                     </div>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" [(ngModel)]="password" name="password" class="form-control"
+                        placeholder="Contraseña">
+                        <div class="text-danger" *ngIf=emptyPassword>
+                            Campo obligatorio
+                         </div>
+                         <div class="text-danger" *ngIf=noDigits>
+                            Debe contener al menos un dígito
+                         </div>
+                         <div class="text-danger" *ngIf=noUpper>
+                            Debe contener al menos una mayúscula
+                         </div>
+                         <div class="text-danger" *ngIf=wrongLength>
+                            Debe tener entre 6 y 16 carácteres
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar contraseña</label>
+                    <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control"
+                        placeholder="Confirmar contraseña">
+                        <div class="text-danger" *ngIf=emptyConfirm>
+                            Campo obligatorio
+                         </div>
+                         <div class="text-danger" *ngIf=wrongConfirm>
+                            Las contraseñas no coinciden
+                         </div>
+                         
+                </div>
+                <div>
+                    <button type="submit" (click)="register()" class="btn btn-black">Registrarme</button>
+                </div>
+                <hr />
+                <div>
+                    ¿Ya tienes cuenta?
+                    <p><a class="btn btn-secondary" href="/login" role="button">Acceder</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
