@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 })
 export class AppComponent {
   title = 'selldesign-front';
+  showBar = true;
+  constructor(public router: Router) {
+    this.router = router;
+  }
+
 }
- 

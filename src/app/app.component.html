@@ -1,8 +1,8 @@
 <div>
-  <barra-navegacion></barra-navegacion>
+  <barra-navegacion *ngIf="router.url != '/login' && router.url != '/register'"></barra-navegacion>
   <router-outlet></router-outlet>
   <!-- Footer -->
-  <footer class="text-center text-lg-start bg-light text-muted">
+  <footer *ngIf="router.url != '/login' && router.url != '/register'" class="text-center text-lg-start bg-light text-muted">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
       <!-- Left -->

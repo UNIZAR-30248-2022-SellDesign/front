@@ -1,28 +1,17 @@
-
-
-    <div class="container p-1">
-        <ul class="row row-cols-4">
-            <li *ngFor="let product of newProducts" class="list-group-item p-2">
-                <div class="card" style="width: 18rem;">
-                    <img src={{product.image}} class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <p class="card-text">{{product.productName}} --- {{product.designName}}</p>
-                    <p class="card-text"><strong>{{product.price}}€</strong></p>
-                    </div>
+<div class="container p-1">
+    <ul class="row row-cols-4">
+        <li *ngFor="let product of newProducts" class="list-group-item p-2">
+            <div class="card" style="width: 18rem;">
+                <img src={{product.image}} class="card-img-top" alt="...">
+                <div class="card-body">
+                <p class="card-text">{{product.productName}} --- {{product.designName}}</p>
+                <p class="card-text"><strong>{{product.price}}€</strong></p>
                 </div>
-            </li>
-        </ul>
-        
-        <div class="d-flex justify-content-center p-2">
-            <button class="btn btn-lg btn-outline-dark" (click)="getMore()">Cargar más</button>
-        </div>
-    </div>
-
-    <footer>
-        <nav class="navbar navbar-expand-lg bg-light p-5 border-top border-dark">
-            <div class="container-fluid d-flex justify-content-center">
-                <h1 class="text-center">Aqui habra cosas que no le importan nunca a nadie</h1>
             </div>
-        </nav>
-    </footer>
-
+        </li>
+    </ul>
+    
+    <div class="d-flex justify-content-center p-2">
+        <button class="btn btn-lg btn-outline-dark" (click)="getMore()">Cargar más</button>
+    </div>
+</div>

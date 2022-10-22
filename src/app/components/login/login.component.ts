@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('session')) {
+      this.router.navigate(['/Perfil']);
+    }
+
   }
 
   login() {
@@ -42,7 +46,9 @@ export class LoginComponent implements OnInit {
         password: this.password,
       })
         .then((res) => {
+          console.log(res)
           if (res.status == 201) {
+            localStorage.setItem('session',res.data)
             this.router.navigate(['/Perfil']);
           }
 

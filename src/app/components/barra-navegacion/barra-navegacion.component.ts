@@ -24,6 +24,11 @@ import axios from 'axios';
 
   cerrarSesion(){
       axios.get("https://selldesign-backend.onrender.com/users/logout", { 
+      }).then((res) => {
+        if(res.status == 200) {
+          localStorage.removeItem('session')
+          this._router.navigate(['/login'])
+        }
       }).catch((error) => {
           console.log(error);
           alert("No se ha podido cerrar sesión");
