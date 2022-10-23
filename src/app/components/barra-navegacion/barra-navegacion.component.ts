@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import axios from 'axios';
+import { backURI } from 'src/environments/backURI';
+import { BuscadorService } from '../../services/buscador.service';
 
 @Component({
   selector: 'barra-navegacion',
@@ -9,9 +11,14 @@ import axios from 'axios';
 })
   export class BarraNavegacionComponent implements OnInit {
 
+  contPage = -1
+  busqueda: string = ""
+  resultBusqueda: any
+
   constructor(
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _servicio: BuscadorService
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +27,32 @@ import axios from 'axios';
       console.log(params);
       
     });
+  }
+
+  async buscar(){
+    if(this.busqueda != ''){
+      this.contPage += 1
+
+      await axios.get(backURI + 'products/' + this.busqueda + '/' + this.contPage)
+      .then(response => {
+          // Obtenemos los datos
+          this.resultBusqueda = response.data
+          console.log('ResultBusqueda',this.resultBusqueda);
+          
+      })
+      .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+          
+      })
+
+      if(this.resultBusqueda.length != 0){
+        let ObjBusqueda = {data: this.resultBusqueda, busqueda: this.busqueda}
+        this._servicio.disparadorDeBusqueda.emit({
+          data:ObjBusqueda
+        })
+      }
+    }
   }
 
   cerrarSesion(){
