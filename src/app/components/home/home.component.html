@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class="container p-1">
+    <ul class="row row-cols-4">
+        <li *ngFor="let product of newProducts" class="list-group-item p-2">
+            <div class="card" style="width: 18rem;">
+                <img src={{product.image}} class="card-img-top" alt="...">
+                <div class="card-body">
+                <p class="card-text">{{product.tipo}} --- {{product.design.name}}</p>
+                <p class="card-text"><strong>{{product.precio}}€</strong></p>
+                </div>
+            </div>
+        </li>
+    </ul>
+    
+    <div class="d-flex justify-content-center p-2">
+        <button class="btn btn-lg btn-outline-dark" (click)="getMore()">Cargar más</button>
+    </div>
+</div>

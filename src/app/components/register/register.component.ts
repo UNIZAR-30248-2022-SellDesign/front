@@ -33,7 +33,9 @@ export class RegisterComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
-    console.log("test");
+    if(localStorage.getItem('session')) {
+      this.router.navigate(['/Perfil']);
+    }
   }
 
   validateEmail(emailToValidate: string) {
