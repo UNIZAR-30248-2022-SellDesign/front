@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           console.log(res)
           if (res.status == 201) {
             localStorage.setItem('session',res.data)
-            this.router.navigate(['/Home']);
+            this.router.navigate(['/home']);
           }
 
         }).catch((error) => {
