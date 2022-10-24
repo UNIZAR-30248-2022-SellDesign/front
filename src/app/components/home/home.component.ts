@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
       this.newProducts = data.data.data
       this.busqueda = data.data.busqueda
       this.flagView = false
+      this.contPageBusqueda = 0
     })
   }
 
@@ -53,6 +54,8 @@ export class HomeComponent implements OnInit {
   getMore() {
     // Home
     if(this.flagView){
+      // console.log('Valor flag', this.flagView);
+      
       this.contPageHome += 1
 
       axios.get(backURI + "products/" + this.contPageHome)
@@ -67,6 +70,8 @@ export class HomeComponent implements OnInit {
         })
     } else{
       // Busqueda
+      // console.log('Valor flag', this.flagView);
+
       this.contPageBusqueda += 1
 
       axios.get(backURI + 'products/' + this.busqueda + '/' + this.contPageBusqueda)
@@ -80,9 +85,36 @@ export class HomeComponent implements OnInit {
             
         })
     }
-    
-
-    
   }
+
+  filterPrice(min:Number, max:Number){
+    if(this.busqueda != ''){
+      //Busqueda + Filtro
+      axios.get(backURI + 'products/' + this.busqueda + '/filter' + '/'+ min + '/'  + max)
+      .then(response => {
+          // Obtenemos los datos
+          this.newProducts = response.data
+      })
+      .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+          
+      })
+
+    } else {
+      //Filtro 
+      // axios.get(backURI + 'products/' + 'filter/' + min + '/'  + max)
+      // .then(response => {
+      //     // Obtenemos los datos
+      //     this.newProducts = response.data
+      // })
+      // .catch(e => {
+      //     // Capturamos los errores
+      //     console.log(e);
+          
+      // })
+    }
+  }
+
 
 }
