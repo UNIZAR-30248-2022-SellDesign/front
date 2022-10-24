@@ -11,8 +11,7 @@ import { BuscadorService } from '../../services/buscador.service';
 })
   export class BarraNavegacionComponent implements OnInit {
 
-  contPage = -1
-  busqueda: string = ""
+  busqueda: string = "Buscar algo..." 
   resultBusqueda: any
 
   constructor(
@@ -30,10 +29,9 @@ import { BuscadorService } from '../../services/buscador.service';
   }
 
   async buscar(){
-    if(this.busqueda != ''){
-      this.contPage += 1
+    if((this.busqueda != "Buscar algo...") && (this.busqueda != "")){
 
-      await axios.get(backURI + 'products/' + this.busqueda + '/' + this.contPage)
+      await axios.get(backURI + 'products/' + this.busqueda + '/' + 0)
       .then(response => {
           // Obtenemos los datos
           this.resultBusqueda = response.data

@@ -21,8 +21,12 @@ export class HomeComponent implements OnInit {
   contPageBusqueda = 0
   flagView = true
   busqueda: string = ''
-  // public lista:Array<any>
+  esNovedad: boolean = false;
+  esBusqueda: boolean = false;
+  precio: string = ''
+  tipo: string = ''
 
+  
   constructor(private _servicio: BuscadorService) { }
 
   ngOnInit(): void {
@@ -34,6 +38,9 @@ export class HomeComponent implements OnInit {
       this.newProducts = data.data.data
       this.busqueda = data.data.busqueda
       this.flagView = false
+      this.contPageBusqueda = 0
+      this.esNovedad = false
+      this.esBusqueda = true
     })
   }
 
@@ -42,17 +49,23 @@ export class HomeComponent implements OnInit {
     .then(response => {
         // Obtenemos los datos
         this.newProducts = response.data
+        if(this.newProducts.length > 0){
+            this.esNovedad = true
+        }
     })
     .catch(e => {
         // Capturamos los errores
         console.log(e);
-        
     })
+
+    
   }
 
   getMore() {
     // Home
     if(this.flagView){
+      // console.log('Valor flag', this.flagView);
+      
       this.contPageHome += 1
 
       axios.get(backURI + "products/" + this.contPageHome)
@@ -67,6 +80,8 @@ export class HomeComponent implements OnInit {
         })
     } else{
       // Busqueda
+      // console.log('Valor flag', this.flagView);
+
       this.contPageBusqueda += 1
 
       axios.get(backURI + 'products/' + this.busqueda + '/' + this.contPageBusqueda)
@@ -80,9 +95,60 @@ export class HomeComponent implements OnInit {
             
         })
     }
-    
+  }
 
-    
+  filterPrice(min:Number, max:Number){
+    if(this.busqueda != ''){
+      //Busqueda + Filtro
+      axios.get(backURI + 'products/' + this.busqueda + '/filter' + '/'+ min + '/'  + max)
+      .then(response => {
+          // Obtenemos los datos
+          this.newProducts = response.data
+      })
+      .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+          
+      })
+
+    } else {
+      //Filtro 
+      axios.get(backURI + 'products/' + 'filter/' + min + '/'  + max)
+      .then(response => {
+          // Obtenemos los datos
+          this.newProducts = response.data
+      })
+      .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+          
+      })
+    }
+    this.precio = min.toString() + ' - ' + max.toString() + ' €'
+  }
+
+  filterPrenda(tipo:Number){
+    axios.get(backURI + 'products/' + 'filterTipo/' + tipo)
+      .then(response => {
+          // Obtenemos los datos
+          this.newProducts = response.data
+      })
+      .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+          
+      })
+    switch(tipo){
+      case 1:
+        this.tipo = 'Camiseta'
+        break
+      case 2:
+        this.tipo = 'Pantalón'
+        break
+      case 3:
+        this.tipo = 'Sudadera'
+        break
+    }
   }
 
 }
