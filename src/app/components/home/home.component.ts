@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   getIni(){
-    axios.get(backURI + "products/" + this.contPageHome)
+    axios.get(backURI + "products/home/page/" + this.contPageHome)
     .then(response => {
         // Obtenemos los datos
         this.newProducts = response.data
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       
       this.contPageHome += 1
 
-      axios.get(backURI + "products/" + this.contPageHome)
+      axios.get(backURI + "products/home/page/" + this.contPageHome)
         .then(response => {
             // Obtenemos los datos
             this.newProducts = this.newProducts.concat(response.data)
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
 
       this.contPageBusqueda += 1
 
-      axios.get(backURI + 'products/' + this.busqueda + '/' + this.contPageBusqueda)
+      axios.get(backURI + 'products/search/' + this.busqueda + '/' + this.contPageBusqueda)
         .then(response => {
             // Obtenemos los datos
             this.newProducts = this.newProducts.concat(response.data)
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
   filterPrice(min:Number, max:Number){
     if(this.busqueda != ''){
       //Busqueda + Filtro
-      axios.get(backURI + 'products/' + this.busqueda + '/filter' + '/'+ min + '/'  + max)
+      axios.get(backURI + 'products/search/' + this.busqueda + '/'+ min + '/'  + max)
       .then(response => {
           // Obtenemos los datos
           this.newProducts = response.data
@@ -112,8 +112,8 @@ export class HomeComponent implements OnInit {
       })
 
     } else {
-      //Filtro 
-      axios.get(backURI + 'products/' + 'filter/' + min + '/'  + max)
+      //Filtro Home
+      axios.get(backURI + 'products/home/' + min + '/'  + max)
       .then(response => {
           // Obtenemos los datos
           this.newProducts = response.data
@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
   }
 
   filterPrenda(tipo:Number){
-    axios.get(backURI + 'products/' + 'filterTipo/' + tipo)
+    axios.get(backURI + 'products/home/' + tipo)
       .then(response => {
           // Obtenemos los datos
           this.newProducts = response.data
