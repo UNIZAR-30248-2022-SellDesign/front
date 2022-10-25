@@ -41,15 +41,18 @@ import { BuscadorService } from '../../services/buscador.service';
       .catch(e => {
           // Capturamos los errores
           console.log(e);
-          
       })
 
-      if(this.resultBusqueda.length != 0){
-        let ObjBusqueda = {data: this.resultBusqueda, busqueda: this.busqueda}
+      // if(this.resultBusqueda.length != 0){
+      //   let ObjBusqueda = {data: this.resultBusqueda, busqueda: this.busqueda}
+      //   this._servicio.disparadorDeBusqueda.emit({
+      //     data:ObjBusqueda
+      //   })
+      // }
+      let ObjBusqueda = {data: this.resultBusqueda, busqueda: this.busqueda}
         this._servicio.disparadorDeBusqueda.emit({
           data:ObjBusqueda
         })
-      }
     }
   }
 
