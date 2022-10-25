@@ -122,12 +122,14 @@ export class HomeComponent implements OnInit {
   }
 
   filterPrice(min:Number, max:Number){
+    this.esBusqueda = true
     if(this.busqueda != ''){
       //Busqueda + Filtro
       axios.get(backURI + 'products/search/' + this.busqueda + '/'+ min + '/'  + max)
       .then(response => {
           // Obtenemos los datos
           this.newProducts = response.data
+          
           if(this.newProducts.length == 0){
             this.noHayProductos = true
           } else{
@@ -190,6 +192,7 @@ export class HomeComponent implements OnInit {
   }
 
   filterPrenda(tipo:Number){
+    this.esBusqueda = true
     this.tipoEntero = tipo
     if(this.precio == ''){
       //Solo se filtra prenda
