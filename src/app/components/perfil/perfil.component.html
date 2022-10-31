@@ -1,1 +1,68 @@
-<p>perfil works!</p>
+<div>
+    <!-- USUARIO -->
+    <div class="card-body text-center">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 150px;">
+        <h5 class="my-3">John Smith</h5>
+        <p class="text-muted mb-1">Full Stack Developer</p>
+        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+        <div class="d-flex justify-content-center mb-2">
+            <!-- <button type="file" class="btn btn-primary">Editar Foto</button> -->
+            <div class="btn btn-primary">Editar Foto</div>
+            <br>
+                <!-- <input id="fileInput" type='file' (change)="onSelectFile($event)"/>dsfsad -->
+            <br>
+
+            <!-- <input type="file" class="btn btn-primary" accept="image/png, image/jpg"> -->
+            <button type="button" class="btn btn-outline-primary ms-1">Editar Perfil</button>
+            <button class="btn btn-primary" (click)="openModal()">Open modal</button>
+        </div>
+    </div>
+    
+    <!-- DISEÑOS y FAVORITOS-->
+    <div class="container tabs">
+        <nav class="tabs__nav">
+            <a
+                (click)="show( false )"
+                class="tabs__nav-item"
+                [class.tabs__nav-item--on]="( selectedTab === false )">
+                <h4 class=""><strong>Productos</strong> en venta:</h4>
+            </a>
+            <a
+                (click)="show( true )"
+                class="tabs__nav-item"
+                [class.tabs__nav-item--on]="( selectedTab === true )">
+                <h4 class=""><strong>FAVORITOS:</strong></h4>
+            </a>
+        </nav>
+        <div #tabsContentRef class="tabs__content" [ngSwitch]="selectedTab">
+            <div *ngSwitchCase="( false )" class="tabs__tab">
+                <ul class="row row-cols-4">
+                    <li *ngFor="let product of newProducts" class="list-group-item p-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src={{product.image}} class="card-img-top" alt="...">
+                        </div>
+                    </li>
+                </ul>
+                <h1 *ngIf=noHayDisenos style="text-align: center;">Todavía <strong>NO</strong> has subido ningún producto</h1> 
+                <h1 *ngIf=noHayDisenos style="text-align: center;"><strong>A QUÉ ESPERAS!</strong></h1> 
+            </div>
+            <div *ngSwitchCase="( true )" class="tabs__tab">
+                <ul class="row row-cols-4">
+                    <li *ngFor="let product of newFavs" class="list-group-item p-2">
+                        <div class="card" style="width: 18rem;">
+                            <img src={{product.image}} class="card-img-top" alt="...">
+                        </div>
+                    </li>
+                </ul>
+                <h1 *ngIf=noHayFav style="text-align: center;">Todavía <strong>NO</strong> tienes favoritos!</h1> 
+            </div>
+            <div *ngIf="noHayDisenos == false" class="d-flex justify-content-center p-2">
+                <button  class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
+            </div>
+            <div *ngIf="noHayFav == false"  class="d-flex justify-content-center p-2">
+                <button class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
+            </div>
+        </div>
+    </div>
+</div>
