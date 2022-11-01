@@ -10,12 +10,14 @@ import { MisDisenosComponent } from './components/mis-disenos/mis-disenos.compon
 import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
 import { MiCarritoComponent } from './components/mi-carrito/mi-carrito.component';
 import { ErrorComponent } from './components/error/error.component';
-import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
+import { ModalEditComponent } from './components/modal-edit/modal-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,17 @@ import { FooterComponent } from './components/footer/footer.component';
     ErrorComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    ModalEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    MdbModalModule
   ],
-  providers: [AppRoutingProviders],
+  providers: [AppRoutingProviders, MdbModalModule],
   bootstrap: [AppComponent]
 
 })
