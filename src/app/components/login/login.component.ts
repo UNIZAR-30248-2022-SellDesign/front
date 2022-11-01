@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
           if (res.status == 201) {
             localStorage.setItem('session',res.data)
             localStorage.setItem('idUsuario',res.data.User.userId)
+            localStorage.setItem('userName',res.data.User.userName)
             this.router.navigate(['/Perfil']);
           }
 

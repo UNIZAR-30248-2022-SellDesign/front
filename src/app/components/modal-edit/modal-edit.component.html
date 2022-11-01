@@ -1,1 +1,25 @@
-<p>modal-edit works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editando <strong>PERFIL</strong> ...</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+               <label>¿Cómo te llamas?</label>
+               <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" placeholder="Nombre y Apellidos">
+            </div>
+            <div class="form-group">
+               <label>Cuéntanos sobre ti ...</label>
+               <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Breve descripción">
+            </div>
+         </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="guardarDatos()">Guardar</button>
+    </div>
+    
+</div>

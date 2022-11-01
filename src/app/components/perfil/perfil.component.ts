@@ -4,11 +4,12 @@ import { Product } from 'src/app/models/product';
 import { backURI } from 'src/environments/backURI';
 import { ModalEditComponent } from '../modal-edit/modal-edit.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  providers: [],
+  providers: [MdbModalService],
   queries: {
     "tabsContentRef": new ViewChild("tabsContentRef")
   },
@@ -26,8 +27,13 @@ export class PerfilComponent implements OnInit {
   newFavs: any
   products: any
   idUser: any
-  url = '';
   modalRef: MdbModalRef<ModalEditComponent> | null = null;
+
+  nombre: string = "";
+  nombreObtenido: string = "";
+  descripcion: string = "";
+  descripcionObtenida: string = "";
+  userName: any
 
   product: Product[] = [
     { productName: "Sudadera", designName: "buah", price: 10, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
@@ -52,6 +58,8 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.getInfo()
     // this.getMore(false) //obtener diseños (1a pag)
     // this.getMore(true) //obtener fav (1a pag)
   }
@@ -73,6 +81,23 @@ export class PerfilComponent implements OnInit {
 
   }
 
+  getInfo(){
+    //getInfo de nombreReal y descripcion   
+    this.userName = localStorage.getItem('userName')
+    axios.get(backURI + "users/user/" + this.userName)
+        .then(response => {
+          // Obtenemos los datos
+          console.log(response.data);
+          this.nombreObtenido = response.data.realname
+          this.descripcionObtenida = response.data.description
+          this.nombre = this.nombreObtenido
+          this.descripcion = this.descripcionObtenida
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
+  }
   getMore(seleccion: boolean) {
     console.log(seleccion);
     this.idUser = localStorage.getItem('idUsuario')
@@ -115,9 +140,27 @@ export class PerfilComponent implements OnInit {
     }
   }
   
-  openModal(){
-    this.modalRef = this.modalService.open(ModalEditComponent)
+  openModal() {
+    this.modalRef = this.modalService.open(ModalEditComponent, {
+      data: {nombre: this.nombre,
+             descripcion: this.descripcion}
+    })
+    this.modalRef.onClose.subscribe((data : any) => {
+      console.log("openmodal de lcos");
+      if(data != undefined){
+        this.nombre = data[0].nombre
+        this.descripcion = data[0].descripcion
+      }
+      // if(data[0].nombre != undefined){
+      //   this.nombre = data[0].nombre
+      // }
+      // if(data[0].descripcion != undefined){
+      //   this.descripcion = data[0].descripcion
+      // }
+      
+    });
   }
+
   // onSelectFile(event) {
   //   if (event.target.files && event.target.files[0]) {
   //     var reader = new FileReader();
