@@ -7,5 +7,5 @@ export interface ProductProfile {
     designerName:String,
     favourite:boolean,
     favouriteImage:String,
-    images: String[]
+    imagesDesign: String[]
 }
