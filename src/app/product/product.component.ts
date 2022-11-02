@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductProfile } from '../models/productProfile';
+import axios from 'axios';
+
+const backURI = "https://selldesign-backend.onrender.com/"
 
 @Component({
   selector: 'app-product',
@@ -40,7 +43,9 @@ export class ProductComponent implements OnInit{
   constructor() { }
 
   ngOnInit(): void {
-    this.getMore()
+    this.getInfo()
+    //this.getInfoDesigner("Ey")
+    //this.getMore()
   }
 
   getMore() {
@@ -56,4 +61,50 @@ export class ProductComponent implements OnInit{
   showFavouriteImage(){
     if(this.viewProduct.favourite) document.write("hola")
   }
+  getInfo(){
+    //getInfo de nombreReal y descripcion   
+    //this.viewProduct = localStorage.getItem('userName')
+    axios.get(backURI+"products/get/636166c94a3a5d54e4df05d6")
+        .then(response => {
+          // Obtenemos los datos
+          console.log(response.data);
+          this.viewProduct.description=response.data.description
+          this.viewProduct.productName=response.data.name
+          this.viewProduct.mainImage=response.data.image
+          this.viewProduct.price=response.data.price
+          this.viewProduct.designName=response.data.design.name
+          this.getInfoDesigner(response.data.design.designer)
+          this.getImagesOfDesigner(response.data.design.name)
+          
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
+  }
+getInfoDesigner(id: String){
+  axios.get(backURI+"users/id/"+id)
+    .then(response => {
+      // Obtenemos los datos
+      console.log(response.data);
+      this.viewProduct.designerName=response.data.username
+    })
+    .catch(e => {
+      // Capturamos los errores
+      console.log(e);
+    })
+}
+getImagesOfDesigner(designName:String){
+  axios.get(backURI+"designs/"+designName)
+      .then(response => {
+        console.log(response)
+        // Obtenemos los datos
+        console.log(response.data);
+        //this.viewProduct.imagesDesign = response.data
+      })
+      .catch(e => {
+        // Capturamos los errores
+        console.log(e);
+      })
+}
 }
