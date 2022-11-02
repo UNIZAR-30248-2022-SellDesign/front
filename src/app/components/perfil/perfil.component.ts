@@ -4,7 +4,6 @@ import { Product } from 'src/app/models/product';
 import { backURI } from 'src/environments/backURI';
 import { ModalEditComponent } from '../modal-edit/modal-edit.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-perfil',
@@ -150,14 +149,7 @@ export class PerfilComponent implements OnInit {
       if(data != undefined){
         this.nombre = data[0].nombre
         this.descripcion = data[0].descripcion
-      }
-      // if(data[0].nombre != undefined){
-      //   this.nombre = data[0].nombre
-      // }
-      // if(data[0].descripcion != undefined){
-      //   this.descripcion = data[0].descripcion
-      // }
-      
+      }      
     });
   }
 

@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ModalEditComponent } from './components/modal-edit/modal-edit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-edit-diseno.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     LoginComponent,
     RegisterComponent,
     FooterComponent,
-    ModalEditComponent
+    ModalEditComponent,
+    ModalEditDisenoComponent
   ],
   imports: [
     BrowserModule,

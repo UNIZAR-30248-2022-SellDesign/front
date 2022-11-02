@@ -1,1 +1,24 @@
-<p>mis-disenos works!</p>
+<div class="container p-1 ">
+    <h2>Mis <strong>DISEÑOS:</strong></h2>
+    <ul class="row row-cols-4">
+        <li  *ngFor="let product of newDesigns" class="list-group-item p-2">
+            <div class="card" style="width: 18rem;">
+                <img src={{product.image}} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <div class="card-text  d-flex">
+                        <p>{{product.designName}}</p>
+                        <button class="btn btn-lg btn-outline-dark" (click)="openModal(0, product)">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="d-flex justify-content-center p-2">
+        <div *ngIf="noHayDesign == false">
+            <button class="btn btn-lg btn-outline-dark" (click)="getMore()">Cargar más</button>
+        </div>
+        <button class="btn btn-lg btn-outline-dark" 
+            (click)="openModal(1,7)">+ Subir diseño</button>
+    </div>
+    
+</div>
