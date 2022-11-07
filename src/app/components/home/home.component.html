@@ -36,12 +36,18 @@
     <h3 *ngIf=esBusqueda><strong>RESULTADO</strong>  busqueda ('{{this.busqueda}}', {{this.precio}}, {{this.tipo}}):</h3>
     <h1 *ngIf=noHayProductos><strong>NO</strong> se ha encontrado ningún producto</h1> 
     <ul class="row row-cols-4">
-        <li  *ngFor="let product of newProducts" class="list-group-item p-2">
-            <div class="card" style="width: 18rem;">
-                <img src={{product.image}} class="card-img-top" alt="...">
+        <li  *ngFor="let product of newProducts" class="list-group-item p-2" >
+            <div class="btn btn-light" style="width: 18rem;" >
+                <img src={{product.image}} class="card-img-top" alt="..." >
                 <div class="card-body">
                 <p class="card-text">{{product.type}} --- {{product.design.name}}</p>
                 <p class="card-text"><strong>{{product.price}}€</strong></p>
+                <a  style="position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1;" href="/#/product/{{product._id}}"></a>
                 </div>
             </div>
         </li>

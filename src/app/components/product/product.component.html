@@ -1,0 +1,77 @@
+<div style="height: 100px;">  
+    <nav class="navbar navbar-expand-lg bg-light border-bottom border-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                </ul>
+                <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container p-1" style="width: 100%;height: 100%;">
+        <div style="width: 30%;float: left;align-items:center;
+        padding-right: 60px;
+        margin-right: 60px;">
+            <img src={{viewProduct.mainImage}} class="card-img-left"  alt="..." style="width: 100%;max-height: fit-content  ;">
+            <!--div style="text-align:center;">
+                <img src={{viewProduct.favouriteImage}} class="card-img-left"  alt="..." style="width: 5%;margin:auto;">
+            </div-->
+            
+            <div>
+                <ul class="row row-cols-4" style="align-items: center;">
+                    <li *ngFor="let image of viewProduct.imagesDesign" class="list-group-item p-2" s>
+                        <img src={{image}} class="card-img-top" alt="..." width="25%">
+                        <div class="card-body">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container p-2" style="width: 600px; height: 380px;padding-top:100px;float: left;position: relative;">
+            <strong>{{viewProduct.productName}}</strong>
+            <br/>
+            DESCRIPCION: {{viewProduct.description}}
+            <br/>
+                <a style='display:inline-block;width: 50%;' >
+                    <strong>Diseñador: </strong> {{viewProduct.designerName}}
+                </a>
+                <a style="text-align:right;display:inline-block;width: 50%;">
+                    <strong>Diseño: </strong>{{viewProduct.designName}}
+                </a>
+            <br/><strong>{{viewProduct.price}}€</strong>
+            <br/>
+            <div>
+                <div style="text-align:left;display:inline-block;width: 47.5%;">
+                <button (click)="buy()" type="button" class="btn btn-primary" >Comprar Ya</button>
+            </div>
+            <div style="text-align:center;display:inline-block;width: 47.5%;">
+                <button (click)="addToCart()" type="button" class="btn btn-success" >Añadir a mi carro</button>
+            </div>
+            
+            <img src={{viewProduct.favouriteImage}} class="card-img-rigth"  alt="..." style="width: 5%;display: inline-block;"> 
+            
+        </div>
+            
+        </div>
+    </div>
+
+    <footer style="position: absolute;bottom: 0;width: 100%;height: 5%;">
+        <nav class="navbar navbar-expand-lg bg-light p-5 border-top border-dark">
+            <div class="container-fluid d-flex justify-content-center">
+                <h1 class="text-center">Aqui habra cosas que no le importan nunca a nadie</h1>
+            </div>
+        </nav>
+    </footer>
+</div>
