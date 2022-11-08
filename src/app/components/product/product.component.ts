@@ -3,6 +3,7 @@ import { ProductProfile } from '../../models/productProfile';
 import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ArgumentService } from 'src/app/services/argument.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -27,11 +28,12 @@ export class ProductComponent implements OnInit{
                                 ,imagesDesign:["null"]}
 
 
-  constructor(private modalService: MdbModalService) {
-    //this.id = false;
+  constructor(private argumentService: ArgumentService) {
+    
   }
 
   ngOnInit(): void {
+    this.argumentService.currentargument.subscribe(message => this.id = message);
     this.getInfo()
   }
 
@@ -45,7 +47,7 @@ export class ProductComponent implements OnInit{
     if(this.viewProduct.favourite) document.write("hola")
   }
   getInfo(){
-    axios.get(backURI+"products/get/")
+    axios.get(backURI+"products/get/"+this.id)
         .then(response => {
           // Obtenemos los datos
           console.log(response.data);

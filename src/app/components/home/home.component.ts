@@ -4,7 +4,7 @@ import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
 import { Product } from '../../models/product';
 import { BuscadorService } from '../../services/buscador.service';
-
+import { ArgumentService } from 'src/app/services/argument.service';
 
 @Component({
   selector: 'app-home',
@@ -31,13 +31,14 @@ export class HomeComponent implements OnInit {
   _max: Number = 0
   tipoEntero:Number = 0
 
-
+  message : any
   
-  constructor(private _servicio: BuscadorService) { }
+  constructor(private _servicio: BuscadorService, private argumentservice : ArgumentService) { }
 
   ngOnInit(): void {
     this.getIni()
-    
+    this.argumentservice.currentargument.subscribe(message => this.message = message);
+
     this._servicio.disparadorDeBusqueda.subscribe(data => {
 
       console.log('Result Tras disparador...', data.data.data);
@@ -189,6 +190,10 @@ export class HomeComponent implements OnInit {
     }else{
       this.precio = min.toString() + ' - ' + max.toString() + ' €'
     }
+  }
+
+  sendArgument(argument:String){
+    this.argumentservice.sendArgument(argument)
   }
 
   filterPrenda(tipo:Number){
