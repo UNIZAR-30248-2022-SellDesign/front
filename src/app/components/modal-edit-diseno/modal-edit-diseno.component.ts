@@ -12,19 +12,19 @@ export class ModalEditDisenoComponent implements OnInit {
 
   nombreDiseno: string = "";
   imagen: string = "";
-  userName: any
+  idUser: any
   
   esEditar:boolean = false
   esSubir:boolean = false
+  idDiseno: string = ''
 
   constructor(public modalRef: MdbModalRef<ModalEditDisenoComponent>) { }
 
   ngOnInit(): void {
-    this.userName = localStorage.getItem('userName')
+    this.idUser = localStorage.getItem('idUsuario')
     console.log(this.nombreDiseno);
     console.log(this.imagen);
     console.log(this.esEditar);
-    
   }
 
   guardarDatos(foto: string, nombre: string ){
@@ -33,61 +33,72 @@ export class ModalEditDisenoComponent implements OnInit {
     console.log(foto);
     console.log(nombre);
 
-    // axios.post(backURI + "misDisenos", {
-    //   username: this.userName,
-    //   image: foto,
-    //   namedesign: nombre,
-    // })
-    //   .then((res) => {
-    //     console.log('guardarDatos:')
-    //     console.log(res)
-        
-    //   }).catch((error) => {
-    //     console.log(error);
-    //   })
+    axios.post(backURI + "designs/new", {
+      name: nombre,
+      image: foto,
+      id: this.idUser
+    })
+      .then((res) => {
+        console.log('guardarDatos:')
+        console.log(res)
 
-    this.modalRef.close() //this.modalRef.close(this.data) para pasar datos
+        this.modalRef.close([{
+          flag: 0,
+          name: nombre,
+          image: foto,
+          _id: ''
+        }])
+        
+      }).catch((error) => {
+        console.log(error);
+      })
+
+    
   }
 
-  actualizarDatos(foto: string, nombre: string){
-    console.log('actualizando diseño...')
+  actualizarDatos(foto: string, nombre: string, idDiseno: string ){
     //put
+    axios.put(backURI + "designs/update", {
+      name: nombre,
+      image: foto,
+      id: idDiseno,
+    })
+      .then((res) => {
+        console.log('actualizarDatos res:')
+        console.log(res)
 
-    // axios.post(backURI + "actuDisenos", {
-    //   username: this.userName,
-    //   image: foto,
-    //   namedesign: nombre,
-    // })
-    //   .then((res) => {
-    //     console.log('actualizarDatos:')
-    //     console.log(res)
+        this.modalRef.close([{
+          flag: 1,
+          name: nombre,
+          image: foto,
+          _id: idDiseno,
+        }])
         
-    //   }).catch((error) => {
-    //     console.log(error);
-    //   })
+      }).catch((error) => {
+        console.log(error);
+      })
 
-    this.modalRef.close() //this.modalRef.close(this.data) para pasar datos
+    
   }
 
-  eliminarDatos(){
+  eliminarDatos(idDiseno: string){
     console.log('eliminando diseño...')
     //delete
-
-    // axios.delete(backURI + "deleteDisenos", {
-    //   username: this.userName,
-    //   image: foto,
-    //   namedesign: nombre,
-    // })
-    //   .then((res) => {
-    //     console.log('actualizarDatos:')
-    //     console.log(res)
+    axios.delete(backURI + "designs/delete/" + this.idUser + '/' + idDiseno)
+      .then((res) => {
+        console.log('eliminarDatos:')
+        console.log(res)
         
-    //   }).catch((error) => {
-    //     console.log(error);
-    //   })
+      }).catch((error) => {
+        console.log(error);
+      })
 
-    this.modalRef.close() //this.modalRef.close(this.data) para pasar datos
-
+    this.modalRef.close([{
+      flag: 2,
+      name: '',
+      image: '',
+      _id: idDiseno,
+    }])
   }
 
 }

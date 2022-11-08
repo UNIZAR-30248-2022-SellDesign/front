@@ -20,13 +20,13 @@
         <button *ngIf="esSubir == true" type="button" class="btn btn-secondary" (click)="modalRef.close()">
             Cancelar
         </button>
-        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" (click)="eliminarDatos()">
+        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" (click)="eliminarDatos(idDiseno)">
             Eliminar
         </button>
         <button *ngIf="esSubir == true" type="submit" class="btn btn-primary" (click)="guardarDatos(imagen, nombreDiseno)">
             Guardar
         </button>
-        <button *ngIf="esEditar == true" type="submit" class="btn btn-primary" (click)="actualizarDatos(imagen, nombreDiseno)">
+        <button *ngIf="esEditar == true" type="submit" class="btn btn-primary" (click)="actualizarDatos(imagen, nombreDiseno, idDiseno)">
             Guardar
         </button>
     </div>

@@ -97,6 +97,7 @@ export class PerfilComponent implements OnInit {
           console.log(e);
         })
   }
+  
   getMore(seleccion: boolean) {
     console.log(seleccion);
     this.idUser = localStorage.getItem('idUsuario')
