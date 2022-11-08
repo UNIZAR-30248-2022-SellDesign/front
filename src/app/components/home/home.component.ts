@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIni()
-    this.argumentservice.currentargument.subscribe(message => this.message = message);
-
+    //this.argumentservice.currentargument.subscribe(message => this.message = message);
     this._servicio.disparadorDeBusqueda.subscribe(data => {
 
       console.log('Result Tras disparador...', data.data.data);
