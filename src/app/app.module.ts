@@ -20,9 +20,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-edit-diseno.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+
     BarraNavegacionComponent,
     HomeComponent,
     PerfilComponent,
