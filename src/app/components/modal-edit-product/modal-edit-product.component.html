@@ -1,0 +1,65 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 *ngIf="esSubir == true" class="modal-title" id="exampleModalLabel"><strong>NUEVO</strong> producto ...</h5>
+        <h5 *ngIf="esSubir == false" class="modal-title" id="exampleModalLabel"><strong>EDITANDO</strong> producto ...</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group" style="justify-content: center;">
+                <li class="nav-item dropdown" style="list-style-type: none;">
+                    <div class="nav-link dropdown-toggle" id="navbarDropdownTipo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        {{nombreTipo}}
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownTipo">
+                        <button class="dropdown-item" (click)="asignarTipo(1)">Camiseta</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" (click)="asignarTipo(2)">Pantalón</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" (click)="asignarTipo(3)">Sudadera</button>
+                    </div>
+                </li>
+             </div>
+            
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Descripción...">
+             </div>
+            <div class="form-group d-flex">
+                <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
+                    <label>Sube tu prenda:</label>
+                    <br>
+                    <img src={{imagen}} class="card-img-top" style="width: 200px; margin-left: 20px;" name="imagen" alt="Deberia haber fotito">
+                </div>
+                <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
+                    <label>Sube tu diseño:</label>
+                    <br>
+                    <img src={{imagenDiseno}}  style="width: 200px;" class="card-img-top" name="imagenDiseno" alt="Deberia haber fotito">
+                </div>
+            </div>
+             <div class="form-group d-flex">
+                  <label style="display: inline-block; text-align: right;">Precio:&nbsp;</label>
+                  <input type="text" [(ngModel)]="precio" name="precio" style="width: 100px;" class="form-control" placeholder="Precio...">
+                  <label style="display: inline-block; text-align: right;">&nbsp;€</label>
+             </div>
+         </form>
+    </div>
+    <div class="modal-footer">
+        <button *ngIf="esSubir == true" type="button" class="btn btn-secondary" (click)="modalRef.close()">
+            Cancelar
+        </button>
+        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" (click)="eliminarDatos(idProducto)">
+            Eliminar
+        </button>
+        <button *ngIf="esSubir == true" type="submit" class="btn btn-primary" (click)="guardarDatos(imagen, nombreProducto, precio, descripcion)">
+            Guardar
+        </button>
+        <button *ngIf="esEditar == true" type="submit" class="btn btn-primary" (click)="actualizarDatos(imagen, nombreProducto, idProducto, precio, descripcion)">
+            Guardar
+        </button>
+    </div>
+    
+</div>

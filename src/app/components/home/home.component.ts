@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   busqueda: string = ''
   esNovedad: boolean = false;
   esBusqueda: boolean = false;
+  hayMas: boolean = false;
   noHayProductos: boolean = false;
   precio: string = ''
   tipo: string = ''
@@ -58,6 +59,8 @@ export class HomeComponent implements OnInit {
   }
 
   getIni(){
+    console.log(backURI + "products/home/page/" + this.contPageHome);
+    
     axios.get(backURI + "products/home/page/" + this.contPageHome)
     .then(response => {
         // Obtenemos los datos
@@ -67,6 +70,7 @@ export class HomeComponent implements OnInit {
             this.noHayProductos = true
         } else{
           this.noHayProductos = false
+          this.hayMas = true
         }
     })
     .catch(e => {
@@ -80,16 +84,19 @@ export class HomeComponent implements OnInit {
   getMore() {
     // Home
     if(this.flagView){
+      console.log('HOME');
+      
       this.contPageHome += 1
-
+      console.log(backURI + "products/home/page/" + this.contPageHome);
       axios.get(backURI + "products/home/page/" + this.contPageHome)
         .then(response => {
             // Obtenemos los datos
             this.newProducts = this.newProducts.concat(response.data)
-            if(this.newProducts.length == 0){
+            if(response.data.length < 8){
               this.noHayProductos = true
             } else{
               this.noHayProductos = false
+              this.hayMas = true
             }
         })
         .catch(e => {
@@ -99,6 +106,8 @@ export class HomeComponent implements OnInit {
         })
     } else{
       // Busqueda
+      console.log('Busqueda');
+
       // console.log('Valor flag', this.flagView);
 
       this.contPageBusqueda += 1
@@ -107,10 +116,11 @@ export class HomeComponent implements OnInit {
         .then(response => {
             // Obtenemos los datos
             this.newProducts = this.newProducts.concat(response.data)
-            if(this.newProducts.length == 0){
+            if(response.data.length == 0){
               this.noHayProductos = true
             } else{
               this.noHayProductos = false
+              this.hayMas = true
             }
         })
         .catch(e => {
@@ -130,11 +140,12 @@ export class HomeComponent implements OnInit {
           // Obtenemos los datos
           this.newProducts = response.data
           
-          if(this.newProducts.length == 0){
+          if(response.data.length == 0){
             this.noHayProductos = true
           } else{
             this.noHayProductos = false
           }
+          this.hayMas = false
       })
       .catch(e => {
           // Capturamos los errores
@@ -144,8 +155,12 @@ export class HomeComponent implements OnInit {
 
     } else {
       //Filtro Home
+      console.log('FILTRO');
+      
       if(this.tipo == ''){
         //Solo se filtra precio
+        console.log('preecio', backURI + 'products/home/' + min + '/'  + max);
+
         axios.get(backURI + 'products/home/' + min + '/'  + max)
           .then(response => {
               // Obtenemos los datos
@@ -155,6 +170,8 @@ export class HomeComponent implements OnInit {
               } else{
                 this.noHayProductos = false
               }
+              this.hayMas = false
+
           })
           .catch(e => {
               // Capturamos los errores
@@ -163,7 +180,7 @@ export class HomeComponent implements OnInit {
           })
       }else{
         //Se filtra precio + tipo
-        console.log(backURI + 'products/home/' + min + '/'  + max  + '/' + this.tipoEntero);
+        console.log('precio + tipo', backURI + 'products/home/' + min + '/'  + max  + '/' + this.tipoEntero);
         
         axios.get(backURI + 'products/home/' + min + '/'  + max  + '/' + this.tipoEntero)
           .then(response => {
@@ -174,6 +191,8 @@ export class HomeComponent implements OnInit {
               } else{
                 this.noHayProductos = false
               }
+          this.hayMas = false
+
           })
           .catch(e => {
               // Capturamos los errores
@@ -192,21 +211,29 @@ export class HomeComponent implements OnInit {
   }
 
   filterPrenda(tipo:Number){
+    console.log('FILTRO PRENDA');
+    
     this.esBusqueda = true
     this.tipoEntero = tipo
     if(this.precio == ''){
       //Solo se filtra prenda
+      console.log('prenda:', backURI + 'products/home/' + tipo);
+      
       axios.get(backURI + 'products/home/' + tipo)
       .then(response => {
           // Obtenemos los datos
           console.log('Response filterPrenda',response.data);
           
           this.newProducts = response.data
-          if(this.newProducts.length == 0){
+          console.log(this.newProducts);
+          
+          if(response.data.length == 0){
             this.noHayProductos = true
           } else{
             this.noHayProductos = false
           }
+          this.hayMas = false
+
       })
       .catch(e => {
           // Capturamos los errores
@@ -215,7 +242,8 @@ export class HomeComponent implements OnInit {
       })
     }else{
       //Se filtra prenda + precio
-      console.log(backURI + 'products/home/' + this._min + '/'  + this._max  + '/' + this.tipoEntero);
+      
+      console.log('prenda + precio', backURI + 'products/home/' + this._min + '/'  + this._max  + '/' + this.tipoEntero);
         
       axios.get(backURI + 'products/home/' + this._min + '/'  + this._max  + '/' + this.tipoEntero)
         .then(response => {
@@ -226,6 +254,8 @@ export class HomeComponent implements OnInit {
             } else{
               this.noHayProductos = false
             }
+            this.hayMas = false
+
         })
         .catch(e => {
             // Capturamos los errores

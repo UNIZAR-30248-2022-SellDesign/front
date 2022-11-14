@@ -55,10 +55,10 @@
                 </ul>
                 <h1 *ngIf=noHayFav style="text-align: center;">Todavía <strong>NO</strong> tienes favoritos!</h1> 
             </div>
-            <div *ngIf="noHayDisenos == false" class="d-flex justify-content-center p-2">
+            <div *ngIf="cargarMas" class="d-flex justify-content-center p-2">
                 <button  class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
             </div>
-            <div *ngIf="noHayFav == false"  class="d-flex justify-content-center p-2">
+            <div *ngIf="cargarMasFav"  class="d-flex justify-content-center p-2">
                 <button class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
             </div>
         </div>

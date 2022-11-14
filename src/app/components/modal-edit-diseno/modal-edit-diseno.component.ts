@@ -13,7 +13,6 @@ export class ModalEditDisenoComponent implements OnInit {
   nombreDiseno: string = "";
   imagen: string = "";
   idUser: any
-  
   esEditar:boolean = false
   esSubir:boolean = false
   idDiseno: string = ''
@@ -24,7 +23,6 @@ export class ModalEditDisenoComponent implements OnInit {
     this.idUser = localStorage.getItem('idUsuario')
     console.log(this.nombreDiseno);
     console.log(this.imagen);
-    console.log(this.esEditar);
   }
 
   guardarDatos(foto: string, nombre: string ){
@@ -95,8 +93,6 @@ export class ModalEditDisenoComponent implements OnInit {
 
     this.modalRef.close([{
       flag: 2,
-      name: '',
-      image: '',
       _id: idDiseno,
     }])
   }
