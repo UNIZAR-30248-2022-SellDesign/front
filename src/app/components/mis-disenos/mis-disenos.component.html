@@ -7,8 +7,8 @@
                 <div class="card-body">
                     <div class="card-text  d-flex">
                         <p>{{product.name}}</p>
-                        <button class="btn btn-lg btn-outline-dark" (click)="openModal(0, product)">Editar</button>
                     </div>
+                <button class="btn btn-lg btn-outline-dark" (click)="openModal(0, product)">Editar</button>
                 </div>
             </div>
         </li>
@@ -21,6 +21,7 @@
         <div *ngIf="hayDesignBoton == true">
             <button class="btn btn-lg btn-outline-dark" (click)="getMore()">Cargar más</button>
         </div>
+        &nbsp;&nbsp;&nbsp;
         <button class="btn btn-lg btn-outline-dark" 
             (click)="openModal(1,7)">+ Subir diseño</button>
     </div>

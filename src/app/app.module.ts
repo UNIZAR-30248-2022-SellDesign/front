@@ -19,6 +19,7 @@ import { ModalEditComponent } from './components/modal-edit/modal-edit.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-edit-diseno.component';
+import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-e
     RegisterComponent,
     FooterComponent,
     ModalEditComponent,
-    ModalEditDisenoComponent
+    ModalEditDisenoComponent,
+    ModalEditProductComponent
   ],
   imports: [
     BrowserModule,

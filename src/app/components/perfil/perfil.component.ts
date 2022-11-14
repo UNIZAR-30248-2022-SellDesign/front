@@ -21,9 +21,11 @@ export class PerfilComponent implements OnInit {
   contPageDisenos = 0
   contPageFav = 0
   noHayDisenos: boolean = true;
+  cargarMas: boolean = false;
+  cargarMasFav: boolean = false;
   noHayFav: boolean = true;
-  newProducts: any
-  newFavs: any
+  newProducts: any[] = []
+  newFavs: any[] = []
   products: any
   idUser: any
   modalRef: MdbModalRef<ModalEditComponent> | null = null;
@@ -59,7 +61,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
 
     this.getInfo()
-    // this.getMore(false) //obtener diseños (1a pag)
+    this.getMore(false) //obtener diseños (1a pag)
     // this.getMore(true) //obtener fav (1a pag)
   }
 
@@ -103,16 +105,25 @@ export class PerfilComponent implements OnInit {
     this.idUser = localStorage.getItem('idUsuario')
 
     if (!seleccion) {
-      //FALSE -> favoritos
+      //FALSE -> diseños en venta
+      console.log('EN PRODUCTOS');
+      
       axios.get(backURI + "perfil/" + this.idUser + "/products/" + this.contPageDisenos)
         .then(response => {
           // Obtenemos los datos
           if (response.data.length == 0) {
-            this.noHayDisenos = true
+            this.cargarMas = false
+            if(this.newProducts.length == 0){
+              this.noHayDisenos = true
+            }
           } else {
             this.noHayDisenos = false
+            this.cargarMas = true
+
           }
           this.newProducts = this.newProducts.concat(response.data)
+          console.log('ESTO VAAAAAAAAAAAA');
+          
         })
         .catch(e => {
           // Capturamos los errores
@@ -121,14 +132,20 @@ export class PerfilComponent implements OnInit {
         this.contPageDisenos ++
 
     } else {
-      //TRUE -> diseños en venta
+      console.log('EN FAV');
+
+      //TRUE ->favoritos 
       axios.get(backURI + "perfil/" + this.idUser + "/fav/" + this.contPageFav)
         .then(response => {
           // Obtenemos los datos
           if (response.data.length == 0) {
-            this.noHayFav = true
+            this.cargarMasFav = true
+            if(this.newFavs.length == 0){
+              this.noHayFav = true
+            }
           } else {
             this.noHayFav = false
+            this.cargarMasFav = true
           }
           this.newFavs = this.newFavs.concat(response.data)
         })
