@@ -4,6 +4,8 @@ import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ArgumentService } from 'src/app/services/argument.service';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -25,8 +27,7 @@ export class ProductComponent implements OnInit{
                                 ,favourite:false
                                 ,favouriteImage:"null"
                                 ,designerName:"null"
-                                ,imagesDesign:["null"]}
-
+                                ,imagesDesign:['null']}
 
   constructor(private argumentService: ArgumentService) {
     
@@ -50,7 +51,6 @@ export class ProductComponent implements OnInit{
     axios.get(backURI+"products/get/"+this.id)
         .then(response => {
           // Obtenemos los datos
-          console.log(response.data);
           this.viewProduct.description=response.data.description
           this.viewProduct.productName=response.data.name
           this.viewProduct.mainImage=response.data.image
@@ -69,7 +69,6 @@ getInfoDesigner(id: String){
   axios.get(backURI+"users/id/"+id)
     .then(response => {
       // Obtenemos los datos
-      console.log(response.data);
       this.viewProduct.designerName=response.data.username
     })
     .catch(e => {
@@ -81,7 +80,6 @@ getImagesOfDesign(designName:String, description:String){
   axios.get(backURI+"products/design/"+designName)
       .then(response => {
         // Obtenemos los datos
-        console.log(response.data);
         const products = new Array(0)
         
         for(let i = 0; i < response.data.length && i < 4; i++) {
