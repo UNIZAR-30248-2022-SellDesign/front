@@ -58,6 +58,13 @@ export class MisProductosComponent implements OnInit {
 
   openModal(flag: Number, product: any) {//flag = 0 -> Editar; flag = 1 -> Subir; 
     if(flag == 0){
+      if(product.type == 'Camiseta'){
+        this.tipo = 1
+      }else if(product.type == 'Pantalon' || product.type == 'Pantalón'){
+        this.tipo = 2
+      }else{
+        this.tipo = 3
+      }
       this.modalRef = this.modalService.open(ModalEditProductComponent, {
         modalClass: 'modal-lg',
         data: {
@@ -67,6 +74,7 @@ export class MisProductosComponent implements OnInit {
                imagen: product.image,
                precio: product.price,
                idProducto: product._id,
+               tipo: this.tipo,
                esEditar: true,
         }
       })
@@ -74,7 +82,7 @@ export class MisProductosComponent implements OnInit {
       this.modalRef = this.modalService.open(ModalEditProductComponent, {
         modalClass: 'modal-lg',
         data: {nombreProducto: "",
-               imagen: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQUMFrtM6pCAj8CxC_gXKBIS03OUZLVv9Y-kZqbO0lKKZlhbDLN9KuC-P3MlWejR4rNW3cWhTxp4CA&usqp=CAc",
+               imagen: "",
                esSubir: true,
                idProducto: '',
                tipo: this.tipo,

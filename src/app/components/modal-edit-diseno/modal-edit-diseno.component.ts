@@ -16,6 +16,8 @@ export class ModalEditDisenoComponent implements OnInit {
   esEditar:boolean = false
   esSubir:boolean = false
   idDiseno: string = ''
+  hayErrorFoto: boolean = false;
+
 
   constructor(public modalRef: MdbModalRef<ModalEditDisenoComponent>) { }
 
@@ -95,6 +97,64 @@ export class ModalEditDisenoComponent implements OnInit {
       flag: 2,
       _id: idDiseno,
     }])
+  }
+
+  onSelectFile(event : any) {
+    console.log('onSelectFile');
+    
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (evento) => { // called once readAsDataURL is completed
+        console.log(evento.target?.result);
+        if(evento.target?.result != undefined){
+          const formData = new FormData()
+          formData.append('media', event.target.files[0])
+          formData.append('key', '0000255a5921f1840e4f359f5679670c')
+          axios.post('https://thumbsnap.com/api/upload', formData)
+            .then(response => {
+               if(response.status == 200){
+                  this.hayErrorFoto = false
+                  console.log('TODO HA IDO BIEN');
+                  console.log(response.data.data.media);
+                  this.imagen = response.data.data.media
+                  console.log('imagen:', this.imagen);
+                  
+                  // var uName = localStorage.getItem('userName')
+                  // axios.post(backURI + "/users/setImage", {
+                  //   username: uName,
+                  //   image: this.url,
+                  // })
+                  //   .then(response => {
+                  //     console.log('Subida al back con éxito');
+                      
+                  //   })
+                  //   .catch(e => {
+                  //     // Capturamos los errores
+                  //     console.log(e);
+                  //   })
+                }else{
+                  //mensaje error
+                  console.log('FALLO AL SUBIR FOTO');
+                  this.hayErrorFoto = true
+                  const myTimeout = setTimeout( () => {
+                    this.hayErrorFoto = false
+                    
+                  }, 3000);
+                }
+            })
+            .catch(e => {
+              // Capturamos los errores
+              console.log(e);
+            })
+
+         
+        }
+
+      }
+    }
   }
 
 }

@@ -94,6 +94,8 @@ export class HomeComponent implements OnInit {
             this.newProducts = this.newProducts.concat(response.data)
             if(response.data.length < 8){
               this.noHayProductos = true
+            
+              if(response.data.length == 0) this.hayMas = false
             } else{
               this.noHayProductos = false
               this.hayMas = true
@@ -108,16 +110,19 @@ export class HomeComponent implements OnInit {
       // Busqueda
       console.log('Busqueda');
 
-      // console.log('Valor flag', this.flagView);
+      console.log('Valor flag', this.flagView);
 
       this.contPageBusqueda += 1
+      console.log(backURI + 'products/search/' + this.busqueda + '/' + this.contPageBusqueda);
+      
 
       axios.get(backURI + 'products/search/' + this.busqueda + '/' + this.contPageBusqueda)
         .then(response => {
             // Obtenemos los datos
             this.newProducts = this.newProducts.concat(response.data)
             if(response.data.length == 0){
-              this.noHayProductos = true
+              this.hayMas = false
+              if(this.newProducts.length == 0) this.noHayProductos = true
             } else{
               this.noHayProductos = false
               this.hayMas = true
