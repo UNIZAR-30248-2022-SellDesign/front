@@ -28,13 +28,15 @@ export class ProductComponent implements OnInit{
                                 ,favouriteImage:"null"
                                 ,designerName:"null"
                                 ,imagesDesign:['null']}
-
-  constructor(private argumentService: ArgumentService) {
+  imagesDesignFuncional = [{id:'null',
+                            imageDesign : 'null'}]
+  constructor(private argumentService: ArgumentService, private argumentServicePrivate : ArgumentService) {
     
   }
 
   ngOnInit(): void {
     this.argumentService.currentargument.subscribe(message => this.id = message);
+    this.argumentServicePrivate.currentargument.subscribe(message => this.id = message);
     this.getInfo()
   }
 
@@ -80,18 +82,32 @@ getImagesOfDesign(designName:String, description:String){
   axios.get(backURI+"products/design/"+designName)
       .then(response => {
         // Obtenemos los datos
-        const products = new Array(0)
+        console.log(response)
+        /*const products = new Array(0)
+        const ids = new Array(0)*/
         
         for(let i = 0; i < response.data.length && i < 4; i++) {
           if(description !== response.data[i].description){
-            products.push(response.data[i].image);
+            //products.push(response.data[i].image);
+            //ids.push(response.data[i]._id)
+            this.imagesDesignFuncional.push({id:response.data[i]._id,imageDesign:response.data[i].image})
           }  
         }
-        this.viewProduct.imagesDesign = products
+        this.imagesDesignFuncional.shift()
+        /*this.viewProduct.imagesDesign = products
+        this.imagesDesignFuncional.imagesDesignId = ids
+        this.imagesDesignFuncional.imagesDesignImagess = products*/
       })
       .catch(e => {
         // Capturamos los errores
         console.log(e);
       })
+}
+sendArgument(argument:String){
+  console.log(argument)
+  this.argumentServicePrivate.sendArgument(argument)
+  this.imagesDesignFuncional = [{id:'null',
+  imageDesign : 'null'}]
+  this.getInfo()
 }
 }
