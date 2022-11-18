@@ -11,8 +11,13 @@
                <input type="text" [(ngModel)]="nombreDiseno" name="nombreDiseno" class="form-control" placeholder="Nombre del diseño...">
             </div>
             <div class="form-group">
-               <label>Sube tu diseño:</label>
-               <img src={{imagen}} class="card-img-top" name="imagen" alt="Deberia haber fotito">
+                <label>Sube tu diseño:</label>
+                <label  for="fileInput" style="cursor: pointer; margin-bottom: -5px;">
+                    <img src={{imagen}} class="card-img-top" name="imagen" alt="Deberia haber fotito">
+                </label>
+                <input style="display: none;" id="fileInput" type='file' (change)="onSelectFile($event)" accept="image/png"/>
+
+                <h1 *ngIf=hayErrorFoto style="color: red; margin-bottom: 1rem;">¡Ha habido un error al subir el diseño!</h1>
             </div>
          </form>
     </div>

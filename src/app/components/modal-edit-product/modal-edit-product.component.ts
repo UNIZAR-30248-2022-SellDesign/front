@@ -22,6 +22,8 @@ export class ModalEditProductComponent implements OnInit {
   esSubir:boolean = false
   idProducto: string = ''
   diseno = {image: ''}
+  hayErrorFoto: boolean = false;
+
 
 
   constructor(public modalRef: MdbModalRef<ModalEditProductComponent>) { }
@@ -64,7 +66,7 @@ export class ModalEditProductComponent implements OnInit {
     console.log(this.tipo);
 
     axios.post(backURI + "products/new", {
-      design: '637269ae83eae85fb6649afe', //id de un diseño random
+      design: '63726ee9a3951bf597ec2099', //id de un diseño random
       price: precio,
       type: this.tipo,
       image: foto,
@@ -89,6 +91,11 @@ export class ModalEditProductComponent implements OnInit {
   actualizarDatos(foto: string, nombre: string, idProducto: string, precio: Number, descripcion: string){
     console.log('actualizando diseño...')
     //put
+    console.log('PASANDO IMAGEN:', foto);
+    console.log('PASANDO precio:', precio);
+    console.log('PASANDO descri:', descripcion);
+    console.log('PASANDO tipo:', this.tipo);
+    
     axios.put(backURI + "products/update", {
       // design: nombre,  ????
       price: precio,
@@ -127,5 +134,60 @@ export class ModalEditProductComponent implements OnInit {
       _id: idProducto,
     }])
   }
+
+  onSelectFile(event : any) {
+    console.log('onSelectFile');
+    
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (evento) => { // called once readAsDataURL is completed
+        console.log(evento.target?.result);
+        if(evento.target?.result != undefined){
+          const formData = new FormData()
+          formData.append('media', event.target.files[0])
+          formData.append('key', '0000255a5921f1840e4f359f5679670c')
+          axios.post('https://thumbsnap.com/api/upload', formData)
+            .then(response => {
+               if(response.status == 200){
+                  this.hayErrorFoto = false
+                  console.log('TODO HA IDO BIEN');
+                  this.imagen = response.data.data.media
+                  console.log('imagen:', this.imagen);
+                  
+                  // var uName = localStorage.getItem('userName')
+                  // axios.post(backURI + "/users/setImage", {
+                  //   username: uName,
+                  //   image: this.url,
+                  // })
+                  //   .then(response => {
+                  //     console.log('Subida al back con éxito');
+                      
+                  //   })
+                  //   .catch(e => {
+                  //     // Capturamos los errores
+                  //     console.log(e);
+                  //   })
+                }else{
+                  //mensaje error
+                  console.log('FALLO AL SUBIR FOTO');
+                  this.hayErrorFoto = true
+                  const myTimeout = setTimeout( () => {
+                    this.hayErrorFoto = false
+                    
+                  }, 3000);
+                }
+            })
+            .catch(e => {
+              // Capturamos los errores
+              console.log(e);
+            })
+        }
+      }
+    }
+  }
+
 
 }

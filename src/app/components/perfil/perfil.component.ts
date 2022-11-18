@@ -21,6 +21,7 @@ export class PerfilComponent implements OnInit {
   contPageDisenos = 0
   contPageFav = 0
   noHayDisenos: boolean = true;
+  hayErrorFoto: boolean = false;
   cargarMas: boolean = false;
   cargarMasFav: boolean = false;
   noHayFav: boolean = true;
@@ -35,6 +36,9 @@ export class PerfilComponent implements OnInit {
   descripcion: string = "";
   descripcionObtenida: string = "";
   userName: any
+
+  url: any = ''
+  foto:any = ''
 
   product: Product[] = [
     { productName: "Sudadera", designName: "buah", price: 10, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
@@ -93,6 +97,7 @@ export class PerfilComponent implements OnInit {
           this.descripcionObtenida = response.data.description
           this.nombre = this.nombreObtenido
           this.descripcion = this.descripcionObtenida
+          this.url = response.data.image
         })
         .catch(e => {
           // Capturamos los errores
@@ -171,17 +176,64 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  // onSelectFile(event) {
-  //   if (event.target.files && event.target.files[0]) {
-  //     var reader = new FileReader();
+  onSelectFile(event : any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
 
-  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-  //     reader.onload = (event) => { // called once readAsDataURL is completed
-  //       this.url = event.target.result;
-  //     }
-  //   }
-  // }
+      reader.onload = (evento) => { // called once readAsDataURL is completed
+        console.log(evento.target?.result);
+        if(evento.target?.result != undefined){
+          const formData = new FormData()
+          formData.append('media', event.target.files[0])
+          formData.append('key', '0000255a5921f1840e4f359f5679670c')
+
+          axios.post('https://thumbsnap.com/api/upload', formData)
+            .then(response => {
+               if(response.status == 200){
+                  this.hayErrorFoto = false
+                  console.log('TODO HA IDO BIEN');
+                  console.log(response.data.data.media);
+                  this.url = response.data.data.media
+                  // this.subirFoto(response.data.data.media)
+                  var uName = localStorage.getItem('userName')
+                  console.log(uName);
+                  console.log(this.url);
+                  axios.post(backURI + "users/setImage", {
+                    username: uName,
+                    image: this.url,
+                  })
+                    .then(response => {
+                      console.log('Subida al back con éxito');
+                      
+                    })
+                    .catch(e => {
+                      // Capturamos los errores
+                      console.log(e);
+                    })
+                }else{
+                  //mensaje error
+                  console.log('FALLO AL SUBIR FOTO');
+                  this.hayErrorFoto = true
+                  const myTimeout = setTimeout( () => {
+                    this.hayErrorFoto = false
+                    
+                  }, 3000);
+                }
+            })
+            .catch(e => {
+              // Capturamos los errores
+              console.log(e);
+            })
+
+         
+        }
+
+      }
+    }
+  }
+
 
   // ---
   // PRIVATE METHODS.

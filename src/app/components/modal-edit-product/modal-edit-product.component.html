@@ -32,7 +32,11 @@
                 <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
                     <label>Sube tu prenda:</label>
                     <br>
-                    <img src={{imagen}} class="card-img-top" style="width: 200px; margin-left: 20px;" name="imagen" alt="Deberia haber fotito">
+                    <label  for="fileInput" style="cursor: pointer; margin-bottom: -5px;">
+                        <img [src]="imagen ? imagen : 'https://c8.alamy.com/compes/2j8gbjj/icono-de-linea-de-fideos-para-camisetas-ilustracion-vectorial-de-contorno-fino-de-ropa-deportiva-signo-lineal-de-color-negro-para-ropa-de-futbol-2j8gbjj.jpg'" class="card-img-top" style="width: 200px; margin-left: 20px;" name="imagen" alt="Deberia haber fotito">
+                    </label>
+                    <input style="display: none;" id="fileInput" type='file' (change)="onSelectFile($event)" accept="image/jpeg, image/jpg"/>
+                    <p *ngIf=hayErrorFoto style="color: red; margin-bottom: 1rem; margin-top: 1rem;">¡Ha habido un error al subir la prenda!</p>
                 </div>
                 <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
                     <label>Sube tu diseño:</label>
