@@ -34,7 +34,8 @@
     </ul>
     <h3 *ngIf=esNovedad><strong>NOVEDADES</strong>  de hoy filtro ({{this.precio}}, {{this.tipo}}):</h3> 
     <h3 *ngIf=esBusqueda><strong>RESULTADO</strong>  busqueda ('{{this.busqueda}}', {{this.precio}}, {{this.tipo}}):</h3>
-    <h1 *ngIf=noHayProductos><strong>NO</strong> se ha encontrado ningún producto</h1> 
+    <h1 *ngIf=noHayProductos><strong>NO</strong> se ha encontrado ningún producto</h1>
+    
     <ul class="row row-cols-4" style="padding: 0;">
         <li  *ngFor="let product of newProducts" class="list-group-item p-2">
             <div class="card" style="width: 18rem;"> <!-- // height: 35rem; -->
