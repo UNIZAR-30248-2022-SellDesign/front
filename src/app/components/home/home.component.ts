@@ -65,6 +65,8 @@ export class HomeComponent implements OnInit {
     .then(response => {
         // Obtenemos los datos
         this.newProducts = response.data
+        console.log(this.newProducts);
+        
         if(this.newProducts.length == 0){
             this.esNovedad = true
             this.noHayProductos = true
