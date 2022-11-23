@@ -20,6 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-edit-diseno.component';
 import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
+import { CommonModule } from '@angular/common';
+import {ProductComponent} from './components/product/product.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ModalEditProductComponent } from './components/modal-edit-product/modal
     BarraNavegacionComponent,
     HomeComponent,
     PerfilComponent,
+    ProductComponent,
     MisDisenosComponent,
     MisProductosComponent,
     MiCarritoComponent,
@@ -43,7 +46,8 @@ import { ModalEditProductComponent } from './components/modal-edit-product/modal
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    MdbModalModule
+    MdbModalModule,
+    CommonModule,
   ],
   providers: [AppRoutingProviders, MdbModalModule],
   bootstrap: [AppComponent]

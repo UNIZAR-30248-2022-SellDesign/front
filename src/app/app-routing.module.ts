@@ -9,7 +9,7 @@ import {MisDisenosComponent} from './components/mis-disenos/mis-disenos.componen
 import {MisProductosComponent} from './components/mis-productos/mis-productos.component';
 import {MiCarritoComponent} from './components/mi-carrito/mi-carrito.component';
 import { ErrorComponent } from './components/error/error.component';
-
+import { ProductComponent } from './components/product/product.component';
 const routes: Routes = [
   
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -20,15 +20,15 @@ const routes: Routes = [
   {path: 'MisDiseños', component: MisDisenosComponent},
   {path: 'MisProductos', component: MisProductosComponent},
   {path: 'MiCarrito/:nombre', component: MiCarritoComponent},
+  {path:'product',component: ProductComponent},
   {path: '**', component: ErrorComponent}
   
 ];
 
 export const AppRoutingProviders: any[] = [];
 
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true})],
   exports: [RouterModule]
 })
 
