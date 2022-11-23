@@ -17,7 +17,7 @@ export class ModalEditDisenoComponent implements OnInit {
   esSubir:boolean = false
   idDiseno: string = ''
   hayErrorFoto: boolean = false;
-
+  error: boolean = false
 
   constructor(public modalRef: MdbModalRef<ModalEditDisenoComponent>) { }
 
@@ -33,27 +33,30 @@ export class ModalEditDisenoComponent implements OnInit {
     console.log(foto);
     console.log(nombre);
 
-    axios.post(backURI + "designs/new", {
-      name: nombre,
-      image: foto,
-      id: this.idUser
-    })
-      .then((res) => {
-        console.log('guardarDatos:')
-        console.log(res)
-
-        this.modalRef.close([{
-          flag: 0,
-          name: nombre,
-          image: foto,
-          _id: ''
-        }])
-        
-      }).catch((error) => {
-        console.log(error);
+    if(nombre != '' && foto != 'https://www.lifewire.com/thmb/TRGYpWa4KzxUt1Fkgr3FqjOd6VQ=/1…trip_icc()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg'){
+      this.error = false
+      axios.post(backURI + "designs/new", {
+        name: nombre,
+        image: foto,
+        id: this.idUser
       })
-
-    
+        .then((res) => {
+          console.log('guardarDatos:')
+          console.log(res)
+  
+          this.modalRef.close([{
+            flag: 0,
+            name: nombre,
+            image: foto,
+            _id: ''
+          }])
+          
+        }).catch((error) => {
+          console.log(error);
+        })
+    }else{
+      this.error = true
+    }
   }
 
   actualizarDatos(foto: string, nombre: string, idDiseno: string ){

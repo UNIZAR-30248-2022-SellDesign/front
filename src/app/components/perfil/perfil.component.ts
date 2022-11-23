@@ -41,21 +41,9 @@ export class PerfilComponent implements OnInit {
   foto:any = ''
 
   product: Product[] = [
-    { productName: "Sudadera", designName: "buah", price: 10, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 20, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 30, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 70, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 50, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 60, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 70, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" },
-    { productName: "Sudadera", designName: "buah", price: 80, image: "https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530" }
   ];
 
   masProducts: Product[] = [
-    { productName: "Sudadera", designName: "buah", price: 10, image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFwAXAMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAwYHAv/EADQQAAEDAgMFBgUDBQAAAAAAAAEAAgMEEQUhMQYSQVGREyIycaHBFGFigdFjseEVIyRCUv/EABoBAQACAwEAAAAAAAAAAAAAAAADBAECBQb/xAApEQEAAgEDAgQGAwAAAAAAAAAAAQIDBBExEiEFQVFhEzJxsdHwFCI0/9oADAMBAAIRAxEAPwD3FAQEBB87wva+fJB9IME2FygA3QZQEBAQEBBgmyDkcT2olfK+GgDWMBI7U5l3kOCsVwxzZx8/iMzaa4+PVTtmqHTio7eXtQfHvG62tEbbK9L3m3Vv3XMeMVrGgGUknm0H1VeYiHWxZLWr3knqqmps2WZxZxbosJJmZbqauqKYgRvu3/l2YRmLL3D61tZG4gbr2Gzm3WEkTuloyICAgIKPa/EvgMHk3HWlm/ts+V9T09lLhp1Xc/xPU/A087cz2hwVI6+9c5Xy6K5Z57BKwiKhl0MawgHd1UFnTw8NwWicug3YNV9jXEk2Y47rkZrPd1qwmEBAQEHmW2eJ/G4vJFGbw0w7Nvzd/seuX2XQ09Omm/q8f4tqvi6iaxxXt+f32VmHkmFp+ZW1+UWmmemFkx5a3es51uDdVBZ08XdKjrmtAvHICTYAtN+gCgs6uLhNhlEoNmSNsbd9hb0utEz71Qa2DdldfS6MQ6zCqn4mkaSbvb3XeYWE1Z3hMRsICCr2kxL+lYRPUg2ktuRDm86dNfspMVOu0Qqa7Ufx8Fr+fl9XkZJNySSeJXUeE33WNCLRN69VBbl0sEf1hYxFR2X8aQyFzpGbvg1c4vsR5C3uFXs6mCe2yxjFmgclGtMHVGHyPGSgtMFqewqwwmzJe79+H4+6w3rO0ukRKICDznb/ABF1TiDKOMnsqcd7kXnXoP3Kvaam1er1eU8b1M3yxijiv3cofCrThrSmyjYOTQoJdXF2iE6LVRyuY1hTqCzpYEwaKJcYc3JBrb4z5INouLEZEHIoy6uhqPiaZkvE5O81hNE7wkIyIKDFdlaKvL5GF0EzjvFzc2uPzH4spqZ7VczU+FYc28x2n98nHYtspiNEHOZF20VvHCCbeY1HqrdM9bOBqfCc+LvEbx7fhDgbYAJLGOJTYgo5XKLCm4KC7p6dNCiXGXDJGWIaaSaS0LHOJ5cEIjdb0uCuIBqXgfSz8rDeKeq2p6eOmZuQt3R56o3iIhtRkQEGqpO7BI7kwn0WY5a3nasy8uYr8vJVSYhktJWaLCl4KC7pYEwBRLsCC12fylmH0hYb0XiJBAQEBBFxN25h1U7lC8+hW1eYRZ52xWn2l5o0K88rVJiWkrONPptQoLOjglNCiXoYOqErPATaqePo9wjenK+WEggICAgg42bYTVn9Fw9FtT5oQaqdsNvpLzoWursvMwkRELSU9JhNpTchQ2dDDO8pwUS/AdVhmVhgZ/zbc2H2RmnLoESiAgICCt2jNsEq7cWW6kLfH80Kut/z2ee7pv8Ayrm8PNxWd29gN8h6rWZhPSJTae4cLiyhsv4Z2mFiAoHRhgoPrZXEqXEqrtaKRz2Mc6JxMbm94C/EC+ozRvWNpdciQQEBAQEBAQEBAQLICAgIP//Z" },
-    { productName: "Sudadera", designName: "buah", price: 60, image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFwAXAMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAwYHAv/EADQQAAEDAgMFBgUDBQAAAAAAAAEAAgMEEQUhMQYSQVGREyIycaHBFGFigdFjseEVIyRCUv/EABoBAQACAwEAAAAAAAAAAAAAAAADBAECBQb/xAApEQEAAgEDAgQGAwAAAAAAAAAAAQIDBBExEiEFQVFhEzJxsdHwFCI0/9oADAMBAAIRAxEAPwD3FAQEBB87wva+fJB9IME2FygA3QZQEBAQEBBgmyDkcT2olfK+GgDWMBI7U5l3kOCsVwxzZx8/iMzaa4+PVTtmqHTio7eXtQfHvG62tEbbK9L3m3Vv3XMeMVrGgGUknm0H1VeYiHWxZLWr3knqqmps2WZxZxbosJJmZbqauqKYgRvu3/l2YRmLL3D61tZG4gbr2Gzm3WEkTuloyICAgIKPa/EvgMHk3HWlm/ts+V9T09lLhp1Xc/xPU/A087cz2hwVI6+9c5Xy6K5Z57BKwiKhl0MawgHd1UFnTw8NwWicug3YNV9jXEk2Y47rkZrPd1qwmEBAQEHmW2eJ/G4vJFGbw0w7Nvzd/seuX2XQ09Omm/q8f4tqvi6iaxxXt+f32VmHkmFp+ZW1+UWmmemFkx5a3es51uDdVBZ08XdKjrmtAvHICTYAtN+gCgs6uLhNhlEoNmSNsbd9hb0utEz71Qa2DdldfS6MQ6zCqn4mkaSbvb3XeYWE1Z3hMRsICCr2kxL+lYRPUg2ktuRDm86dNfspMVOu0Qqa7Ufx8Fr+fl9XkZJNySSeJXUeE33WNCLRN69VBbl0sEf1hYxFR2X8aQyFzpGbvg1c4vsR5C3uFXs6mCe2yxjFmgclGtMHVGHyPGSgtMFqewqwwmzJe79+H4+6w3rO0ukRKICDznb/ABF1TiDKOMnsqcd7kXnXoP3Kvaam1er1eU8b1M3yxijiv3cofCrThrSmyjYOTQoJdXF2iE6LVRyuY1hTqCzpYEwaKJcYc3JBrb4z5INouLEZEHIoy6uhqPiaZkvE5O81hNE7wkIyIKDFdlaKvL5GF0EzjvFzc2uPzH4spqZ7VczU+FYc28x2n98nHYtspiNEHOZF20VvHCCbeY1HqrdM9bOBqfCc+LvEbx7fhDgbYAJLGOJTYgo5XKLCm4KC7p6dNCiXGXDJGWIaaSaS0LHOJ5cEIjdb0uCuIBqXgfSz8rDeKeq2p6eOmZuQt3R56o3iIhtRkQEGqpO7BI7kwn0WY5a3nasy8uYr8vJVSYhktJWaLCl4KC7pYEwBRLsCC12fylmH0hYb0XiJBAQEBBFxN25h1U7lC8+hW1eYRZ52xWn2l5o0K88rVJiWkrONPptQoLOjglNCiXoYOqErPATaqePo9wjenK+WEggICAgg42bYTVn9Fw9FtT5oQaqdsNvpLzoWursvMwkRELSU9JhNpTchQ2dDDO8pwUS/AdVhmVhgZ/zbc2H2RmnLoESiAgICCt2jNsEq7cWW6kLfH80Kut/z2ee7pv8Ayrm8PNxWd29gN8h6rWZhPSJTae4cLiyhsv4Z2mFiAoHRhgoPrZXEqXEqrtaKRz2Mc6JxMbm94C/EC+ozRvWNpdciQQEBAQEBAQEBAQLICAgIP//Z" },
-    { productName: "Sudadera", designName: "buah", price: 70, image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFwAXAMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAwYHAv/EADQQAAEDAgMFBgUDBQAAAAAAAAEAAgMEEQUhMQYSQVGREyIycaHBFGFigdFjseEVIyRCUv/EABoBAQACAwEAAAAAAAAAAAAAAAADBAECBQb/xAApEQEAAgEDAgQGAwAAAAAAAAAAAQIDBBExEiEFQVFhEzJxsdHwFCI0/9oADAMBAAIRAxEAPwD3FAQEBB87wva+fJB9IME2FygA3QZQEBAQEBBgmyDkcT2olfK+GgDWMBI7U5l3kOCsVwxzZx8/iMzaa4+PVTtmqHTio7eXtQfHvG62tEbbK9L3m3Vv3XMeMVrGgGUknm0H1VeYiHWxZLWr3knqqmps2WZxZxbosJJmZbqauqKYgRvu3/l2YRmLL3D61tZG4gbr2Gzm3WEkTuloyICAgIKPa/EvgMHk3HWlm/ts+V9T09lLhp1Xc/xPU/A087cz2hwVI6+9c5Xy6K5Z57BKwiKhl0MawgHd1UFnTw8NwWicug3YNV9jXEk2Y47rkZrPd1qwmEBAQEHmW2eJ/G4vJFGbw0w7Nvzd/seuX2XQ09Omm/q8f4tqvi6iaxxXt+f32VmHkmFp+ZW1+UWmmemFkx5a3es51uDdVBZ08XdKjrmtAvHICTYAtN+gCgs6uLhNhlEoNmSNsbd9hb0utEz71Qa2DdldfS6MQ6zCqn4mkaSbvb3XeYWE1Z3hMRsICCr2kxL+lYRPUg2ktuRDm86dNfspMVOu0Qqa7Ufx8Fr+fl9XkZJNySSeJXUeE33WNCLRN69VBbl0sEf1hYxFR2X8aQyFzpGbvg1c4vsR5C3uFXs6mCe2yxjFmgclGtMHVGHyPGSgtMFqewqwwmzJe79+H4+6w3rO0ukRKICDznb/ABF1TiDKOMnsqcd7kXnXoP3Kvaam1er1eU8b1M3yxijiv3cofCrThrSmyjYOTQoJdXF2iE6LVRyuY1hTqCzpYEwaKJcYc3JBrb4z5INouLEZEHIoy6uhqPiaZkvE5O81hNE7wkIyIKDFdlaKvL5GF0EzjvFzc2uPzH4spqZ7VczU+FYc28x2n98nHYtspiNEHOZF20VvHCCbeY1HqrdM9bOBqfCc+LvEbx7fhDgbYAJLGOJTYgo5XKLCm4KC7p6dNCiXGXDJGWIaaSaS0LHOJ5cEIjdb0uCuIBqXgfSz8rDeKeq2p6eOmZuQt3R56o3iIhtRkQEGqpO7BI7kwn0WY5a3nasy8uYr8vJVSYhktJWaLCl4KC7pYEwBRLsCC12fylmH0hYb0XiJBAQEBBFxN25h1U7lC8+hW1eYRZ52xWn2l5o0K88rVJiWkrONPptQoLOjglNCiXoYOqErPATaqePo9wjenK+WEggICAgg42bYTVn9Fw9FtT5oQaqdsNvpLzoWursvMwkRELSU9JhNpTchQ2dDDO8pwUS/AdVhmVhgZ/zbc2H2RmnLoESiAgICCt2jNsEq7cWW6kLfH80Kut/z2ee7pv8Ayrm8PNxWd29gN8h6rWZhPSJTae4cLiyhsv4Z2mFiAoHRhgoPrZXEqXEqrtaKRz2Mc6JxMbm94C/EC+ozRvWNpdciQQEBAQEBAQEBAQLICAgIP//Z" },
-    { productName: "Sudadera", designName: "buah", price: 80, image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFwAXAMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAwYHAv/EADQQAAEDAgMFBgUDBQAAAAAAAAEAAgMEEQUhMQYSQVGREyIycaHBFGFigdFjseEVIyRCUv/EABoBAQACAwEAAAAAAAAAAAAAAAADBAECBQb/xAApEQEAAgEDAgQGAwAAAAAAAAAAAQIDBBExEiEFQVFhEzJxsdHwFCI0/9oADAMBAAIRAxEAPwD3FAQEBB87wva+fJB9IME2FygA3QZQEBAQEBBgmyDkcT2olfK+GgDWMBI7U5l3kOCsVwxzZx8/iMzaa4+PVTtmqHTio7eXtQfHvG62tEbbK9L3m3Vv3XMeMVrGgGUknm0H1VeYiHWxZLWr3knqqmps2WZxZxbosJJmZbqauqKYgRvu3/l2YRmLL3D61tZG4gbr2Gzm3WEkTuloyICAgIKPa/EvgMHk3HWlm/ts+V9T09lLhp1Xc/xPU/A087cz2hwVI6+9c5Xy6K5Z57BKwiKhl0MawgHd1UFnTw8NwWicug3YNV9jXEk2Y47rkZrPd1qwmEBAQEHmW2eJ/G4vJFGbw0w7Nvzd/seuX2XQ09Omm/q8f4tqvi6iaxxXt+f32VmHkmFp+ZW1+UWmmemFkx5a3es51uDdVBZ08XdKjrmtAvHICTYAtN+gCgs6uLhNhlEoNmSNsbd9hb0utEz71Qa2DdldfS6MQ6zCqn4mkaSbvb3XeYWE1Z3hMRsICCr2kxL+lYRPUg2ktuRDm86dNfspMVOu0Qqa7Ufx8Fr+fl9XkZJNySSeJXUeE33WNCLRN69VBbl0sEf1hYxFR2X8aQyFzpGbvg1c4vsR5C3uFXs6mCe2yxjFmgclGtMHVGHyPGSgtMFqewqwwmzJe79+H4+6w3rO0ukRKICDznb/ABF1TiDKOMnsqcd7kXnXoP3Kvaam1er1eU8b1M3yxijiv3cofCrThrSmyjYOTQoJdXF2iE6LVRyuY1hTqCzpYEwaKJcYc3JBrb4z5INouLEZEHIoy6uhqPiaZkvE5O81hNE7wkIyIKDFdlaKvL5GF0EzjvFzc2uPzH4spqZ7VczU+FYc28x2n98nHYtspiNEHOZF20VvHCCbeY1HqrdM9bOBqfCc+LvEbx7fhDgbYAJLGOJTYgo5XKLCm4KC7p6dNCiXGXDJGWIaaSaS0LHOJ5cEIjdb0uCuIBqXgfSz8rDeKeq2p6eOmZuQt3R56o3iIhtRkQEGqpO7BI7kwn0WY5a3nasy8uYr8vJVSYhktJWaLCl4KC7pYEwBRLsCC12fylmH0hYb0XiJBAQEBBFxN25h1U7lC8+hW1eYRZ52xWn2l5o0K88rVJiWkrONPptQoLOjglNCiXoYOqErPATaqePo9wjenK+WEggICAgg42bYTVn9Fw9FtT5oQaqdsNvpLzoWursvMwkRELSU9JhNpTchQ2dDDO8pwUS/AdVhmVhgZ/zbc2H2RmnLoESiAgICCt2jNsEq7cWW6kLfH80Kut/z2ee7pv8Ayrm8PNxWd29gN8h6rWZhPSJTae4cLiyhsv4Z2mFiAoHRhgoPrZXEqXEqrtaKRz2Mc6JxMbm94C/EC+ozRvWNpdciQQEBAQEBAQEBAQLICAgIP//Z" }
   ];
 
   constructor(private modalService: MdbModalService) {
@@ -66,7 +54,7 @@ export class PerfilComponent implements OnInit {
 
     this.getInfo()
     this.getMore(false) //obtener diseños (1a pag)
-    // this.getMore(true) //obtener fav (1a pag)
+    this.getMore(true) //obtener fav (1a pag)
   }
 
   // ---
@@ -118,6 +106,8 @@ export class PerfilComponent implements OnInit {
           // Obtenemos los datos
           if (response.data.length == 0) {
             this.cargarMas = false
+            console.log(this.cargarMas);
+            
             if(this.newProducts.length == 0){
               this.noHayDisenos = true
             }
@@ -127,7 +117,6 @@ export class PerfilComponent implements OnInit {
 
           }
           this.newProducts = this.newProducts.concat(response.data)
-          console.log('ESTO VAAAAAAAAAAAA');
           
         })
         .catch(e => {
@@ -144,7 +133,9 @@ export class PerfilComponent implements OnInit {
         .then(response => {
           // Obtenemos los datos
           if (response.data.length == 0) {
-            this.cargarMasFav = true
+            this.cargarMasFav = false
+            console.log('cargarmasfav', this.cargarMasFav);
+            
             if(this.newFavs.length == 0){
               this.noHayFav = true
             }
