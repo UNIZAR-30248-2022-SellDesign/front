@@ -7,11 +7,12 @@
         <form>
             <div class="form-group">
                <label>¿Cómo te llamas?</label>
-               <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" placeholder="Nombre y Apellidos">
+               <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" 
+                        placeholder="Nombre y Apellidos" maxlength="25">
             </div>
             <div class="form-group">
                <label>Cuéntanos sobre ti ...</label>
-               <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Breve descripción">
+               <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Breve descripción" maxlength="100">
             </div>
          </form>
     </div>

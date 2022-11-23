@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
   esBusqueda: boolean = false;
   hayMas: boolean = false;
   noHayProductos: boolean = false;
-  precio: string = ''
-  tipo: string = ''
+  precio: string = 'Precio'
+  tipo: string = 'Prenda'
   _min: Number = 0
   _max: Number = 0
   tipoEntero:Number = 0
@@ -48,10 +48,11 @@ export class HomeComponent implements OnInit {
       this.contPageBusqueda = 0
       this.esNovedad = false
       this.esBusqueda = true
-      this.precio = ''
+      this.precio = 'Precio'
       this.tipo = ''
       if(this.newProducts.length == 0 ){
         this.noHayProductos = true
+        this.hayMas = false
       }else{
         this.noHayProductos = false
       }
@@ -66,9 +67,9 @@ export class HomeComponent implements OnInit {
         // Obtenemos los datos
         this.newProducts = response.data
         console.log(this.newProducts);
+        this.esNovedad = true
         
         if(this.newProducts.length == 0){
-            this.esNovedad = true
             this.noHayProductos = true
         } else{
           this.noHayProductos = false
@@ -86,6 +87,8 @@ export class HomeComponent implements OnInit {
   getMore() {
     // Home
     if(this.flagView){
+      this.esNovedad = true
+
       console.log('HOME');
       
       this.contPageHome += 1
@@ -110,6 +113,8 @@ export class HomeComponent implements OnInit {
         })
     } else{
       // Busqueda
+      this.esNovedad = false
+
       console.log('Busqueda');
 
       console.log('Valor flag', this.flagView);
@@ -164,7 +169,7 @@ export class HomeComponent implements OnInit {
       //Filtro Home
       console.log('FILTRO');
       
-      if(this.tipo == ''){
+      if(this.tipo == 'Prenda'){
         //Solo se filtra precio
         console.log('preecio', backURI + 'products/home/' + min + '/'  + max);
 
@@ -226,7 +231,7 @@ export class HomeComponent implements OnInit {
     
     this.esBusqueda = true
     this.tipoEntero = tipo
-    if(this.precio == ''){
+    if(this.precio == 'Precio'){
       //Solo se filtra prenda
       console.log('prenda:', backURI + 'products/home/' + tipo);
       

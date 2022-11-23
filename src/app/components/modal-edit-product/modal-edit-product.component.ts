@@ -23,6 +23,7 @@ export class ModalEditProductComponent implements OnInit {
   idProducto: string = ''
   diseno = {image: ''}
   hayErrorFoto: boolean = false;
+  error:boolean = false
 
 
 
@@ -65,27 +66,30 @@ export class ModalEditProductComponent implements OnInit {
     console.log(descripcion);
     console.log(this.tipo);
 
-    axios.post(backURI + "products/new", {
-      design: '63726ee9a3951bf597ec2099', //id de un diseño random
-      price: precio,
-      type: this.tipo,
-      image: foto,
-      description: descripcion,
-      seller: this.idUser
-    })
-      .then((res) => {
-        console.log('guardarDatos:')
-        console.log(res)
-
-        this.modalRef.close([{
-          flag: 0
-        }])
-
-      }).catch((error) => {
-        console.log(error);
+    if(precio != 0 && foto != '' && this.nombreTipo != 'Prenda'){
+      this.error = true
+      axios.post(backURI + "products/new", {
+        design: '63726ee9a3951bf597ec2099', //id de un diseño random
+        price: precio,
+        type: this.tipo,
+        image: foto,
+        description: descripcion,
+        seller: this.idUser
       })
-
-      
+        .then((res) => {
+          console.log('guardarDatos:')
+          console.log(res)
+  
+          this.modalRef.close([{
+            flag: 0
+          }])
+  
+        }).catch((error) => {
+          console.log(error);
+        })
+    }else{
+      this.error = true
+    }
   }
 
   actualizarDatos(foto: string, nombre: string, idProducto: string, precio: Number, descripcion: string){

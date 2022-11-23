@@ -4,8 +4,8 @@
         <label for="">
             <img class="rounded-circle img-fluid" style="width: 150px; height: 150px;" alt="avatar" [src]="url ? url : 'https://estaticos.muyinteresante.es/uploads/images/gallery/5f96c5745bafe85c04aac28e/1-monte-everest.jpg'"> 
         </label>
-        <h5 class="mt-3">{{this.nombre}}</h5>
-        <p class="text-muted mb-4">{{this.descripcion}}</p>
+        <h5 class="mt-3" style="margin-left: 50rem; margin-right: 50rem;">{{this.nombre}}</h5>
+        <p class="text-muted mb-4" style="margin-left: 40rem; margin-right: 40rem;">{{this.descripcion}}</p>
         <div class="d-flex justify-content-center mb-2">
             <div class="btn btn-primary ms-1">
                 <input style="display: none;" id="fileInput" type='file' (change)="onSelectFile($event)" accept="image/png, image/jpg"/>
@@ -24,7 +24,7 @@
                 (click)="show( false )"
                 class="tabs__nav-item"
                 [class.tabs__nav-item--on]="( selectedTab === false )">
-                <h4 class=""><strong>Productos</strong> en venta:</h4>
+                <h4 class=""><strong>PRODUCTOS</strong> en venta:</h4>
             </a>
             <a
                 (click)="show( true )"
@@ -44,6 +44,9 @@
                 </ul>
                 <h1 *ngIf=noHayDisenos style="text-align: center;">Todavía <strong>NO</strong> has subido ningún producto</h1> 
                 <h1 *ngIf=noHayDisenos style="text-align: center;"><strong>A QUÉ ESPERAS!</strong></h1> 
+                <div *ngIf="cargarMas" class="d-flex justify-content-center p-2">
+                    <button  class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
+                </div>
             </div>
             <div *ngSwitchCase="( true )" class="tabs__tab">
                 <ul class="row row-cols-4">
@@ -53,13 +56,10 @@
                         </div>
                     </li>
                 </ul>
-                <h1 *ngIf=noHayFav style="text-align: center;">Todavía <strong>NO</strong> tienes favoritos!</h1> 
-            </div>
-            <div *ngIf="cargarMas" class="d-flex justify-content-center p-2">
-                <button  class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
-            </div>
-            <div *ngIf="cargarMasFav"  class="d-flex justify-content-center p-2">
-                <button class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
+                <h1 *ngIf=noHayFav style="text-align: center;">Todavía <strong>NO</strong> tienes favoritos!</h1>
+                <div *ngIf="cargarMasFav" class="d-flex justify-content-center p-2">
+                    <button class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
+                </div> 
             </div>
         </div>
     </div>

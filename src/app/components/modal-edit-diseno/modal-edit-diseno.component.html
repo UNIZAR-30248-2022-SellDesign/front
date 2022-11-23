@@ -8,7 +8,8 @@
         <form>
             <div class="form-group">
                <label>¿Cómo lo quieres llamar?</label>
-               <input type="text" [(ngModel)]="nombreDiseno" name="nombreDiseno" class="form-control" placeholder="Nombre del diseño...">
+               <input type="text" [(ngModel)]="nombreDiseno" name="nombreDiseno" class="form-control" 
+                        placeholder="Nombre del diseño..." maxlength="25">
             </div>
             <div class="form-group">
                 <label>Sube tu diseño:</label>
@@ -18,14 +19,15 @@
                 <input style="display: none;" id="fileInput" type='file' (change)="onSelectFile($event)" accept="image/png"/>
 
                 <h1 *ngIf=hayErrorFoto style="color: red; margin-bottom: 1rem;">¡Ha habido un error al subir el diseño!</h1>
+                <h1 *ngIf=error style="color: red; margin-bottom: 1rem; justify-content: center;">¡Hay algún error, revisa todo!</h1>
             </div>
          </form>
     </div>
     <div class="modal-footer">
-        <button *ngIf="esSubir == true" type="button" class="btn btn-secondary" (click)="modalRef.close()">
+        <button *ngIf="esSubir == true" type="button" class="btn btn-secondary" style="background-color: red;"  (click)="modalRef.close()">
             Cancelar
         </button>
-        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" (click)="eliminarDatos(idDiseno)">
+        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" style="background-color: red;" (click)="eliminarDatos(idDiseno)">
             Eliminar
         </button>
         <button *ngIf="esSubir == true" type="submit" class="btn btn-primary" (click)="guardarDatos(imagen, nombreDiseno)">

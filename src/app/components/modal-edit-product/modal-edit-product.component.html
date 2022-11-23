@@ -26,7 +26,7 @@
             
             <div class="form-group">
                 <label>Descripción</label>
-                <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Descripción...">
+                <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Descripción..." maxlength="80">
              </div>
             <div class="form-group d-flex">
                 <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
@@ -46,16 +46,18 @@
             </div>
              <div class="form-group d-flex">
                   <label style="display: inline-block; text-align: right;">Precio:&nbsp;</label>
-                  <input type="text" [(ngModel)]="precio" name="precio" style="width: 100px;" class="form-control" placeholder="Precio...">
+                  <input type="text" [(ngModel)]="precio" name="precio" style="width: 100px;" class="form-control" 
+                        placeholder="Precio..." maxlength="3">
                   <label style="display: inline-block; text-align: right;">&nbsp;€</label>
              </div>
+             <h1 *ngIf=error style="color: red; margin-bottom: 1rem; justify-content: center;">¡Hay algún error, revisa todo!</h1>
          </form>
     </div>
     <div class="modal-footer">
-        <button *ngIf="esSubir == true" type="button" class="btn btn-secondary" (click)="modalRef.close()">
+        <button *ngIf="esSubir == true" type="button" class="btn btn-secondary" style="background-color: red;" (click)="modalRef.close()">
             Cancelar
         </button>
-        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" (click)="eliminarDatos(idProducto)">
+        <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" style="background-color: red;" (click)="eliminarDatos(idProducto)">
             Eliminar
         </button>
         <button *ngIf="esSubir == true" type="submit" class="btn btn-primary" (click)="guardarDatos(imagen, nombreProducto, precio, descripcion)">
