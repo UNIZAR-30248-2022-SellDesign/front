@@ -30,6 +30,7 @@ export class ProductComponent implements OnInit{
                                 ,imagesDesign:['null']}
   imagesDesignFuncional = [{id:'null',
                             imageDesign : 'null'}]
+  designImagePage : any
   constructor(private argumentService: ArgumentService, private argumentServicePrivate : ArgumentService) {
     
   }
@@ -82,7 +83,7 @@ getImagesOfDesign(designName:String, description:String){
   axios.get(backURI+"products/design/"+designName)
       .then(response => {
         // Obtenemos los datos
-        console.log(response)
+        this.designImagePage = response.data[0].design.image
         /*const products = new Array(0)
         const ids = new Array(0)*/
         
