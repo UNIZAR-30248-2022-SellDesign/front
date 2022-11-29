@@ -2,22 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductProfile } from '../../models/productProfile';
 import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { ArgumentService } from 'src/app/services/argument.service';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import {ActivatedRoute, Params, Router } from '@angular/router';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
-  providers: [MdbModalService],
-  queries: {
-    "tabsContentRef": new ViewChild("tabsContentRef")
-  }
+  styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit{
   id:any
-
   viewProduct: ProductProfile = {
                                 productName:"null"
                                 ,designName:"null"
@@ -31,14 +24,15 @@ export class ProductComponent implements OnInit{
   imagesDesignFuncional = [{id:'null',
                             imageDesign : 'null'}]
   designImagePage : any
-  constructor(private argumentService: ArgumentService, private argumentServicePrivate : ArgumentService) {
-    
-  }
+  constructor(private route: ActivatedRoute,private router: Router) {  }
 
   ngOnInit(): void {
-    this.argumentService.currentargument.subscribe(message => this.id = message);
-    this.argumentServicePrivate.currentargument.subscribe(message => this.id = message);
-    this.getInfo()
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['idProducto']
+      this.imagesDesignFuncional = [{ id:'null',
+                                      imageDesign : 'null'}]
+      this.getInfo()
+    });
   }
 
   addToCart(){
@@ -105,10 +99,10 @@ getImagesOfDesign(designName:String, description:String){
       })
 }
 sendArgument(argument:String){
-  console.log(argument)
+  /*console.log(argument)
   this.argumentServicePrivate.sendArgument(argument)
   this.imagesDesignFuncional = [{id:'null',
   imageDesign : 'null'}]
-  this.getInfo()
+  this.getInfo()*/
 }
 }

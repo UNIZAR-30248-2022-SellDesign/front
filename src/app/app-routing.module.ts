@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'MisDiseños', component: MisDisenosComponent},
   {path: 'MisProductos', component: MisProductosComponent},
   {path: 'MiCarrito/:nombre', component: MiCarritoComponent},
-  {path:'product',component: ProductComponent},
+  {path:'product/:idProducto',component: ProductComponent},
   {path: '**', component: ErrorComponent}
   
 ];
