@@ -33,9 +33,10 @@ export class ProductComponent implements OnInit{
       this.imagesDesignFuncional = [{ id:'null',
                                       imageDesign : 'null'}]
       this.getInfo()
+      this.getFavorite()
     });
     this.idUser = localStorage.getItem('idUsuario')
-    this.getFavorite()
+    
   }
   getFavorite(){
     axios.get(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
