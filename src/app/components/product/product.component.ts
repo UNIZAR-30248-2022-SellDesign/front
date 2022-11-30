@@ -78,31 +78,27 @@ getImagesOfDesign(designName:String, description:String){
       .then(response => {
         // Obtenemos los datos
         this.designImagePage = response.data[0].design.image
-        /*const products = new Array(0)
-        const ids = new Array(0)*/
         
         for(let i = 0; i < response.data.length && i < 4; i++) {
           if(description !== response.data[i].description){
-            //products.push(response.data[i].image);
-            //ids.push(response.data[i]._id)
             this.imagesDesignFuncional.push({id:response.data[i]._id,imageDesign:response.data[i].image})
           }  
         }
         this.imagesDesignFuncional.shift()
-        /*this.viewProduct.imagesDesign = products
-        this.imagesDesignFuncional.imagesDesignId = ids
-        this.imagesDesignFuncional.imagesDesignImagess = products*/
       })
       .catch(e => {
         // Capturamos los errores
         console.log(e);
       })
 }
-sendArgument(argument:String){
-  /*console.log(argument)
-  this.argumentServicePrivate.sendArgument(argument)
-  this.imagesDesignFuncional = [{id:'null',
-  imageDesign : 'null'}]
-  this.getInfo()*/
+actualizarFavorito(){
+  if(this.viewProduct.favourite){
+    console.log("Quitando favorito")
+    this.viewProduct.favourite = false
+  }else{
+    console.log("Poniendo favorito")
+    this.viewProduct.favourite = true
+  }
 }
+
 }

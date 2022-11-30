@@ -22,6 +22,7 @@ import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-e
 import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
 import { CommonModule } from '@angular/common';
 import {ProductComponent} from './components/product/product.component'
+//import { MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -48,9 +49,11 @@ import {ProductComponent} from './components/product/product.component'
     NgbModule,
     MdbModalModule,
     CommonModule,
+    //MatButtonModule,
   ],
   providers: [AppRoutingProviders, MdbModalModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  //exports : [MatButtonModule]
 
 })
 export class AppModule { }
