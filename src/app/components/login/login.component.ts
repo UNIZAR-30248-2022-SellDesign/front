@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(localStorage.getItem('session')) {
-      this.router.navigate(['/Perfil']);
+      this.router.navigate(['/home']);
     }
 
   }

@@ -98,9 +98,9 @@ export class HomeComponent implements OnInit {
             // Obtenemos los datos
             this.newProducts = this.newProducts.concat(response.data)
             if(response.data.length < 8){
-              this.noHayProductos = true
+              this.hayMas = false
             
-              if(response.data.length == 0) this.hayMas = false
+              if(this.newProducts.length == 0) this.noHayProductos = true
             } else{
               this.noHayProductos = false
               this.hayMas = true
