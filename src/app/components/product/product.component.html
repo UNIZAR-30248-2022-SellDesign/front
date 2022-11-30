@@ -46,33 +46,11 @@
         <div style="text-align:center;display:inline-block;width: 40%;">
             <button (click)="addToCart()" type="button" class="btn btn-success" >Añadir a mi carro</button>
         </div>
-        
-        <!--img src={{viewProduct.favouriteImage}} class="card-img-rigth"  alt="..." style="width: 5%;display: inline-block;"--> 
-        <!--button mat-icon-button (click)="actualizarFavorito()">
-            <mat-icon
-              *ngIf={{viewProduct.favourite}}
-              aria-label="Example icon-button with a heart icon">
-              favorite
-            </mat-icon>
-        </button-->
-        <!--div>
-            <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-
-            <label for="id-of-input" class="custom-checkbox">
-            <input type="checkbox" id="id-of-input"/>
-            <i class="glyphicon glyphicon-star-empty"></i>
-            <i class="glyphicon glyphicon-star"></i>
-            </label>
-        </div-->
-    
-        <!--button class="favouri" (click)="actualizarFavorito()">
-            <i class="fa" [ngClass]="{'fa-heart' : viewProduct.favourite, 'fa-heart-o': !viewProduct.favourite }"></i>
-        </button-->
-
         <button class="like-button"
                 [ngClass]="{ 'heart-animation-1': !viewProduct.favourite,
                             'heart-animation-2 liked': viewProduct.favourite }"
                 (click)="actualizarFavorito()" style="display: inline-block;">
+
   <i class="like-icon"></i> <ng-content></ng-content>
 </button>
     </div>

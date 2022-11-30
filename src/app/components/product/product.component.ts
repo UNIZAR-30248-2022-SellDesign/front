@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit{
                                 ,imagesDesign:['null']}
   imagesDesignFuncional = [{id:'null',
                             imageDesign : 'null'}]
+  idUser : any
   designImagePage : any
   constructor(private route: ActivatedRoute,private router: Router) {  }
 
@@ -33,17 +34,29 @@ export class ProductComponent implements OnInit{
                                       imageDesign : 'null'}]
       this.getInfo()
     });
+    this.idUser = localStorage.getItem('idUsuario')
+    this.getFavorite()
   }
-
+  getFavorite(){
+    axios.get(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
+        .then(response => {
+          console.log(response)
+          if (response.data.length!=0) this.viewProduct.favourite = true
+          else  this.viewProduct.favourite = false
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
+  }
   addToCart(){
     console.log("Añadido al carrito")
   }
+  
   buy(){
     console.log("Comprado")
   }
-  showFavouriteImage(){
-    if(this.viewProduct.favourite) document.write("hola")
-  }
+
   getInfo(){
     axios.get(backURI+"products/get/"+this.id)
         .then(response => {
@@ -94,11 +107,28 @@ getImagesOfDesign(designName:String, description:String){
 actualizarFavorito(){
   if(this.viewProduct.favourite){
     console.log("Quitando favorito")
-    this.viewProduct.favourite = false
+    axios.delete(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
+        .then(response => {
+          console.log(response)
+          this.getFavorite()
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
   }else{
     console.log("Poniendo favorito")
-    this.viewProduct.favourite = true
+    axios.post(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
+        .then(response => {
+          console.log(response)
+          this.getFavorite()
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
   }
+  
 }
 
 }
