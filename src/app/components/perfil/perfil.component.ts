@@ -144,6 +144,7 @@ export class PerfilComponent implements OnInit {
             this.cargarMasFav = true
           }
           this.newFavs = this.newFavs.concat(response.data)
+          console.log(this.newFavs)
         })
         .catch(e => {
           // Capturamos los errores

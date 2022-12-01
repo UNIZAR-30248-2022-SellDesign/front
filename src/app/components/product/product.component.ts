@@ -16,32 +16,31 @@ export class ProductComponent implements OnInit{
                                 ,designName:"null"
                                 ,description:"null"
                                 ,price:0
-                                ,mainImage:"null"
+                                ,mainImage:""
                                 ,favourite:false
                                 ,favouriteImage:"null"
                                 ,designerName:"null"
                                 ,imagesDesign:['null']}
-  imagesDesignFuncional = [{id:'null',
-                            imageDesign : 'null'}]
+  imagesDesignFuncional = [{id:'',
+                            imageDesign : ''}]
   idUser : any
   designImagePage : any
   constructor(private route: ActivatedRoute,private router: Router) {  }
 
   ngOnInit(): void {
+    this.idUser = localStorage.getItem('idUsuario')
     this.route.params.subscribe((params: Params) => {
       this.id = params['idProducto']
-      this.imagesDesignFuncional = [{ id:'null',
-                                      imageDesign : 'null'}]
+      this.imagesDesignFuncional = [{ id:'',
+                                      imageDesign : ''}]
       this.getInfo()
       this.getFavorite()
     });
-    this.idUser = localStorage.getItem('idUsuario')
-    
+    if(this.idUser!=null && this.id != null) this.getFavorite()
   }
   getFavorite(){
     axios.get(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
         .then(response => {
-          console.log(response)
           if (response.data.length!=0) this.viewProduct.favourite = true
           else  this.viewProduct.favourite = false
         })
@@ -107,10 +106,8 @@ getImagesOfDesign(designName:String, description:String){
 }
 actualizarFavorito(){
   if(this.viewProduct.favourite){
-    console.log("Quitando favorito")
     axios.delete(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
         .then(response => {
-          console.log(response)
           this.getFavorite()
         })
         .catch(e => {
@@ -118,10 +115,8 @@ actualizarFavorito(){
           console.log(e);
         })
   }else{
-    console.log("Poniendo favorito")
     axios.post(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
         .then(response => {
-          console.log(response)
           this.getFavorite()
         })
         .catch(e => {
@@ -131,5 +126,8 @@ actualizarFavorito(){
   }
   
 }
-
+/*goToProduct(id : String){
+  this.router.navigate(['/product/'+id])
+}*/
+//href="/#/product/{{imageFuncional.id}}"
 }
