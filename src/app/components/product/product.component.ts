@@ -90,10 +90,12 @@ getImagesOfDesign(designName:String, description:String){
   axios.get(backURI+"products/design/"+designName)
       .then(response => {
         // Obtenemos los datos
+        console.log(response.data)
         this.designImagePage = response.data[0].design.image
         
         for(let i = 0; i < response.data.length && i < 4; i++) {
-          if(description !== response.data[i].description){
+          if(this.id !== response.data[i]._id){
+            console.log("añado")
             this.imagesDesignFuncional.push({id:response.data[i]._id,imageDesign:response.data[i].image})
           }  
         }
@@ -106,6 +108,7 @@ getImagesOfDesign(designName:String, description:String){
 }
 actualizarFavorito(){
   if(this.viewProduct.favourite){
+
     axios.delete(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
         .then(response => {
           this.getFavorite()
