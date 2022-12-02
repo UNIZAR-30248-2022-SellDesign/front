@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit{
           this.viewProduct.price=response.data.price
           this.viewProduct.designName=response.data.design.name
           this.getInfoDesigner(response.data.design.designer)
-          this.getImagesOfDesign(response.data.design._id,response.data.description)
+          this.getImagesOfDesign(response.data.design._id)
           
         })
         .catch(e => {
@@ -86,7 +86,7 @@ getInfoDesigner(id: String){
       console.log(e);
     })
 }
-getImagesOfDesign(designName:String, description:String){
+getImagesOfDesign(designName:String){
   axios.get(backURI+"products/design/"+designName)
       .then(response => {
         // Obtenemos los datos
