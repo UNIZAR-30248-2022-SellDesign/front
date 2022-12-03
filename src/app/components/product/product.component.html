@@ -27,6 +27,7 @@
     </div>
     
     <div class="container p-2" style="width: 600px; height: 380px;padding-top:100px;float: left;position: relative;">
+
         <strong>{{viewProduct.productName}}</strong>
         <br/>
         DESCRIPCION: {{viewProduct.description}}
@@ -50,8 +51,10 @@
                 [ngClass]="{ 'heart-animation-1': !viewProduct.favourite,
                             'heart-animation-2 liked': viewProduct.favourite }"
                 (click)="actualizarFavorito()" style="display: inline-block;">
-
-  <i class="like-icon"></i> <ng-content></ng-content>
-</button>
+            <i class="like-icon"></i> <ng-content></ng-content>
+        </button>
+        <div *ngIf=cart class="alert alert-success" role="alert" style="margin: 1em; margin-left: 47%; width: 70%;">
+            <p>Producto añadadido al carrito correctamente!</p>
+        </div>
     </div>
 </div>

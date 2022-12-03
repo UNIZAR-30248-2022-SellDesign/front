@@ -25,6 +25,7 @@ export class ProductComponent implements OnInit{
                             imageDesign : ''}]
   idUser : any
   designImagePage : any
+  cart : any
   constructor(private route: ActivatedRoute,private router: Router) {  }
 
   ngOnInit(): void {
@@ -50,7 +51,18 @@ export class ProductComponent implements OnInit{
         })
   }
   addToCart(){
-    console.log("Añadido al carrito")
+    this.cart=true
+    window.setTimeout(() => {
+      this.cart = false;
+    }, 2000);
+    axios.post(backURI+"cart/"+this.idUser+"/"+this.id)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(e => {
+      // Capturamos los errores
+      console.log(e);
+    })
   }
   
   buy(){
@@ -90,7 +102,6 @@ getImagesOfDesign(designName:String){
   axios.get(backURI+"products/design/"+designName)
       .then(response => {
         // Obtenemos los datos
-        console.log(response.data)
         this.designImagePage = response.data[0].design.image
         
         for(let i = 0; i < response.data.length && i < 4; i++) {

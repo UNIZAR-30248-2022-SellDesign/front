@@ -12,7 +12,6 @@ import { MiCarritoComponent } from './components/mi-carrito/mi-carrito.component
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ModalEditComponent } from './components/modal-edit/modal-edit.component';
@@ -22,7 +21,6 @@ import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-e
 import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
 import { CommonModule } from '@angular/common';
 import {ProductComponent} from './components/product/product.component'
-//import { MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -48,8 +46,7 @@ import {ProductComponent} from './components/product/product.component'
     FormsModule,
     NgbModule,
     MdbModalModule,
-    CommonModule,
-    //MatButtonModule,
+    CommonModule
   ],
   providers: [AppRoutingProviders, MdbModalModule],
   bootstrap: [AppComponent],
