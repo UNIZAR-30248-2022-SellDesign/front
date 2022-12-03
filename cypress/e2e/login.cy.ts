@@ -6,6 +6,11 @@ describe('LogginComponent', () => {
       expect(response.status).to.eq(200)
     })
   })
+  it('Deja Acceder a Registro', () => {
+    cy.visit('/#/login')
+    cy.get('.btn-secondary').click()
+    cy.get('label').contains('Confirmar contraseña')
+  })
   it('No deja Acceder sin campos', () => {
     cy.visit('/#/login')
     cy.get('.btn-black').click()
