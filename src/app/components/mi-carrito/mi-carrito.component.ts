@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faYahoo } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios';
 import { any } from 'cypress/types/bluebird';
 import { backURI } from 'src/environments/backURI';
@@ -21,13 +22,17 @@ export class MiCarritoComponent implements OnInit {
   getCart(){
     axios.get(backURI + "cart/"+this.idUser+"/0")
     .then(response => {
-      if(response.data.length==0) this.noHayProductos=true
+      console.log(response.data)
+      if(response.data.length==0){
+        this.noHayProductos=true
+      } 
       else{
         this.noHayProductos = false
         this.newProducts = []
         for(let i=0;i<response.data.length;i++){
           this.getProductInfo(response.data[i].product)
         }
+        console.log(this.newProducts)
       }
       
     })
@@ -47,5 +52,27 @@ export class MiCarritoComponent implements OnInit {
           // Capturamos los errores
           console.log(e);
         })
+  }
+  eliminarProducto(idProducto:string){
+    console.log("Eliminando "+idProducto)
+    axios.delete(backURI+"cart/"+this.idUser+"/"+idProducto)
+    .then(response=>{
+      for(let i=0;i<this.newProducts.length;i++){
+        if(this.newProducts[i]._id === idProducto) this.newProducts.splice(i , 1)
+      }
+      
+    })
+    .catch(e => {
+      console.log(e)
+    })
+  }
+  vaciarTodo(){
+    axios.delete(backURI+"cart/"+this.idUser)
+    .then(response=>{
+      this.newProducts.splice(0,this.newProducts.length)
+    })
+    .catch(e => {
+      console.log(e)
+    })
   }
 }
