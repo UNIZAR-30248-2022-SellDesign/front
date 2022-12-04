@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'Perfil', component: PerfilComponent},
   {path: 'MisDiseños', component: MisDisenosComponent},
   {path: 'MisProductos', component: MisProductosComponent},
-  {path: 'MiCarrito/:nombre', component: MiCarritoComponent},
+  {path: 'MiCarrito', component: MiCarritoComponent},
   {path:'product/:idProducto',component: ProductComponent},
   {path: '**', component: ErrorComponent}
   
