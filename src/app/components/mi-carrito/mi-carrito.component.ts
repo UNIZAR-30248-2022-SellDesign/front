@@ -75,4 +75,11 @@ export class MiCarritoComponent implements OnInit {
       console.log(e)
     })
   }
+  totalprice(){
+    let price = 0
+    for(let i=0;i<this.newProducts.length;i++){
+      price+=this.newProducts[i].price
+    }
+    return price
+  }
 }
