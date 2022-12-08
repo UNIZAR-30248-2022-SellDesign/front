@@ -3,6 +3,9 @@ import { ProductProfile } from '../../models/productProfile';
 import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
 import {ActivatedRoute, Params, Router } from '@angular/router';
+import { MdbModalRef,MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ModalComponent } from '../payment/payment.component';
+
 
 @Component({
   selector: 'app-product',
@@ -10,6 +13,7 @@ import {ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit{
+  modalRef: MdbModalRef<ModalComponent> | null = null;
   id:any
   viewProduct: ProductProfile = {
                                 productName:"null"
@@ -26,7 +30,7 @@ export class ProductComponent implements OnInit{
   idUser : any
   designImagePage : any
   cart : any
-  constructor(private route: ActivatedRoute,private router: Router) {  }
+  constructor(private route: ActivatedRoute,private router: Router,private modalService: MdbModalService) {  }
 
   ngOnInit(): void {
     this.idUser = localStorage.getItem('idUsuario')
@@ -66,7 +70,7 @@ export class ProductComponent implements OnInit{
   }
   
   buy(){
-    console.log("Comprado")
+    this.modalRef = this.modalService.open(ModalComponent)
   }
 
   getInfo(){
