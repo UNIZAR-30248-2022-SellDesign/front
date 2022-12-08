@@ -1,26 +1,27 @@
-<div class="row">
+<p class="alert alert-success" *ngIf="success" >Compra Realizada con Éxito!</p>
+<div class="row" *ngIf="!success">
     <div class="col-75">
       <div class="container">
           <div class="row">
             <div class="col-50">
               <h3>Dirección de Envío</h3>
-              <label for="fname"><i class="fa fa-user"></i> Nombre y Apellidos</label>
-              <input type="text" id="fname" name="firstname" placeholder="Jose M. Cuenca">
+              <label for="name"><i class="fa fa-user"></i> Nombre y Apellidos</label>
+              <input type="text" [(ngModel)]="name"  id="name" name="name" placeholder="Jose M. Cuenca">
               <label for="email"><i class="fa fa-envelope"></i> Correo</label>
-              <input type="text" id="email" name="email" placeholder="jose@ejemplo.com">
-              <label for="adr"><i class="fa fa-address-card-o"></i> Dirección</label>
-              <input type="text" id="adr" name="address" placeholder="Calle Gran Vía 2 3ºB">
+              <input type="text" [(ngModel)]="email"   id="email" name="email" placeholder="jose@ejemplo.com">
+              <label for="address"><i class="fa fa-address-card-o"></i> Dirección</label>
+              <input type="text" [(ngModel)]="address"   id="address" name="address" placeholder="Calle Gran Vía 2 3ºB">
               <label for="city"><i class="fa fa-institution"></i> Ciudad</label>
-              <input type="text" id="city" name="city" placeholder="Madrid">
+              <input type="text" [(ngModel)]="city"   id="city" name="city" placeholder="Madrid">
   
               <div class="row">
                 <div class="col-50">
                   <label for="state">Provincia</label>
-                  <input type="text" id="state" name="state" placeholder="Zaragoza">
+                  <input type="text" [(ngModel)]="state"   id="state" name="state" placeholder="Zaragoza">
                 </div>
                 <div class="col-50">
-                  <label for="zip">C. P</label>
-                  <input type="text" id="zip" name="zip" placeholder="50005">
+                  <label for="zipCode">C. P</label>
+                  <input type="text" [(ngModel)]="zipCode"  id="zipCode" name="zipCode" placeholder="50005">
                 </div>
               </div>
             </div>
@@ -34,27 +35,27 @@
                 <i class="fa fa-cc-mastercard" style="color:red;"></i>
                 <i class="fa fa-cc-discover" style="color:orange;"></i>
               </div>
-              <label for="cname">Nombre en la Tarjeta</label>
-              <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-              <label for="ccnum">Numero Tarjeta de Credito</label>
-              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-              <label for="expmonth">Mes de Caducidad</label>
-              <input type="text" id="expmonth" name="expmonth" placeholder="Septiembre">
+              <label for="namecard">Nombre en la Tarjeta</label>
+              <input type="text" [(ngModel)]="namecard" id="namecard" name="namecard" placeholder="John More Doe">
+              <label for="cardNumber">Numero Tarjeta de Credito</label>
+              <input type="text" [(ngModel)]="cardNumber"  id="cardNumber" name="cardNumber" placeholder="1111-2222-3333-4444">
+              <label for="month">Mes de Caducidad</label>
+              <input type="text" [(ngModel)]="month"  id="month" name="month" placeholder="Septiembre">
   
               <div class="row">
                 <div class="col-50">
-                  <label for="expyear">Año de CAD</label>
-                  <input type="text" id="expyear" name="expyear" placeholder="2018">
+                  <label for="year">Año de CAD</label>
+                  <input type="text" [(ngModel)]="year"   id="year" name="year" placeholder="2018">
                 </div>
                 <div class="col-50">
-                  <label for="cvv">CVV</label>
-                  <input type="text" id="cvv" name="cvv" placeholder="352">
+                  <label for="CVV">CVV</label>
+                  <input type="text" [(ngModel)]="CVV"   id="CVV" name="CVV" placeholder="352">
                 </div>
               </div>
             </div>     
             <div>
                 <button (click)="modalRef.close()" class="btn" style="width:45%; background-color: blue; float: left;">Cerrar</button>
-                <input type="submit" value="Pagar" class="btn"style="width:45%; float: right;">
+                <button (click)="pay()" class="btn"style="width:45%; float: right;">Pagar</button>
                 </div>
             </div>       
       </div>

@@ -21,6 +21,7 @@ import { ModalEditDisenoComponent } from './components/modal-edit-diseno/modal-e
 import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
 import { CommonModule } from '@angular/common';
 import {ProductComponent} from './components/product/product.component'
+import { ModalComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {ProductComponent} from './components/product/product.component'
     FooterComponent,
     ModalEditComponent,
     ModalEditDisenoComponent,
-    ModalEditProductComponent
+    ModalEditProductComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
