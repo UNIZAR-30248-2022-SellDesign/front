@@ -110,7 +110,6 @@ getImagesOfDesign(designName:String){
         
         for(let i = 0; i < response.data.length && i < 4; i++) {
           if(this.id !== response.data[i]._id){
-            console.log("añado")
             this.imagesDesignFuncional.push({id:response.data[i]._id,imageDesign:response.data[i].image})
           }  
         }

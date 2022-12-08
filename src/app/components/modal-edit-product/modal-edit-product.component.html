@@ -23,26 +23,28 @@
                     </div>
                 </li>
              </div>
-            
+             <div class="form-group">
+                <p>Nombre: {{nombreTipo}} {{designName}} </p>
+             </div>
             <div class="form-group">
                 <label>Descripción</label>
                 <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" placeholder="Descripción..." maxlength="80">
              </div>
             <div class="form-group d-flex">
-                <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
-                    <label>Sube tu prenda:</label>
-                    <br>
-                    <label  for="fileInput" style="cursor: pointer; margin-bottom: -5px;">
-                        <img [src]="imagen ? imagen : 'https://c8.alamy.com/compes/2j8gbjj/icono-de-linea-de-fideos-para-camisetas-ilustracion-vectorial-de-contorno-fino-de-ropa-deportiva-signo-lineal-de-color-negro-para-ropa-de-futbol-2j8gbjj.jpg'" class="card-img-top" style="width: 200px; margin-left: 20px;" name="imagen" alt="Deberia haber fotito">
-                    </label>
-                    <input style="display: none;" id="fileInput" type='file' (change)="onSelectFile($event)" accept="image/jpeg, image/jpg"/>
-                    <p *ngIf=hayErrorFoto style="color: red; margin-bottom: 1rem; margin-top: 1rem;">¡Ha habido un error al subir la prenda!</p>
-                </div>
-                <div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;" >
-                    <label>Sube tu diseño:</label>
-                    <br>
-                    <img src={{imagenDiseno}}  style="width: 200px;" class="card-img-top" name="imagenDiseno" alt="Deberia haber fotito">
-                </div>
+                <div class="form-group" style="float:left;justify-content: center;">
+                    <li class="nav-item dropdown" *ngFor="let design of designs" style="list-style-type: none;">
+                        <div class="nav-link dropdown-toggle" id="navbarDropdownTipo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                            {{designName}}
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownTipo">
+                            <button class="dropdown-item" (click)="asignDesign(design._id,design.name)">{{design.name}}</button>
+                            <div *ngIf="" class="dropdown-divider"></div>
+                        </div>
+                    </li>
+                 </div>
             </div>
              <div class="form-group d-flex">
                   <label style="display: inline-block; text-align: right;">Precio:&nbsp;</label>
@@ -60,7 +62,7 @@
         <button *ngIf="esEditar == true" type="button" class="btn btn-secondary" style="background-color: red;" (click)="eliminarDatos(idProducto)">
             Eliminar
         </button>
-        <button *ngIf="esSubir == true" type="submit" class="btn btn-primary" (click)="guardarDatos(imagen, nombreProducto, precio, descripcion)">
+        <button *ngIf="esSubir == true" type="submit" class="btn btn-primary" (click)="guardarDatos(precio, descripcion)">
             Guardar
         </button>
         <button *ngIf="esEditar == true" type="submit" class="btn btn-primary" (click)="actualizarDatos(imagen, nombreProducto, idProducto, precio, descripcion)">

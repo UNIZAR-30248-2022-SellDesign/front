@@ -24,8 +24,10 @@ export class ModalEditProductComponent implements OnInit {
   diseno = {image: ''}
   hayErrorFoto: boolean = false;
   error:boolean = false
-
-
+  designs= [{_id:'',name:''}]
+  designName: string = "diseño"
+  idDesign: string = ""
+  imageProduct:string = ""
 
   constructor(public modalRef: MdbModalRef<ModalEditProductComponent>) { }
 
@@ -39,40 +41,57 @@ export class ModalEditProductComponent implements OnInit {
       this.imagenDiseno = this.imagen
 
     }
+    this.getDesigns()
   }
+  getDesigns(){
+    this.idUser = localStorage.getItem('idUsuario')
 
+    axios.get(backURI + "designs/" + this.idUser + "/0")
+        .then(response => {
+          console.log(response.data)
+          let i
+          for(i=0;i<response.data.length;i++){
+            this.designs.push({_id:response.data[i]._id,name:response.data[i].name})
+          }
+          this.designs.shift()
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
+  }
   asignarTipo(tipo: Number){
     switch(tipo){
       case 1:
         this.tipo = 1
         this.nombreTipo = 'Camiseta'
+        this.imageProduct = "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/441598/item/goods_00_441598.jpg?width=722&impolicy=quality_70&imformat=chrome"
         break
       case 2:
         this.tipo = 2
         this.nombreTipo = 'Pantalón'
+        this.imageProduct = "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F8e%2F1a%2F8e1afc93481dd9c6545ef252ddf09bd42b56b794.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]"
         break
       case 3:
         this.tipo = 3
         this.nombreTipo = 'Sudadera'
+        this.imageProduct = "https://img.abercrombie.com/is/image/anf/KIC_122-3572-1296-900_prod1?policy=product-large"
         break
     }
   }
-  guardarDatos(foto: string, nombre: string, precio: Number, descripcion: string){
+  guardarDatos( precio: Number,descripcion: string, ){
     console.log('guardando diseño...')
     //post
-    console.log(foto);
-    console.log(nombre);
     console.log(precio);
-    console.log(descripcion);
     console.log(this.tipo);
 
-    if(precio != 0 && foto != '' && this.nombreTipo != 'Prenda'){
+    if(precio != 0 && this.nombreTipo != 'Prenda'){
       this.error = true
       axios.post(backURI + "products/new", {
-        design: '63726ee9a3951bf597ec2099', //id de un diseño random
+        design: this.idDesign, //id de un diseño random
         price: precio,
         type: this.tipo,
-        image: foto,
+        image: this.imageProduct,
         description: descripcion,
         seller: this.idUser
       })
@@ -160,20 +179,6 @@ export class ModalEditProductComponent implements OnInit {
                   console.log('TODO HA IDO BIEN');
                   this.imagen = response.data.data.media
                   console.log('imagen:', this.imagen);
-                  
-                  // var uName = localStorage.getItem('userName')
-                  // axios.post(backURI + "/users/setImage", {
-                  //   username: uName,
-                  //   image: this.url,
-                  // })
-                  //   .then(response => {
-                  //     console.log('Subida al back con éxito');
-                      
-                  //   })
-                  //   .catch(e => {
-                  //     // Capturamos los errores
-                  //     console.log(e);
-                  //   })
                 }else{
                   //mensaje error
                   console.log('FALLO AL SUBIR FOTO');
@@ -192,6 +197,9 @@ export class ModalEditProductComponent implements OnInit {
       }
     }
   }
-
+  asignDesign(_id:string,name:string){
+    this.designName=name
+    this.idDesign = _id
+  }
 
 }

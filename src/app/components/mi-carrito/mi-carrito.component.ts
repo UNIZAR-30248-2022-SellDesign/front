@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faYahoo } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios';
-import { any } from 'cypress/types/bluebird';
 import { backURI } from 'src/environments/backURI';
 import { MdbModalRef,MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalComponent } from '../payment/payment.component';
@@ -18,7 +16,7 @@ export class MiCarritoComponent implements OnInit {
   noHayProductos: boolean = false;
   newProducts:any
   modalRef: MdbModalRef<ModalComponent> | null = null;
-  
+
   constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
