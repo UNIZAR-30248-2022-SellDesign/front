@@ -3,6 +3,10 @@ import { faYahoo } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios';
 import { any } from 'cypress/types/bluebird';
 import { backURI } from 'src/environments/backURI';
+import { MdbModalRef,MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ModalComponent } from '../payment/payment.component';
+
+
 @Component({
   selector: 'app-mi-carrito',
   templateUrl: './mi-carrito.component.html',
@@ -13,7 +17,9 @@ export class MiCarritoComponent implements OnInit {
   hayMas: boolean = false;
   noHayProductos: boolean = false;
   newProducts:any
-  constructor() { }
+  modalRef: MdbModalRef<ModalComponent> | null = null;
+  
+  constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
     this.idUser = localStorage.getItem('idUsuario')
@@ -81,5 +87,8 @@ export class MiCarritoComponent implements OnInit {
       price+=this.newProducts[i].price
     }
     return price
+  }
+  comprar(){
+    this.modalRef = this.modalService.open(ModalComponent)
   }
 }

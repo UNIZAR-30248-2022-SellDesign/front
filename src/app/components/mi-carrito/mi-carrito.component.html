@@ -27,16 +27,16 @@
                     z-index: 1;" href="/#/product/{{product._id}}"></a>
                 </div>
                 <div style="width: 50%;float:right">
-                    <button class="btn btn-lg btn-outline-dark" (click)="eliminarProducto(product._id)" >Eliminar</button>
+                    <button class="btn btn-danger" (click)="eliminarProducto(product._id)" >Eliminar</button>
                 </div>
             </li>
         </ul>
         <div *ngIf=!noHayProductos style="float: right;width: 40%;margin: 1%;">
             <div style="padding-right: 30px;">
-                <button class="btn btn-lg btn-outline-dark" >Comprar</button>
+                <button class="btn btn-primary" (click)="comprar()" >Comprar</button>
             </div>
             <div style="padding-right: 30px;">
-                <button class="btn btn-lg btn-outline-dark" (click)="vaciarTodo()">Vaciar Carrito</button>
+                <button class="btn btn-danger" (click)="vaciarTodo()">Vaciar Carrito</button>
             </div>
             <h3>
                 Precio Total del carrito : {{totalprice()}} €
