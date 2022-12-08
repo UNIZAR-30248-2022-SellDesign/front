@@ -12,6 +12,7 @@ describe('HomeComponent', () => {
     cy.get('strong').contains('NOVEDADES')
   })
   
+  
   it('Filtro precio 1€ - 30€', () => {
     cy.get('#navbarDropdownPrecio').click().get('.dropdown-item').contains('1€ - 30€').click()
     cy.get('[name=precio]').each((item)=>{
