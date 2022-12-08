@@ -1,119 +1,139 @@
-describe('RegisterComponent', () => {
-  const passwordBuena = "Micon2"
-  const usuarioBueno = "test"
-  const emailBueno = "miCorreo@gmail.com"
+describe('PerfilComponent', () => {
+  var descripcion = ""
+  var nombre = ""
+  const desc = "JAJAJAJA"
+  const nom = "Pepito Grillo"
 
-  before(()=>{
-    cy.request('https://selldesign-backend.onrender.com/api').then(response=>{
+  before(() => {
+    cy.request('https://selldesign-backend.onrender.com/api').then(response => {
       expect(response.status).to.eq(200)
+    })
+    cy.visit('/#/login')
+    cy.get('[name=username]').type('raulito')
+    cy.get('[name=password]').type('123456A')
+    cy.get('.btn-black').click()
+    // cy.visit('/#/Perfil')
+    cy.get('.bi-person-square').click()
+    cy.get('.dropdown-item').first().contains('Mi Perfil').click()
+    cy.get('strong').contains('FAVORITOS:')
+    cy.wait(200)
+  })
+
+  /*
+  it('Editar Perfil + X', () => {
+    cy.get('[name=nombre]').then(mes => {
+      nombre = mes.text()
+    })
+    cy.get('[name=descripcion]').then(mes => {
+      descripcion = mes.text()
+    })
+    
+    cy.get('.btn-outline-primary').click()
+    cy.get('.modal').should('be.visible')
+    cy.get('[name=nombreModal]').clear().type('Soy una prueba')
+
+    cy.get('[name=descripcionModal]').clear().type('Prueba realizada con exito')
+    cy.get('.btn-close').click()
+    
+    expect('[name=nombre]').to.not.equal('Soy una prueba')
+    expect('[name=descripcion]').to.not.equal('Prueba realizada con exito')
+    
+  })
+
+  it('Editar Perfil + Cancelar', () => {
+    cy.get('[name=nombre]').then(mes => {
+      nombre = mes.text()
+    })
+    cy.get('[name=descripcion]').then(mes => {
+      descripcion = mes.text()
+    })
+    
+    cy.get('.btn-outline-primary').click()
+    cy.get('.modal').should('be.visible')
+    cy.get('[name=nombreModal]').clear().type('Soy una prueba')
+
+    cy.get('[name=descripcionModal]').clear().type('Prueba realizada con exito')
+    cy.get('.btn-secondary').click()
+    
+    expect('[name=nombre]').to.not.equal('Soy una prueba')
+    expect('[name=descripcion]').to.not.equal('Prueba realizada con exito')
+  })
+
+  it('Editar Perfil + Guardar', () => {
+    cy.get('[name=nombre]').then(mes => {
+      nombre = mes.text()
+    })
+    cy.get('[name=descripcion]').then(mes => {
+      descripcion = mes.text()
+    })
+    
+    cy.get('.btn-outline-primary').click()
+    cy.get('.modal').should('be.visible')
+    cy.get('[name=nombreModal]').clear().type('Soy una prueba')
+
+    cy.get('[name=descripcionModal]').clear().type('Prueba realizada con exito')
+    cy.get('.btn-primary').contains('Guardar').click()
+    cy.wait(100)
+ 
+    cy.get('[name=nombre]').should((elem) => {
+      // cy.log('elemento', elem.text())
+      expect(elem.text()).to.equal('Soy una prueba');
+    });
+
+    cy.get('[name=descripcion]').should((elem) => {
+      // cy.log('elemento', elem.text())
+      expect(elem.text()).to.equal('Prueba realizada con exito');
+    });
+  })
+
+  it('Si no hay favoritos, texto informativo', () => {
+    cy.get('[name=botonFavorito]').click()
+    cy.get('[name=mensajeFav]').should('be.visible').then(() => {
+      cy.log('FUNCIONA')
+      cy.get('.list-group-item')
+        .should('have.length', 0)
+    })
+  })
+  
+  it('Si no hay productos, texto informativo', () => {
+    // cy.get('.list-group-item')
+    //   .should('have.length.greaterThan', 1)
+    //   // now that we know the elements have loaded, get the number
+    //   .its('length')
+    //   .then(n => {
+    //     // use n if you need to  
+    //     console.log('ASKJDABLSKJDFSJLDAF',n);
+
+    //   })
+
+    cy.get('[name=botonProducto]').click()
+    cy.get('[name=mensaje]').should('be.visible').then(() => {
+      cy.log('FUNCIONA')
+      cy.get('.list-group-item')
+        .should('have.length', 0)
     })
   })
 
-  it('No deja Registrar sin campos', () => {
-    cy.visit('/#/register')
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').first().contains('Campo obligatorio')
+*/
+
+  // it('Mostrar Productos en venta', () => {
+  // })
+
+  it('Mostrar Favoritos', () => {
+    cy.get('[name=botonFavorito]').click()
+    cy.get('.list-group-item').then((list) => {
+      if(list.length > 0){
+        cy.get('[name=mensajeFav]').should('not.be.visible')
+      }
+    })
+
   })
+
   
-  it('Deja Acceder a Login', () => {
-    cy.visit('/#/register')
-    cy.get('.btn-secondary').click()
-    cy.get('.btn-black').contains('Acceder')
-  })
-  
-  it('No deja Registrar sin terminacion de email', () => {
-    cy.visit('/#/register')
 
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type('test1@cfefwe')
-    cy.get('[name=password]').type(passwordBuena)
-    cy.get('[name=confirmPassword]').type(passwordBuena)
+  // it('Editar Foto', () => {
+  //   //Yo no lo haria pq se te mete en tus carpetas personales
+  // })
 
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Dirección no válida')
-  })
 
-  it('No deja Registrar sin terminacion de email 2', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type('test1@cfefwe.')
-    cy.get('[name=password]').type(passwordBuena)
-    cy.get('[name=confirmPassword]').type(passwordBuena)
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Dirección no válida')
-  })
-
-  it('No deja Registrar sin @ de email', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type('test1')
-    cy.get('[name=password]').type(passwordBuena)
-    cy.get('[name=confirmPassword]').type(passwordBuena)
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Dirección no válida')
-  })
-
-  it('No deja Registrar password diferentes', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type(emailBueno)
-    cy.get('[name=password]').type("Micon22")
-    cy.get('[name=confirmPassword]').type(passwordBuena)
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Las contraseñas no coinciden')
-  })
-
-  it('No deja Registrar password sin mayúsculas', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type(emailBueno)
-    cy.get('[name=password]').type("micon22")
-    cy.get('[name=confirmPassword]').type("micon22")
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Debe contener al menos una mayúscula')
-  })
-
-  it('No deja Registrar password sin dígito', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type(emailBueno)
-    cy.get('[name=password]').type("Miconnnn")
-    cy.get('[name=confirmPassword]').type("Miconnn")
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Debe contener al menos un dígito')
-  })
-
-  it('No deja Registrar password menos de 6 caracteres', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type(emailBueno)
-    cy.get('[name=password]').type("Mico2")
-    cy.get('[name=confirmPassword]').type("Mico2")
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Debe tener entre 6 y 16 carácteres')
-  })
-
-  it('No deja Registrar password con más de 16 caracteres', () => {
-    cy.visit('/#/register')
-
-    cy.get('[name=username]').type(usuarioBueno)
-    cy.get('[name=email]').type(emailBueno)
-    cy.get('[name=password]').type("MiconMiconMiconMiconMicon2")
-    cy.get('[name=confirmPassword]').type("MiconMiconMiconMiconMicon2")
-
-    cy.get('.btn-black').click()
-    cy.get('.text-danger').contains('Debe tener entre 6 y 16 carácteres')
-  })
 })
