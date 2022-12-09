@@ -116,7 +116,8 @@ export class PerfilComponent implements OnInit {
             this.cargarMas = true
 
           }
-          this.newProducts = this.newProducts.concat(response.data)
+          console.log(response.data)
+          this.newProducts = this.newProducts.concat( response.data)
           this.getmyImagesFavs()
         })
         .catch(e => {
@@ -160,12 +161,12 @@ export class PerfilComponent implements OnInit {
   }
   getmyImagesFavs(){
     this.myProducts = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
-    for(let i= 0;i<this.newFavs.length;i++){
-      axios.get(backURI+"products/get/"+this.newFavs[i].product)
+    for(let i= 0;i<this.newProducts.length;i++){
+      axios.get(backURI+"products/get/"+this.newProducts[i]._id)
         .then(response => {
           // Obtenemos los datos
           console.log(response)
-          this.getMyImageOfDesign(this.newFavs[i].product,response.data.design._id,response.data.type+" "+response.data.design.name,response.data.image,response.data.price)
+          this.getMyImageOfDesign(this.newProducts[i]._id,response.data.design._id,response.data.type+" "+response.data.design.name,response.data.image,response.data.price)
           
         })
         .catch(e => {
@@ -173,9 +174,7 @@ export class PerfilComponent implements OnInit {
           console.log(e);
         })
     }
-    this.myProducts.shift()
-    console.log(this.products)
-    
+    this.myProducts.shift()    
   }
   getImagesFavs(){
     this.products = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
@@ -192,9 +191,7 @@ export class PerfilComponent implements OnInit {
           console.log(e);
         })
     }
-    this.products.shift()
-    console.log(this.products)
-    
+    this.products.shift()    
   }
   getMyImageOfDesign(productId:string,_id:string,name:string,productImage:string,price:number){
     axios.get(backURI+"products/design/"+_id)
