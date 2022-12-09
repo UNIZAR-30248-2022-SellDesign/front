@@ -143,8 +143,9 @@ export class PerfilComponent implements OnInit {
             this.noHayFav = false
             this.cargarMasFav = true
           }
-          this.newFavs = this.newFavs.concat(response.data)
-          console.log(this.newFavs)
+          
+          this.newFavs = response.data
+          //console.log(this.newFavs)
           this.getImagesFavs()
         })
         .catch(e => {
@@ -154,8 +155,11 @@ export class PerfilComponent implements OnInit {
         this.contPageFav++
     }
   }
+  contains(name:string){
+    return name.includes("Pantalon")
+  }
   getImagesFavs(){
-    this.products = []
+    this.products = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
     for(let i= 0;i<this.newFavs.length;i++){
       axios.get(backURI+"products/get/"+this.newFavs[i].product)
         .then(response => {

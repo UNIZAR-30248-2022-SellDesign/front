@@ -51,10 +51,13 @@
             <div *ngSwitchCase="( true )" class="tabs__tab">
                 <ul class="row row-cols-4">
                     <li *ngFor="let product of products" class="list-group-item p-2">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 10rem;">
                             <img src={{product.productImage}} class="card-img-top" alt="...">
-                            <div style="position: absolute; top:10rem; left:8rem;">
-                                <img  src='{{product.designImage}}'  width="80" height="80"  />
+                            <div *ngIf="!contains(product.name)" style="position: absolute; top:4rem; left:4rem;">
+                                <img  src='{{product.designImage}}'  width="40" height="40"  />
+                            </div>
+                            <div *ngIf="contains(product.name)" style="position: absolute; top:3rem; left:3rem;">
+                                <img  src='{{product.designImage}}'  width="20" height="20"  />
                             </div>
                             <a  style="position: absolute;
                                 width: 100%;

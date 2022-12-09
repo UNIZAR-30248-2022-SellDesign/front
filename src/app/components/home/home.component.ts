@@ -225,6 +225,9 @@ export class HomeComponent implements OnInit {
   sendArgument(argument:String){
     this.argumentservice.sendArgument(argument)
   }
+  contains(name:string){
+    return name.includes("Pantalon")
+  }
 
   filterPrenda(tipo:Number){
     console.log('FILTRO PRENDA');

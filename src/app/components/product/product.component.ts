@@ -24,9 +24,10 @@ export class ProductComponent implements OnInit{
                                 ,favourite:false
                                 ,favouriteImage:"null"
                                 ,designerName:"null"
+                                ,type:""
                                 ,imagesDesign:['null']}
   imagesDesignFuncional = [{id:'',
-                            imageDesign : ''}]
+                            imageDesign : '',type:''}]
   idUser : any
   designImagePage : any
   cart : any
@@ -37,7 +38,7 @@ export class ProductComponent implements OnInit{
     this.route.params.subscribe((params: Params) => {
       this.id = params['idProducto']
       this.imagesDesignFuncional = [{ id:'',
-                                      imageDesign : ''}]
+                                      imageDesign : '',type:''}]
       this.getInfo()
       this.getFavorite()
     });
@@ -81,6 +82,7 @@ export class ProductComponent implements OnInit{
           this.viewProduct.productName=response.data.name
           this.viewProduct.mainImage=response.data.image
           this.viewProduct.price=response.data.price
+          this.viewProduct.type=response.data.type
           this.viewProduct.designName=response.data.design.name
           this.getInfoDesigner(response.data.design.designer)
           this.getImagesOfDesign(response.data.design._id)
@@ -110,7 +112,7 @@ getImagesOfDesign(designName:String){
         
         for(let i = 0; i < response.data.length && i < 4; i++) {
           if(this.id !== response.data[i]._id){
-            this.imagesDesignFuncional.push({id:response.data[i]._id,imageDesign:response.data[i].image})
+            this.imagesDesignFuncional.push({id:response.data[i]._id,imageDesign:response.data[i].image,type:response.data[i].type})
           }  
         }
         this.imagesDesignFuncional.shift()
@@ -143,8 +145,7 @@ actualizarFavorito(){
   }
   
 }
-/*goToProduct(id : String){
-  this.router.navigate(['/product/'+id])
-}*/
-//href="/#/product/{{imageFuncional.id}}"
+contains(name:string){
+  return name.includes("Pantalon")
+}
 }

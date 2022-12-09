@@ -43,8 +43,11 @@
             <div class="card" style="width: 18rem;"> <!-- // height: 35rem; -->
                 <div style="position: relative;">
                     <img src={{product.image}} class="card-img-top"  height="350"  />
-                    <div style="position: absolute; top:10rem; left:6rem;">
+                    <div *ngIf="!contains(product.type)" style="position: absolute; top:6.5rem; left:6rem;">
                         <img  src='{{product.design.image}}'  width="80" height="80"  />
+                    </div>
+                    <div *ngIf="contains(product.type)" style="position: absolute; top:5rem; left:5.5rem;">
+                        <img  src='{{product.design.image}}'  width="40" height="40"  />
                     </div>
                 </div>
                 <div class="card-body">
