@@ -11,8 +11,11 @@
                 <div class="card" style="width: 50%;float:left"> <!-- // height: 35rem; -->
                     <div style="position: relative; width: 40%;">
                         <img src={{product.image}} class="card-img-top"  height="100" width="100"  />
-                        <div style="position: absolute; top:0rem; left:6rem;">
-                            <img  src='{{product.design.image}}'  width="80" height="80"  />
+                        <div *ngIf="!contains(product.type)" style="position: absolute; top:1.5rem; left:2.5rem;">
+                            <img  src='{{product.design.image}}'  width="20" height="20"  />
+                        </div>
+                        <div *ngIf="contains(product.type)" style="position: absolute; top:1.5rem; left:1.8rem;">
+                            <img  src='{{product.design.image}}'  width="20" height="20"  />
                         </div>
                     </div>
                     <div class="card-body">

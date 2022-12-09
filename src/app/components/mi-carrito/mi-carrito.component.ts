@@ -89,4 +89,7 @@ export class MiCarritoComponent implements OnInit {
   comprar(){
     this.modalRef = this.modalService.open(ModalComponent)
   }
+  contains(name:string){
+    return name.includes("Pantalon")
+  }
 }
