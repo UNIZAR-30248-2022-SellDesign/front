@@ -27,7 +27,7 @@ export class PerfilComponent implements OnInit {
   noHayFav: boolean = true;
   newProducts: any[] = []
   newFavs: any[] = []
-  products: any
+  products= [{productId:'',productImage:'', designImage : '',name:'',price:0}]
   idUser: any
   modalRef: MdbModalRef<ModalEditComponent> | null = null;
 
@@ -145,6 +145,7 @@ export class PerfilComponent implements OnInit {
           }
           this.newFavs = this.newFavs.concat(response.data)
           console.log(this.newFavs)
+          this.getImagesFavs()
         })
         .catch(e => {
           // Capturamos los errores
@@ -153,7 +154,42 @@ export class PerfilComponent implements OnInit {
         this.contPageFav++
     }
   }
-  
+  getImagesFavs(){
+    this.products = []
+    for(let i= 0;i<this.newFavs.length;i++){
+      axios.get(backURI+"products/get/"+this.newFavs[i].product)
+        .then(response => {
+          // Obtenemos los datos
+          console.log(response)
+          this.getImageOfDesign(this.newFavs[i].product,response.data.design._id,response.data.type+" "+response.data.design.name,response.data.image,response.data.price)
+          
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
+    }
+    this.products.shift()
+    console.log(this.products)
+    
+  }
+  getImageOfDesign(productId:string,_id:string,name:string,productImage:string,price:number){
+    axios.get(backURI+"products/design/"+_id)
+      .then(response => {
+        // Obtenemos los datos
+        this.products.push({
+          productId,
+          productImage,
+          designImage:response.data[0].design.image,
+          price,
+          name
+        })
+      })
+      .catch(e => {
+        // Capturamos los errores
+        console.log(e);
+      })
+  }
   openModal() {
     this.modalRef = this.modalService.open(ModalEditComponent, {
       data: {nombre: this.nombre,
