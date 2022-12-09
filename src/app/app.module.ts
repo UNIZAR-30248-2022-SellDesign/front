@@ -48,7 +48,8 @@ import { ModalComponent } from './components/payment/payment.component';
     FormsModule,
     NgbModule,
     MdbModalModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [AppRoutingProviders, MdbModalModule],
   bootstrap: [AppComponent],
