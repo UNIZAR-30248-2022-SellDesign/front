@@ -45,7 +45,7 @@ export class PerfilComponent implements OnInit {
 
   masProducts: Product[] = [
   ];
-
+  myProducts = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
   constructor(private modalService: MdbModalService) {
     this.selectedTab = false;
   }
@@ -117,7 +117,7 @@ export class PerfilComponent implements OnInit {
 
           }
           this.newProducts = this.newProducts.concat(response.data)
-          
+          this.getmyImagesFavs()
         })
         .catch(e => {
           // Capturamos los errores
@@ -158,6 +158,25 @@ export class PerfilComponent implements OnInit {
   contains(name:string){
     return name.includes("Pantalon")
   }
+  getmyImagesFavs(){
+    this.myProducts = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
+    for(let i= 0;i<this.newFavs.length;i++){
+      axios.get(backURI+"products/get/"+this.newFavs[i].product)
+        .then(response => {
+          // Obtenemos los datos
+          console.log(response)
+          this.getMyImageOfDesign(this.newFavs[i].product,response.data.design._id,response.data.type+" "+response.data.design.name,response.data.image,response.data.price)
+          
+        })
+        .catch(e => {
+          // Capturamos los errores
+          console.log(e);
+        })
+    }
+    this.myProducts.shift()
+    console.log(this.products)
+    
+  }
   getImagesFavs(){
     this.products = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
     for(let i= 0;i<this.newFavs.length;i++){
@@ -176,6 +195,23 @@ export class PerfilComponent implements OnInit {
     this.products.shift()
     console.log(this.products)
     
+  }
+  getMyImageOfDesign(productId:string,_id:string,name:string,productImage:string,price:number){
+    axios.get(backURI+"products/design/"+_id)
+      .then(response => {
+        // Obtenemos los datos
+        this.myProducts.push({
+          productId,
+          productImage,
+          designImage:response.data[0].design.image,
+          price,
+          name
+        })
+      })
+      .catch(e => {
+        // Capturamos los errores
+        console.log(e);
+      })
   }
   getImageOfDesign(productId:string,_id:string,name:string,productImage:string,price:number){
     axios.get(backURI+"products/design/"+_id)
