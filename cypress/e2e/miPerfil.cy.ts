@@ -19,7 +19,7 @@ describe('PerfilComponent', () => {
     cy.wait(200)
   })
 
-  /*
+  
   it('Editar Perfil + X', () => {
     cy.get('[name=nombre]').then(mes => {
       nombre = mes.text()
@@ -114,20 +114,20 @@ describe('PerfilComponent', () => {
     })
   })
 
-*/
+
 
   // it('Mostrar Productos en venta', () => {
   // })
 
-  it('Mostrar Favoritos', () => {
-    cy.get('[name=botonFavorito]').click()
-    cy.get('.list-group-item').then((list) => {
-      if(list.length > 0){
-        cy.get('[name=mensajeFav]').should('not.be.visible')
-      }
-    })
+  // it('Mostrar Favoritos', () => {
+  //   cy.get('[name=botonFavorito]').click()
+  //   cy.get('.list-group-item').then((list) => {
+  //     if(list.length > 0){
+  //       cy.get('[name=mensajeFav]').should('not.be.visible')
+  //     }
+  //   })
 
-  })
+  // })
 
   
 
