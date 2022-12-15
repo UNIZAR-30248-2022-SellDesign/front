@@ -19,7 +19,6 @@ describe('PerfilComponent', () => {
     cy.wait(200)
   })
 
-  
   it('Editar Perfil + X', () => {
     cy.get('[name=nombre]').then(mes => {
       nombre = mes.text()
@@ -86,33 +85,40 @@ describe('PerfilComponent', () => {
     });
   })
 
-  it('Si no hay favoritos, texto informativo', () => {
-    cy.get('[name=botonFavorito]').click()
-    cy.get('[name=mensajeFav]').should('be.visible').then(() => {
-      cy.log('FUNCIONA')
-      cy.get('.list-group-item')
-        .should('have.length', 0)
-    })
+  it('Cambiar foto perfil', () => {
+    // cy.get('.btn-primary').contains('Editar Foto').click()  
+    cy.get('input[type=file]').invoke('show').selectFile('cypress/fixtures/Avatar.jpg')
+    cy.get('label').find('img').should('have.attr', 'src').should('include', 'thumbsnap.com')
   })
+
+
+  // it('Si no hay favoritos, texto informativo', () => {
+  //   cy.get('[name=botonFavorito]').click()
+  //   cy.get('[name=mensajeFav]').should('be.visible').then(() => {
+  //     cy.log('FUNCIONA')
+  //     cy.get('.list-group-item')
+  //       .should('have.length', 0)
+  //   })
+  // })
   
-  it('Si no hay productos, texto informativo', () => {
-    // cy.get('.list-group-item')
-    //   .should('have.length.greaterThan', 1)
-    //   // now that we know the elements have loaded, get the number
-    //   .its('length')
-    //   .then(n => {
-    //     // use n if you need to  
-    //     console.log('ASKJDABLSKJDFSJLDAF',n);
+  // it('Si no hay productos, texto informativo', () => {
+  //   // cy.get('.list-group-item')
+  //   //   .should('have.length.greaterThan', 1)
+  //   //   // now that we know the elements have loaded, get the number
+  //   //   .its('length')
+  //   //   .then(n => {
+  //   //     // use n if you need to  
+  //   //     console.log('ASKJDABLSKJDFSJLDAF',n);
 
-    //   })
+  //   //   })
 
-    cy.get('[name=botonProducto]').click()
-    cy.get('[name=mensaje]').should('be.visible').then(() => {
-      cy.log('FUNCIONA')
-      cy.get('.list-group-item')
-        .should('have.length', 0)
-    })
-  })
+  //   cy.get('[name=botonProducto]').click()
+  //   cy.get('[name=mensaje]').should('be.visible').then(() => {
+  //     cy.log('FUNCIONA')
+  //     cy.get('.list-group-item')
+  //       .should('have.length', 0)
+  //   })
+  // })
 
 
 
@@ -127,12 +133,6 @@ describe('PerfilComponent', () => {
   //     }
   //   })
 
-  // })
-
-  
-
-  // it('Editar Foto', () => {
-  //   //Yo no lo haria pq se te mete en tus carpetas personales
   // })
 
 
