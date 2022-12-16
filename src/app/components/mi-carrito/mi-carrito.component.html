@@ -1,10 +1,13 @@
 <div class="container p-1 " style="display:inline-block">
-    <div *ngIf=!noHayProductos style="height:  5rem;">
-        <h2>Mi carrito</h2> 
-    </div>
-    <div *ngIf=noHayProductos style="height:  24rem;">
-        <h1><strong>NO</strong> se ha encontrado ningún producto ...</h1> 
-    </div>
+    <div class="" name="textoCarrito">
+        <div *ngIf=!noHayProductos style="height:  5rem;">
+            <h2>Mi carrito:</h2> 
+        </div>
+        <div *ngIf=noHayProductos style="height:  24rem;">
+            <h1><strong>NO</strong> se ha encontrado ningún producto ...</h1> 
+        </div>
+    </div> 
+    
     <div>
         <ul class="row" style="margin: 1%;width: 50%; float:left">
             <li  *ngFor="let product of newProducts" class="list-group-item p-2">

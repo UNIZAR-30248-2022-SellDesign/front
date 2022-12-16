@@ -61,9 +61,12 @@ describe('PerfilComponent', () => {
   it('Editar Perfil + Guardar', () => {
     cy.get('[name=nombre]').then(mes => {
       nombre = mes.text()
+      cy.log(nombre)
     })
     cy.get('[name=descripcion]').then(mes => {
       descripcion = mes.text()
+      cy.log(descripcion)
+
     })
     
     cy.get('.btn-outline-primary').click()
@@ -72,7 +75,7 @@ describe('PerfilComponent', () => {
 
     cy.get('[name=descripcionModal]').clear().type('Prueba realizada con exito')
     cy.get('.btn-primary').contains('Guardar').click()
-    cy.wait(100)
+    cy.wait(1500)
  
     cy.get('[name=nombre]').should((elem) => {
       // cy.log('elemento', elem.text())
