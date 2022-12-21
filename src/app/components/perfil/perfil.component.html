@@ -82,7 +82,7 @@
                         </div>
                     </li>
                 </ul>
-                <h1 *ngIf=noHayFav name='mensajeFav' style="text-align: center;">Todavía <strong>NO</strong> tienes favoritos!</h1>
+                <h1 *ngIf=noHayFav name='mensajeFav' style="text-align: center;" >Todavía <strong name="avisoFav">NO</strong> tienes favoritos!</h1>
                 <div *ngIf="cargarMasFav" class="d-flex justify-content-center p-2">
                     <button class="btn btn-lg btn-outline-dark" (click)="getMore(selectedTab)">Cargar más</button>
                 </div> 

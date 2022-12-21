@@ -1,8 +1,4 @@
 describe('MisDisenosComponent', () => {
-  var descripcion = ""
-  var nombre = ""
-  const desc = "JAJAJAJA"
-  const nom = "Pepito Grillo"
 
   before(() => {
     cy.request('https://selldesign-backend.onrender.com/api').then(response => {
