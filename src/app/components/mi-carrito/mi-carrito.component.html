@@ -1,7 +1,7 @@
 <div class="container p-1 " style="display:inline-block">
     <div class="" name="textoCarrito">
         <div *ngIf=!noHayProductos style="height:  5rem;">
-            <h2>Mi carrito:</h2> 
+            <h2>Mi <strong>CARRITO:</strong></h2> 
         </div>
         <div *ngIf=noHayProductos style="height:  24rem;">
             <h1><strong>NO</strong> se ha encontrado ningún producto ...</h1> 
@@ -38,14 +38,14 @@
             </li>
         </ul>
         <div *ngIf=!noHayProductos style="float: right;width: 40%;margin: 1%;">
-            <div style="padding-right: 30px;">
+            <div style="padding-right: 30px; padding-bottom: 2rem;">
                 <button class="btn btn-primary" (click)="comprar()" >Comprar</button>
             </div>
-            <div style="padding-right: 30px;">
+            <div style="padding-right: 30px; padding-bottom: 2rem;">
                 <button class="btn btn-danger" (click)="vaciarTodo()">Vaciar Carrito</button>
             </div>
             <h3>
-                Precio Total del carrito : {{totalprice()}} €
+                Total: <strong name="precio">{{totalprice()}}</strong> €
             </h3>
         </div>
     </div>
