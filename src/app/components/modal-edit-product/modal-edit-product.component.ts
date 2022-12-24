@@ -24,6 +24,7 @@ export class ModalEditProductComponent implements OnInit {
   diseno = {image: '',name:''}
   hayErrorFoto: boolean = false;
   error:boolean = false
+  errorPrice:boolean = false
   designs= [{_id:'',name:''}]
   designName: string = "Diseño"
   idDesign: string = ""
@@ -85,28 +86,33 @@ export class ModalEditProductComponent implements OnInit {
     //post
     console.log(precio);
     console.log(this.tipo);
-
+    
     if(precio != 0 && this.nombreTipo != 'Prenda'){
-      this.error = false
-      axios.post(backURI + "products/new", {
-        design: this.idDesign, //id de un diseño random
-        price: precio,
-        type: this.tipo,
-        image: this.imageProduct,
-        description: descripcion,
-        seller: this.idUser
-      })
-        .then((res) => {
-          console.log('guardarDatos:')
-          console.log(res)
-  
-          this.modalRef.close([{
-            flag: 0
-          }])
-  
-        }).catch((error) => {
-          console.log(error);
+      if (precio >100 || precio<5 ){
+        this.errorPrice = true
+      }else{
+        this.error = false
+        this.errorPrice = false
+        axios.post(backURI + "products/new", {
+          design: this.idDesign, //id de un diseño random
+          price: precio,
+          type: this.tipo,
+          image: this.imageProduct,
+          description: descripcion,
+          seller: this.idUser
         })
+          .then((res) => {
+            console.log('guardarDatos:')
+            console.log(res)
+    
+            this.modalRef.close([{
+              flag: 0
+            }])
+    
+          }).catch((error) => {
+            console.log(error);
+          })
+      }
     }else{
       this.error = true
     }
@@ -119,27 +125,32 @@ export class ModalEditProductComponent implements OnInit {
     console.log('PASANDO precio:', precio);
     console.log('PASANDO descri:', descripcion);
     console.log('PASANDO tipo:', this.tipo);
-    
-    axios.put(backURI + "products/update", {
-      // design: nombre,  ????
-      price: precio,
-      type: this.tipo,
-      image: foto,
-      description: descripcion,
-      _id: idProducto
-    })
-      .then((res) => {
-        console.log('actualizarDatos res:')
-        console.log(res)
-
-        this.modalRef.close([{
-          flag: 1,
-        }])
-        
-      }).catch((error) => {
-        console.log(error);
+    if(precio<5 || precio>100){
+      this.errorPrice = true
+      console.log('ERORR PRECIO EDITARRRR')
+    }else{
+      axios.put(backURI + "products/update", {
+        // design: nombre,  ????
+        price: precio,
+        type: this.tipo,
+        image: foto,
+        description: descripcion,
+        _id: idProducto
       })
+        .then((res) => {
+          console.log('actualizarDatos res:')
+          console.log(res)
+
+          this.modalRef.close([{
+            flag: 1,
+          }])
+          
+        }).catch((error) => {
+          console.log(error);
+        })
+    } 
   }
+  
 
   eliminarDatos(idProducto: string){
     console.log('eliminando diseño...')

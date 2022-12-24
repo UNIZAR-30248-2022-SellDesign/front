@@ -54,6 +54,7 @@
                         placeholder="Precio..." maxlength="3">
                   <label style="display: inline-block; text-align: right;">&nbsp;€</label>
              </div>
+             <h1 *ngIf=errorPrice style="color: red; margin-bottom: 1rem; justify-content: center;">El precio como máximo 100€ y como mínimo 5€</h1>
              <h1 *ngIf=error style="color: red; margin-bottom: 1rem; justify-content: center;">¡Hay algún error, revisa todo!</h1>
          </form>
     </div>
