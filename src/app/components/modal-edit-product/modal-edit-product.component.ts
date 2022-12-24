@@ -86,7 +86,7 @@ export class ModalEditProductComponent implements OnInit {
     console.log(this.tipo);
 
     if(precio != 0 && this.nombreTipo != 'Prenda'){
-      this.error = true
+      this.error = false
       axios.post(backURI + "products/new", {
         design: this.idDesign, //id de un diseño random
         price: precio,

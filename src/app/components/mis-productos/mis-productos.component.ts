@@ -20,6 +20,7 @@ export class MisProductosComponent implements OnInit {
   idUser: any
   modalRef: MdbModalRef<ModalEditProductComponent> | null = null;
   tipo: Number = 0;
+  myProducts = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
 
   constructor(private modalService: MdbModalService) { }
 
@@ -92,16 +93,13 @@ export class MisProductosComponent implements OnInit {
         }
       })
     }
-
+    
     this.modalRef.onClose.subscribe((data : any) => {
       console.log("openmodal de lcos");
 
       // COMPROBAR QUE FUNCIONE UNA VEZ HAYA PETICIONES
       
       if(data != undefined){
-        // this.aux[0]._id = data[0]._id
-        // this.aux[0].image = data[0].image
-        // this.aux[0].name = data[0].name
         if(data[0].flag == 0){ //subir
           console.log('en subir');
           
@@ -117,6 +115,25 @@ export class MisProductosComponent implements OnInit {
         }
       }      
     });
-  
+  }
+  contains(name:string){
+    return name.includes("Pantalon")
+  }
+  getMyImageOfDesign(productId:string,_id:string,name:string,productImage:string,price:number){
+    axios.get(backURI+"products/design/"+_id)
+      .then(response => {
+        // Obtenemos los datos
+        this.myProducts.push({
+          productId,
+          productImage,
+          designImage:response.data[0].design.image,
+          price,
+          name
+        })
+      })
+      .catch(e => {
+        // Capturamos los errores
+        console.log(e);
+      })
   }
 }
