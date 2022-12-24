@@ -21,11 +21,11 @@ export class ModalEditProductComponent implements OnInit {
   esEditar:boolean = false
   esSubir:boolean = false
   idProducto: string = ''
-  diseno = {image: ''}
+  diseno = {image: '',name:''}
   hayErrorFoto: boolean = false;
   error:boolean = false
   designs= [{_id:'',name:''}]
-  designName: string = "diseño"
+  designName: string = "Diseño"
   idDesign: string = ""
   imageProduct:string = ""
 
@@ -35,11 +35,12 @@ export class ModalEditProductComponent implements OnInit {
     this.idUser = localStorage.getItem('idUsuario')
     console.log(this.nombreTipo);
     console.log(this.diseno);
+    
     if(this.esEditar){
       this.imagenDiseno = this.diseno.image
+      this.designName = this.diseno.name
     }else{
-      this.imagenDiseno = this.imagen
-
+      this.imagenDiseno = this.diseno.image
     }
     this.getDesigns()
   }
