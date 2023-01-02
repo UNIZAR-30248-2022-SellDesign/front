@@ -21,10 +21,8 @@ import { BuscadorService } from '../../services/buscador.service';
   ) { }
 
   ngOnInit(): void {
-
     this._route.params.subscribe((params: Params) => {
       console.log(params);
-      
     });
   }
 

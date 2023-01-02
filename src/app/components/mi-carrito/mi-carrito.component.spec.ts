@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 import { MiCarritoComponent } from './mi-carrito.component';
 
@@ -8,6 +9,9 @@ describe('MiCarritoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        MdbModalService,
+      ],
       declarations: [ MiCarritoComponent ]
     })
     .compileComponents();

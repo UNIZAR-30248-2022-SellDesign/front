@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { BarraNavegacionComponent } from './barra-navegacion.component';
 
@@ -8,7 +9,11 @@ describe('BarraNavegacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BarraNavegacionComponent ]
+      imports: [
+        RouterTestingModule,
+      ],
+      declarations: [ BarraNavegacionComponent ],
+  
     })
     .compileComponents();
 
@@ -17,7 +22,13 @@ describe('BarraNavegacionComponent', () => {
     fixture.detectChanges();
   });
 
+  // it('should instance', () => {
+  //   expect(component).toBeDefined();
+  //   expect(component.busqueda).toBe("");
+  // });
+
   it('should create', () => {
+    // expect(component).toBeTruthy();
     expect(component).toBeTruthy();
   });
 });
