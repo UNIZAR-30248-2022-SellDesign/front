@@ -53,33 +53,6 @@ describe('HomeComponent', () => {
     expect(component.tipoEntero).toEqual(0);
     expect(component.getIni).toHaveBeenCalled();
   });
-  /*it('should emit search event on search', () => {
-    component.busquedaForm.controls.busqueda.setValue('test');
-    spyOn(component.busqueda, 'emit');
-    component.buscar();
-    expect(component.busqueda.emit).toHaveBeenCalledWith('test');
-  });*/
-  /*it('should update products and search term on subscription to BuscadorService', () => {
-    spyOn(buscadorService.disparadorDeBusqueda, 'subscribe').and.callFake((cb) => {
-      cb({
-        data: {
-          data: [{ id: 1, name: 'Test Product' }],
-          busqueda: 'test'
-        }
-      });
-    });
-    component.ngOnInit();
-    expect(component.newProducts).toEqual([{ id: 1, name: 'Test Product' }]);
-    expect(component.flagView).toEqual(false);
-    expect(component.contPageHome).toEqual(0);
-    expect(component.contPageBusqueda).toEqual(0);
-    expect(component.esNovedad).toEqual(false);
-    expect(component.esBusqueda).toEqual(true);
-    expect(component.hayMas).toEqual(false);
-    expect(component.noHayProductos).toEqual(false);
-    expect(component.precio).toEqual('Precio');
-    expect(component.tipo).toEqual('');
-  });*/
 
   it('should make HTTP request and update products on getMore for search view', () => {
     component.flagView = false;
@@ -98,13 +71,5 @@ describe('HomeComponent', () => {
     expect(component.precio).toEqual('Precio');
     expect(component.tipo).toEqual('Prenda');
   });
-
-  /*it('should update message on subscription to ArgumentService', () => {
-    spyOn(argumentService.sendArgument, 'subscribe').and.callFake((cb) => {
-      cb('test message');
-    });
-    component.ngOnInit();
-    expect(component.message).toEqual('test message');
-  });*/
 
 });
