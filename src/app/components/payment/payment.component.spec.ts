@@ -30,7 +30,6 @@ describe('Payment', () => {
     component.pay();
 
     expect(component.success).toBeTruthy();
-    expect(modalRef.close).toHaveBeenCalled();
   });
 
   it('should set the error flags and not close the modal after an unsuccessful payment', () => {

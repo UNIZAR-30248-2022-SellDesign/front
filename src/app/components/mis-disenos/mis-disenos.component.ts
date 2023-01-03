@@ -86,13 +86,6 @@ export class MisDisenosComponent implements OnInit {
           this.newDesigns = []
           this.getMore()
         }else if(data[0].flag == 1){ //actualizar
-          // console.log('id:', data[0]._id);
-          // console.log('diseños', this.newDesigns);
-          // var foundIndex = this.newDesigns.findIndex(x => x._id == data[0]._id);
-          // console.log('indice', foundIndex);
-          // console.log('diseños pre', this.newDesigns);
-          // this.newDesigns[foundIndex] = this.aux[0]
-          // console.log('diseños post', this.newDesigns);
           var aux = this.contPagemisDisenos;
           this.contPagemisDisenos = 0
           this.newDesigns = []
@@ -100,12 +93,8 @@ export class MisDisenosComponent implements OnInit {
 
           
         }else if(data[0].flag == 2){ //eliminar
-          // this.nombre = data[0].nombre
-          // this.descripcion = data[0].descripcion
           this.newDesigns = this.newDesigns.filter(x => x._id != data[0]._id);
         }
-        
-        // this.newDesigns = this.newDesigns.concat(this.aux[0])
       }      
     });
   
