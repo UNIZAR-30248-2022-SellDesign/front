@@ -89,7 +89,7 @@ describe('ModalEditDisenoComponent', () => {
     });
 
     it('should set the image URL when onSelectFile is called with a valid file', () => {
-        spyOn(axios, 'post').and.returnValue(Promise.resolve({status:200}));
+        spyOn(axios, 'post').and.returnValue(Promise.resolve({response:{status:200,data:{data:{media:'http'}}}}));
         // Create a fake file object
         const file = new File(['image data'], 'image.jpg', { type: 'image/jpeg' });
         // Create a fake event object

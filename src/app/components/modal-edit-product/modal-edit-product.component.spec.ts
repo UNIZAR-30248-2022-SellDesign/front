@@ -121,9 +121,8 @@ describe('ModalEditProductComponent', () => {
         expect(axios.delete).toHaveBeenCalledWith('https://selldesign-backend.onrender.com/products/delete/123/product');
     });
     it('should set the image URL when onSelectFile is called with a valid file', fakeAsync(() => {
-        spyOn(axios, 'post').and.returnValue(Promise.resolve({status:200}));
-        // Create a fake file object
-        const file = new File(['image data'], 'image.jpg', { type: 'image/jpeg' });
+      spyOn(axios, 'post').and.returnValue(Promise.resolve({response:{status:200,data:{data:{media:'http'}}}}));
+      const file = new File(['image data'], 'image.jpg', { type: 'image/jpeg' });
         // Create a fake event object
         const event = { target: { files: [file] } };
         // Spy on the axios post method

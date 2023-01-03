@@ -110,6 +110,7 @@ describe('RegisterComponent', () => {
     component.confirmPassword = "123456A"
     component.username = "Manuel"
     component.email = "aa@gmail.com"
+    spyOn(axios,'post').and.returnValue(Promise.resolve({status:201}))
     component.register()
     expect(component.errors).toEqual(false);
 
