@@ -40,10 +40,7 @@ export class ModalEditDisenoComponent implements OnInit {
         image: foto,
         id: this.idUser
       })
-        .then((res) => {
-          console.log('guardarDatos:')
-          console.log(res)
-  
+        .then((res) => {  
           this.modalRef.close([{
             flag: 0,
             name: nombre,
@@ -89,9 +86,7 @@ export class ModalEditDisenoComponent implements OnInit {
     //delete
     axios.delete(backURI + "designs/delete/" + this.idUser + '/' + idDiseno)
       .then((res) => {
-        console.log('eliminarDatos:')
-        console.log(res)
-        
+        console.log('eliminarDatos:')        
       }).catch((error) => {
         console.log(error);
       })
@@ -120,27 +115,10 @@ export class ModalEditDisenoComponent implements OnInit {
             .then(response => {
                if(response.status == 200){
                   this.hayErrorFoto = false
-                  console.log('TODO HA IDO BIEN');
-                  console.log(response.data.data.media);
                   this.imagen = response.data.data.media
-                  console.log('imagen:', this.imagen);
-                  
-                  // var uName = localStorage.getItem('userName')
-                  // axios.post(backURI + "/users/setImage", {
-                  //   username: uName,
-                  //   image: this.url,
-                  // })
-                  //   .then(response => {
-                  //     console.log('Subida al back con éxito');
-                      
-                  //   })
-                  //   .catch(e => {
-                  //     // Capturamos los errores
-                  //     console.log(e);
-                  //   })
+
                 }else{
                   //mensaje error
-                  console.log('FALLO AL SUBIR FOTO');
                   this.hayErrorFoto = true
                   const myTimeout = setTimeout( () => {
                     this.hayErrorFoto = false
