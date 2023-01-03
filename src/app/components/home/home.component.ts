@@ -13,7 +13,11 @@ import { ArgumentService } from 'src/app/services/argument.service';
 })
 export class HomeComponent implements OnInit {
 
-  newProducts: any
+  // products: Product[] = [
+  //   {productName:"Sudadera",designName:"buah",price:80,image:"https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530"}
+  // ];
+
+  newProducts: any = []
   contPageHome = 0
   contPageBusqueda = 0
   flagView = true
@@ -34,6 +38,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIni()
+    //this.argumentservice.currentargument.subscribe(message => this.message = message);
+    
     this._servicio.disparadorDeBusqueda.subscribe(data => {
 
       console.log('Result Tras disparador...', data.data.data);

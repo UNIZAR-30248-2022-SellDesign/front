@@ -43,13 +43,6 @@ export class RegisterComponent implements OnInit {
     return regularExpression.test(String(emailToValidate).toLowerCase());
   }
 
-  validatePassword(passToValidate: string) {
-    var valid: true;
-    if (this.password.search(/\d/) == -1 || this.password.search(/[A-Z]/) == -1 || this.password.length < 4) {
-
-    }
-  }
-
   register() {
     this.errors = false, this.emptyUser = false, this.emptyMail = false, this.emptyPassword = false, this.emptyConfirm = false, this.invalidEmail = false, this.noDigits = false, this.noUpper = false, this.wrongConfirm = false, this.wrongLength = false;
     //Username checks:

@@ -5,6 +5,7 @@ import { ArgumentService } from 'src/app/services/argument.service';
 import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import axios from 'axios';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -34,26 +35,30 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize variables and make HTTP request on ngOnInit', () => {
-    spyOn(component, 'getIni').and.returnValue(undefined);
+  it('ngOnInit gets home products', () => {
+    // spyOn(axios, 'get').and.returnValue(Promise.resolve({ data: [{ product: 'abc' }, { product: 'def' }] }));
+    spyOn(axios, 'get').and.resolveTo({ 
+      response: {
+        data: [
+        { productName: 'ADSFASDF',
+          designName: "asdasdasd",
+          price: 13,
+          image: "sadasd" } 
+    ]}})
     component.ngOnInit();
-    expect(component.newProducts).toBeUndefined();
-    expect(component.contPageHome).toEqual(0);
-    expect(component.contPageBusqueda).toEqual(0);
-    expect(component.flagView).toEqual(true);
-    expect(component.busqueda).toEqual('');
-    expect(component.esNovedad).toEqual(false);
-    expect(component.esBusqueda).toEqual(false);
-    expect(component.hayMas).toEqual(false);
+    expect(axios.get).toHaveBeenCalledWith('https://selldesign-backend.onrender.com/products/home/page/0');
+    
+    expect(component.newProducts.length).toEqual(1);
+    expect(component.esNovedad).toEqual(true);
     expect(component.noHayProductos).toEqual(false);
-    expect(component.precio).toEqual('Precio');
-    expect(component.tipo).toEqual('Prenda');
-    expect(component._min).toEqual(0);
-    expect(component._max).toEqual(0);
-    expect(component.tipoEntero).toEqual(0);
-    expect(component.getIni).toHaveBeenCalled();
+    expect(component.hayMas).toEqual(true);
   });
-
+  
+  
+  
+  
+  
+    
   it('should make HTTP request and update products on getMore for search view', () => {
     component.flagView = false;
     component.contPageBusqueda = 0;
@@ -61,7 +66,7 @@ describe('HomeComponent', () => {
     //spyOn(component, 'getSearch').and.returnValue(null);
     component.getMore();
     //expect(component.getSearch).toHaveBeenCalledWith('test', 1);
-    expect(component.newProducts).toBeUndefined();
+    expect(component.newProducts.length).toEqual(0);
     expect(component.contPageHome).toEqual(0);
     expect(component.contPageBusqueda).toEqual(1);
     expect(component.esNovedad).toEqual(false);
@@ -71,5 +76,4 @@ describe('HomeComponent', () => {
     expect(component.precio).toEqual('Precio');
     expect(component.tipo).toEqual('Prenda');
   });
-
 });

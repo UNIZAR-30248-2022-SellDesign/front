@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.router.getCurrentNavigation()?.extractedUrl)
     if(localStorage.getItem('session')) {
       this.router.navigate(['/home']);
     }
