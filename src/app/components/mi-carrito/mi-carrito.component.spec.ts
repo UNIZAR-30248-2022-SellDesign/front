@@ -11,7 +11,6 @@ describe('MiCarritoComponent', () => {
   let component: MiCarritoComponent;
   let modalService: MdbModalService;
   let fixture: ComponentFixture<MiCarritoComponent>;
-  let axiosSpy: jasmine.SpyObj<typeof axios>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
