@@ -1,4 +1,4 @@
-import { async, TestBed,ComponentFixture } from '@angular/core/testing';
+import { async, TestBed,ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { Router } from '@angular/router';
 import {FormsModule} from '@angular/forms';
@@ -47,5 +47,43 @@ describe('LoginComponent', () => {
     expect(component.emptyName).toEqual(true);
     expect(component.errors).toEqual(true);
   });
+
+  it('login -> parametros correcto', () => {
+    component.password = "123456A"
+    component.username = "Manuel"
+    component.login()
+    expect(component.errors).toEqual(false);
+    expect(component.emptyPassword).toEqual(false);
+  });
+
+  it('login -> contraseña vacía', () => {
+    component.password = ""
+    component.username = "Manuel"
+    component.login()
+    expect(component.errors).toEqual(true);
+    expect(component.emptyPassword).toEqual(true);
+  });
+
+  it('login -> parametros correcto', fakeAsync(() => {
+    component.password = "123456A"
+    component.username = "Manuel"
+    
+    spyOn(axios, 'post').and.resolveTo({ status: 201, data: { username: component.username,
+      password: component.password} });
+    spyOn(router, 'navigate');
+    component.login()
+    tick(500)
+    expect(axios.post).toHaveBeenCalledWith('https://selldesign-backend.onrender.com/users/login', {
+      username: component.username,
+      password: component.password,
+
+    });
+    
+    // localStorage.setItem('session', "sadfasdf")
+    // localStorage.setItem('idUsuario','idUsuario')
+    // localStorage.setItem('userName','userName')
+
+  }));
+
 
 });
