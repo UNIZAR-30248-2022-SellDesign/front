@@ -46,8 +46,6 @@ export class LoginComponent implements OnInit {
         password: this.password,
       })
         .then((res) => {
-          console.log(res)
-          console.log(res.data.User.userId)
           if (res.status == 201) {
             let i = 0
             localStorage.setItem('session',res.data)

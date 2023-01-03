@@ -80,7 +80,6 @@ export class PerfilComponent implements OnInit {
     axios.get(backURI + "users/user/" + this.userName)
         .then(response => {
           // Obtenemos los datos
-          console.log(response.data);
           this.nombreObtenido = response.data.realname
           this.descripcionObtenida = response.data.description
           this.nombre = this.nombreObtenido
@@ -94,20 +93,16 @@ export class PerfilComponent implements OnInit {
   }
   
   getMore(seleccion: boolean) {
-    console.log(seleccion);
     this.idUser = localStorage.getItem('idUsuario')
 
     if (!seleccion) {
       //FALSE -> diseños en venta
-      console.log('EN PRODUCTOS');
       
       axios.get(backURI + "perfil/" + this.idUser + "/products/" + this.contPageDisenos)
         .then(response => {
           // Obtenemos los datos
           if (response.data.length == 0) {
-            this.cargarMas = false
-            console.log(this.cargarMas);
-            
+            this.cargarMas = false            
             if(this.newProducts.length == 0){
               this.noHayDisenos = true
             }
@@ -116,7 +111,6 @@ export class PerfilComponent implements OnInit {
             this.cargarMas = true
 
           }
-          console.log(response.data)
           this.newProducts = this.newProducts.concat( response.data)
           this.getmyImagesFavs()
         })
@@ -127,7 +121,6 @@ export class PerfilComponent implements OnInit {
         this.contPageDisenos ++
 
     } else {
-      console.log('EN FAV');
 
       //TRUE ->favoritos 
       axios.get(backURI + "perfil/" + this.idUser + "/fav/" + this.contPageFav)
@@ -135,7 +128,6 @@ export class PerfilComponent implements OnInit {
           // Obtenemos los datos
           if (response.data.length == 0) {
             this.cargarMasFav = false
-            console.log('cargarmasfav', this.cargarMasFav);
             
             if(this.newFavs.length == 0){
               this.noHayFav = true
@@ -146,7 +138,6 @@ export class PerfilComponent implements OnInit {
           }
           
           this.newFavs = response.data
-          //console.log(this.newFavs)
           this.getImagesFavs()
         })
         .catch(e => {
@@ -165,7 +156,6 @@ export class PerfilComponent implements OnInit {
       axios.get(backURI+"products/get/"+this.newProducts[i]._id)
         .then(response => {
           // Obtenemos los datos
-          console.log(response)
           this.getMyImageOfDesign(this.newProducts[i]._id,response.data.design._id,response.data.type+" "+response.data.design.name,response.data.image,response.data.price)
           
         })
@@ -182,7 +172,6 @@ export class PerfilComponent implements OnInit {
       axios.get(backURI+"products/get/"+this.newFavs[i].product)
         .then(response => {
           // Obtenemos los datos
-          console.log(response)
           this.getImageOfDesign(this.newFavs[i].product,response.data.design._id,response.data.type+" "+response.data.design.name,response.data.image,response.data.price)
           
         })
@@ -233,7 +222,6 @@ export class PerfilComponent implements OnInit {
              descripcion: this.descripcion}
     })
     this.modalRef.onClose.subscribe((data : any) => {
-      console.log("openmodal de lcos");
       if(data != undefined){
         this.nombre = data[0].nombre
         this.descripcion = data[0].descripcion
@@ -248,7 +236,6 @@ export class PerfilComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (evento) => { // called once readAsDataURL is completed
-        console.log(evento.target?.result);
         if(evento.target?.result != undefined){
           const formData = new FormData()
           formData.append('media', event.target.files[0])
@@ -258,20 +245,14 @@ export class PerfilComponent implements OnInit {
             .then(response => {
                if(response.status == 200){
                   this.hayErrorFoto = false
-                  console.log('TODO HA IDO BIEN');
-                  console.log(response.data.data.media);
                   this.url = response.data.data.media
                   // this.subirFoto(response.data.data.media)
                   var uName = localStorage.getItem('userName')
-                  console.log(uName);
-                  console.log(this.url);
                   axios.post(backURI + "users/setImage", {
                     username: uName,
                     image: this.url,
                   })
-                    .then(response => {
-                      console.log('Subida al back con éxito');
-                      
+                    .then(response => {                      
                     })
                     .catch(e => {
                       // Capturamos los errores
@@ -279,7 +260,6 @@ export class PerfilComponent implements OnInit {
                     })
                 }else{
                   //mensaje error
-                  console.log('FALLO AL SUBIR FOTO');
                   this.hayErrorFoto = true
                   const myTimeout = setTimeout( () => {
                     this.hayErrorFoto = false

@@ -47,8 +47,6 @@ export class MisProductosComponent implements OnInit {
             this.hayDesign = false
             }
           }
-          console.log('response mis-productos');
-          console.log(response.data);
         })
         .catch(e => {
           // Capturamos los errores
@@ -95,14 +93,11 @@ export class MisProductosComponent implements OnInit {
     }
     
     this.modalRef.onClose.subscribe((data : any) => {
-      console.log("openmodal de lcos");
 
       // COMPROBAR QUE FUNCIONE UNA VEZ HAYA PETICIONES
       
       if(data != undefined){
-        if(data[0].flag == 0){ //subir
-          console.log('en subir');
-          
+        if(data[0].flag == 0){ //subir          
           this.contPagemisDisenos= 0
           this.newProducts = []
           this.getMore()

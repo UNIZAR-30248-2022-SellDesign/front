@@ -34,9 +34,6 @@ export class ModalEditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = localStorage.getItem('idUsuario')
-    console.log(this.nombreTipo);
-    console.log(this.diseno);
-    
     if(this.esEditar){
       this.imagenDiseno = this.diseno.image
       this.designName = this.diseno.name
@@ -50,7 +47,6 @@ export class ModalEditProductComponent implements OnInit {
 
     axios.get(backURI + "designs/" + this.idUser + "/0")
         .then(response => {
-          console.log(response.data)
           let i
           for(i=0;i<response.data.length;i++){
             this.designs.push({_id:response.data[i]._id,name:response.data[i].name})
@@ -81,12 +77,7 @@ export class ModalEditProductComponent implements OnInit {
         break
     }
   }
-  guardarDatos( precio: Number,descripcion: string, ){
-    console.log('guardando diseño...')
-    //post
-    console.log(precio);
-    console.log(this.tipo);
-    
+  guardarDatos( precio: Number,descripcion: string, ){    
     if(precio != 0 && this.nombreTipo != 'Prenda'){
       if (precio >100 || precio<5 ){
         this.errorPrice = true
@@ -102,8 +93,6 @@ export class ModalEditProductComponent implements OnInit {
           seller: this.idUser
         })
           .then((res) => {
-            console.log('guardarDatos:')
-            console.log(res)
     
             this.modalRef.close([{
               flag: 0
@@ -119,15 +108,8 @@ export class ModalEditProductComponent implements OnInit {
   }
 
   actualizarDatos(foto: string, nombre: string, idProducto: string, precio: Number, descripcion: string){
-    console.log('actualizando diseño...')
-    //put
-    console.log('PASANDO IMAGEN:', foto);
-    console.log('PASANDO precio:', precio);
-    console.log('PASANDO descri:', descripcion);
-    console.log('PASANDO tipo:', this.tipo);
     if(precio<5 || precio>100){
       this.errorPrice = true
-      console.log('ERORR PRECIO EDITARRRR')
     }else{
       axios.put(backURI + "products/update", {
         // design: nombre,  ????
@@ -138,9 +120,6 @@ export class ModalEditProductComponent implements OnInit {
         _id: idProducto
       })
         .then((res) => {
-          console.log('actualizarDatos res:')
-          console.log(res)
-
           this.modalRef.close([{
             flag: 1,
           }])
@@ -153,13 +132,9 @@ export class ModalEditProductComponent implements OnInit {
   
 
   eliminarDatos(idProducto: string){
-    console.log('eliminando diseño...')
     //delete
     axios.delete(backURI + "products/delete/" + this.idUser + '/' + idProducto)
       .then((res) => {
-        console.log('eliminarDatos:')
-        console.log(res)
-        
       }).catch((error) => {
         console.log(error);
       })
@@ -170,16 +145,13 @@ export class ModalEditProductComponent implements OnInit {
     }])
   }
 
-  onSelectFile(event : any) {
-    console.log('onSelectFile');
-    
+  onSelectFile(event : any) {    
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (evento) => { // called once readAsDataURL is completed
-        console.log(evento.target?.result);
         if(evento.target?.result != undefined){
           const formData = new FormData()
           formData.append('media', event.target.files[0])
@@ -188,12 +160,9 @@ export class ModalEditProductComponent implements OnInit {
             .then(response => {
                if(response.status == 200){
                   this.hayErrorFoto = false
-                  console.log('TODO HA IDO BIEN');
                   this.imagen = response.data.data.media
-                  console.log('imagen:', this.imagen);
                 }else{
                   //mensaje error
-                  console.log('FALLO AL SUBIR FOTO');
                   this.hayErrorFoto = true
                   const myTimeout = setTimeout( () => {
                     this.hayErrorFoto = false

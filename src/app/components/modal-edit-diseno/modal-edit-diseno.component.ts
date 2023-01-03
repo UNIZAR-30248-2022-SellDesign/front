@@ -23,16 +23,9 @@ export class ModalEditDisenoComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = localStorage.getItem('idUsuario')
-    console.log(this.nombreDiseno);
-    console.log(this.imagen);
   }
 
   guardarDatos(foto: string, nombre: string ){
-    console.log('guardando diseño...')
-    //post
-    console.log(foto);
-    console.log(nombre);
-
     if(nombre != '' && foto != 'https://www.lifewire.com/thmb/TRGYpWa4KzxUt1Fkgr3FqjOd6VQ=/1…trip_icc()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg'){
       this.error = false
       axios.post(backURI + "designs/new", {
@@ -64,8 +57,6 @@ export class ModalEditDisenoComponent implements OnInit {
       id: idDiseno,
     })
       .then((res) => {
-        console.log('actualizarDatos res:')
-        console.log(res)
 
         this.modalRef.close([{
           flag: 1,
@@ -82,11 +73,9 @@ export class ModalEditDisenoComponent implements OnInit {
   }
 
   eliminarDatos(idDiseno: string){
-    console.log('eliminando diseño...')
     //delete
     axios.delete(backURI + "designs/delete/" + this.idUser + '/' + idDiseno)
       .then((res) => {
-        console.log('eliminarDatos:')        
       }).catch((error) => {
         console.log(error);
       })
@@ -97,16 +86,13 @@ export class ModalEditDisenoComponent implements OnInit {
     }])
   }
 
-  onSelectFile(event : any) {
-    console.log('onSelectFile');
-    
+  onSelectFile(event : any) {    
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (evento) => { // called once readAsDataURL is completed
-        console.log(evento.target?.result);
         if(evento.target?.result != undefined){
           const formData = new FormData()
           formData.append('media', event.target.files[0])

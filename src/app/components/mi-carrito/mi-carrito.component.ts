@@ -26,7 +26,6 @@ export class MiCarritoComponent implements OnInit {
   getCart(){
     axios.get(backURI + "cart/"+this.idUser+"/0")
     .then(response => {
-      console.log(response.data)
       if(response.data.length==0){
         this.noHayProductos=true
       } 
@@ -36,7 +35,6 @@ export class MiCarritoComponent implements OnInit {
         for(let i=0;i<response.data.length;i++){
           this.getProductInfo(response.data[i].product)
         }
-        console.log(this.newProducts)
       }
       
     })
@@ -58,18 +56,14 @@ export class MiCarritoComponent implements OnInit {
         })
   }
   eliminarProducto(idProducto:string){
-    console.log("Eliminando "+idProducto)
     axios.delete(backURI+"cart/"+this.idUser+"/"+idProducto)
     .then(response=>{
-      console.log('AHORAA ' + this.newProducts.length)
       for(let i=0;i<this.newProducts.length;i++){
         if(this.newProducts[i]._id === idProducto) {
           this.newProducts.splice(i , 1)
           
         }
-      }
-      console.log('AHORAA ' + this.newProducts.length)
-      
+      }      
     })
     .catch(e => {
       console.log(e)

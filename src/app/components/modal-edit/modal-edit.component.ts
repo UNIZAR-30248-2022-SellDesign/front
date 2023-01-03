@@ -27,10 +27,7 @@ export class ModalEditComponent implements OnInit {
   }
 
   guardarDatos(){
-    console.log('guardar datos');
     //Guardar nombre
-    console.log(this.nombre);
-    console.log(this.descripcion);
     
     if(this.nombre != this.nombreObtenido){ 
       axios.post(backURI + "users/setRealName", {
@@ -38,8 +35,6 @@ export class ModalEditComponent implements OnInit {
         realname: this.nombre,
       })
         .then((res) => {
-          console.log('NOMBRE:')
-          console.log(res)
           
         }).catch((error) => {
           console.log(error);
@@ -52,8 +47,6 @@ export class ModalEditComponent implements OnInit {
         description: this.descripcion,
       })
         .then((res) => {
-          console.log('DESCRIPTION:')
-          console.log(res)
           
         }).catch((error) => {
           console.log(error);

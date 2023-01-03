@@ -46,8 +46,6 @@ export class MisDisenosComponent implements OnInit {
             this.hayDesign = false
             }
           }
-          console.log('response mis-disenos');
-          console.log(response.data);
         })
         .catch(e => {
           // Capturamos los errores
@@ -76,7 +74,6 @@ export class MisDisenosComponent implements OnInit {
     }
 
     this.modalRef.onClose.subscribe((data : any) => {
-      console.log("openmodal de lcos");
       if(data != undefined){
         this.aux[0]._id = data[0]._id
         this.aux[0].image = data[0].image

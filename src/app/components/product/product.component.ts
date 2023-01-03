@@ -62,7 +62,6 @@ export class ProductComponent implements OnInit{
     }, 2000);
     axios.post(backURI+"cart/"+this.idUser+"/"+this.id)
     .then(response => {
-      console.log(response)
     })
     .catch(e => {
       // Capturamos los errores
