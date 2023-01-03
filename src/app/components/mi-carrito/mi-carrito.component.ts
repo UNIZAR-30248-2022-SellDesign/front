@@ -61,9 +61,14 @@ export class MiCarritoComponent implements OnInit {
     console.log("Eliminando "+idProducto)
     axios.delete(backURI+"cart/"+this.idUser+"/"+idProducto)
     .then(response=>{
+      console.log('AHORAA ' + this.newProducts.length)
       for(let i=0;i<this.newProducts.length;i++){
-        if(this.newProducts[i]._id === idProducto) this.newProducts.splice(i , 1)
+        if(this.newProducts[i]._id === idProducto) {
+          this.newProducts.splice(i , 1)
+          
+        }
       }
+      console.log('AHORAA ' + this.newProducts.length)
       
     })
     .catch(e => {
