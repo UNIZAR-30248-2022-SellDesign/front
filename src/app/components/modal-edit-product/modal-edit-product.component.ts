@@ -21,7 +21,7 @@ export class ModalEditProductComponent implements OnInit {
   esEditar:boolean = false
   esSubir:boolean = false
   idProducto: string = ''
-  diseno = {image: '',name:''}
+  diseno = {_id: '',image: '',name:''}
   hayErrorFoto: boolean = false;
   error:boolean = false
   errorPrice:boolean = false
@@ -37,6 +37,8 @@ export class ModalEditProductComponent implements OnInit {
     if(this.esEditar){
       this.imagenDiseno = this.diseno.image
       this.designName = this.diseno.name
+      this.idDesign = this.diseno._id
+      console.log(this.diseno)
     }else{
       this.imagenDiseno = this.diseno.image
     }
@@ -120,7 +122,7 @@ export class ModalEditProductComponent implements OnInit {
         image: foto,
         description: descripcion,
         _id: idProducto,
-        design : this.idDesign
+        design : this.diseno._id
       })
         .then((res) => {
           this.modalRef.close([{
