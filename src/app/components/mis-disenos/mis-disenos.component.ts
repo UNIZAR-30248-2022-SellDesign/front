@@ -4,6 +4,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalEditDisenoComponent } from '../modal-edit-diseno/modal-edit-diseno.component';
 import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mis-disenos',
@@ -12,6 +13,7 @@ import { backURI } from 'src/environments/backURI';
   styleUrls: ['./mis-disenos.component.css']
 })
 export class MisDisenosComponent implements OnInit {
+  [x: string]: any;
 
   hayDesignBoton : boolean = false
   hayDesign : boolean = false
@@ -22,10 +24,16 @@ export class MisDisenosComponent implements OnInit {
   modalRef: MdbModalRef<ModalEditDisenoComponent> | null = null;
 
 
-  constructor(private modalService: MdbModalService) { }
+  constructor(private modalService: MdbModalService, public router: Router) { }
 
   ngOnInit(): void {
-    this.getMore();
+    if(localStorage.getItem('session')) {
+      this.getMore();
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+
   }
 
   getMore(){

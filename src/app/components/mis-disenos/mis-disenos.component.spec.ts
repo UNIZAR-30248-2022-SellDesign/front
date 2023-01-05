@@ -5,19 +5,25 @@ import { ModalEditDisenoComponent } from '../modal-edit-diseno/modal-edit-diseno
 import { of, throwError } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import axios from 'axios';
+import { Router } from '@angular/router';
 describe('MisDisenosComponent', () => {
   let component: MisDisenosComponent;
   let modalService: MdbModalService;
   let modalRef: any;
+  let router: Router;
 
   beforeEach(async(() => {
     
     modalService = jasmine.createSpyObj('MdbModalService', ['open']);
     TestBed.configureTestingModule({
-    declarations: [MisDisenosComponent]
+    declarations: [MisDisenosComponent],
+    providers: [
+      { provide: Router, useValue: { navigate: () => {} } }
+    ]
     }).compileComponents();
 
-    component = new MisDisenosComponent(modalService);
+    router = TestBed.inject(Router);
+    component = new MisDisenosComponent(modalService, router);
   }));
     it('should create the component', () => {
         expect(component).toBeTruthy();

@@ -5,6 +5,7 @@ import { backURI } from 'src/environments/backURI';
 import { Product } from '../../models/product';
 import { BuscadorService } from '../../services/buscador.service';
 import { ArgumentService } from 'src/app/services/argument.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -34,29 +35,35 @@ export class HomeComponent implements OnInit {
 
   message : any
   
-  constructor(private _servicio: BuscadorService, private argumentservice : ArgumentService) { }
+  constructor(private _servicio: BuscadorService, private argumentservice : ArgumentService, public router: Router) { }
 
   ngOnInit(): void {
-    this.getIni()
-    //this.argumentservice.currentargument.subscribe(message => this.message = message);
-    
-    this._servicio.disparadorDeBusqueda.subscribe(data => {
+    if(localStorage.getItem('session')) {
+      this.getIni()
+      //this.argumentservice.currentargument.subscribe(message => this.message = message);
+      
+      this._servicio.disparadorDeBusqueda.subscribe(data => {
 
-      this.newProducts = data.data.data
-      this.busqueda = data.data.busqueda
-      this.flagView = false
-      this.contPageBusqueda = 0
-      this.esNovedad = false
-      this.esBusqueda = true
-      this.precio = 'Precio'
-      this.tipo = ''
-      if(this.newProducts.length == 0 ){
-        this.noHayProductos = true
-        this.hayMas = false
-      }else{
-        this.noHayProductos = false
-      }
-    })
+        this.newProducts = data.data.data
+        this.busqueda = data.data.busqueda
+        this.flagView = false
+        this.contPageBusqueda = 0
+        this.esNovedad = false
+        this.esBusqueda = true
+        this.precio = 'Precio'
+        this.tipo = ''
+        if(this.newProducts.length == 0 ){
+          this.noHayProductos = true
+          this.hayMas = false
+        }else{
+          this.noHayProductos = false
+        }
+      })
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+    
   }
 
   getIni(){  

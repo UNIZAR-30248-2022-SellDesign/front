@@ -3,6 +3,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
 import { ModalEditProductComponent } from '../modal-edit-product/modal-edit-product.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mis-productos',
@@ -22,10 +23,15 @@ export class MisProductosComponent implements OnInit {
   tipo: Number = 0;
   myProducts = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
 
-  constructor(private modalService: MdbModalService) { }
+  constructor(private modalService: MdbModalService, public router: Router) { }
 
   ngOnInit(): void {
-    this.getMore();
+    if(localStorage.getItem('session')) {
+      this.getMore();
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
 
 

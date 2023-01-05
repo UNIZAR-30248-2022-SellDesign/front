@@ -3,6 +3,7 @@ import axios from 'axios';
 import { backURI } from 'src/environments/backURI';
 import { MdbModalRef,MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalComponent } from '../payment/payment.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,11 +18,18 @@ export class MiCarritoComponent implements OnInit {
   newProducts:any
   modalRef: MdbModalRef<ModalComponent> | null = null;
 
-  constructor(private modalService: MdbModalService) { }
+  constructor(private modalService: MdbModalService,  public router: Router) { }
 
   ngOnInit(): void {
-    this.idUser = localStorage.getItem('idUsuario')
-    if(this.idUser!=null) this.getCart()
+    if(localStorage.getItem('session')) {
+      this.idUser = localStorage.getItem('idUsuario')
+      if(this.idUser!=null) this.getCart()
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+
+    
   }
   getCart(){
     axios.get(backURI + "cart/"+this.idUser+"/0")

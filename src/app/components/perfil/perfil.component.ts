@@ -4,6 +4,7 @@ import { Product } from 'src/app/models/product';
 import { backURI } from 'src/environments/backURI';
 import { ModalEditComponent } from '../modal-edit/modal-edit.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -46,15 +47,20 @@ export class PerfilComponent implements OnInit {
   masProducts: Product[] = [
   ];
   myProducts = [{productId:'',productImage:'', designImage : '',name:'',price:0}]
-  constructor(private modalService: MdbModalService) {
+  constructor(private modalService: MdbModalService, public router: Router) {
     this.selectedTab = false;
   }
 
   ngOnInit(): void {
-
-    this.getInfo()
-    this.getMore(false) //obtener diseños (1a pag)
-    this.getMore(true) //obtener fav (1a pag)
+    if(localStorage.getItem('session')) {
+      this.getInfo()
+      this.getMore(false) //obtener diseños (1a pag)
+      this.getMore(true) //obtener fav (1a pag)
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+    
   }
 
   // ---

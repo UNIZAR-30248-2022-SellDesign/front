@@ -34,16 +34,22 @@ export class ProductComponent implements OnInit{
   constructor(private route: ActivatedRoute,private router: Router,private modalService: MdbModalService) {  }
 
   ngOnInit(): void {
-    this.idUser = localStorage.getItem('idUsuario')
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['idProducto']
-      this.imagesDesignFuncional = [{ id:'',
-                                      imageDesign : '',type:''}]
-      this.getInfo()
-      this.getFavorite()
-    });
-    if(this.idUser!=null && this.id != null) this.getFavorite()
+    if(localStorage.getItem('session')) {
+      this.idUser = localStorage.getItem('idUsuario')
+      this.route.params.subscribe((params: Params) => {
+        this.id = params['idProducto']
+        this.imagesDesignFuncional = [{ id:'',
+                                        imageDesign : '',type:''}]
+        this.getInfo()
+        this.getFavorite()
+      });
+      if(this.idUser!=null && this.id != null) this.getFavorite()
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
   }
+  
   getFavorite(){
     axios.get(backURI+"perfil/fav/"+this.idUser+"/"+this.id)
         .then(response => {

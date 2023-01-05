@@ -3,16 +3,27 @@ import { PerfilComponent } from './perfil.component';
 import { ComponentFixture } from '@angular/core/testing';
 import axios from 'axios';
 import { MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Router } from '@angular/router';
 
 describe('PerfilComponent', () => {
     let component: PerfilComponent;
     let fixture: ComponentFixture<PerfilComponent>;
     let modalService: MdbModalService;
+    let router: Router;
 
     beforeEach(async(() => {
         //fixture = TestBed.createComponent(PerfilComponent);
         //component = fixture.componentInstance;
-        component = new PerfilComponent(modalService);
+
+        TestBed.configureTestingModule({
+        declarations: [PerfilComponent],
+        providers: [
+          { provide: Router, useValue: { navigate: () => {} } }
+        ]
+        }).compileComponents();
+
+        router = TestBed.inject(Router);
+        component = new PerfilComponent(modalService, router);
         
     }));
 
