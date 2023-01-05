@@ -111,7 +111,7 @@ export class ModalEditProductComponent implements OnInit {
     if(precio<5 || precio>100){
       this.errorPrice = true
     }else{
-      console.log("actualizar;", precio, this.tipo, foto, descripcion, idProducto);
+      console.log("actualizar;", precio, this.tipo, foto, descripcion, idProducto, this.idDesign);
       
       axios.put(backURI + "products/update", {
         // design: nombre,  ????
@@ -119,7 +119,8 @@ export class ModalEditProductComponent implements OnInit {
         type: this.tipo,
         image: foto,
         description: descripcion,
-        _id: idProducto
+        _id: idProducto,
+        design : this.idDesign
       })
         .then((res) => {
           this.modalRef.close([{
@@ -181,7 +182,7 @@ export class ModalEditProductComponent implements OnInit {
     }
   }
   asignDesign(_id:string,name:string){
-    this.designName=name
+    this.designName = name
     this.idDesign = _id
   }
 
