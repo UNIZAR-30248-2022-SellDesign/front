@@ -6,7 +6,7 @@ describe('HomeComponent', () => {
       expect(response.status).to.eq(200)
     })
     cy.visit('/#/login')
-    cy.get('[name=username]').type('ibon3')
+    cy.get('[name=username]').type('test')
     cy.get('[name=password]').type('Micontraseña2')
     cy.get('.btn-black').click()
     cy.get('strong').contains('NOVEDADES')
@@ -14,7 +14,7 @@ describe('HomeComponent', () => {
   
   
   it('Filtro precio 1€ - 30€', () => {
-    cy.get('#navbarDropdownPrecio').click().get('.dropdown-item').contains('1€ - 30€').click()
+    cy.get('#navbarDropdownPrecio').click().get('.dropdown-item').contains('1€ - 30€').click().wait(20000)
     
 
     cy.get('[name=precio]').each((item)=>{
@@ -25,10 +25,10 @@ describe('HomeComponent', () => {
   })
   
   it('Filtro precio 31€ - 70€', () => {
-    cy.get('#navbarDropdownPrecio').click().get('.dropdown-item').contains('31€ - 70€').click()
+    cy.get('#navbarDropdownPrecio').click().get('.dropdown-item').contains('31€ - 70€').click().wait(10000)
     cy.wait(500)
     cy.get('[name=precio]').each((item)=>{
-        cy.wrap(item).invoke('text').then(parseInt).should('be.a', 'number').should('be.greaterThan',30).should('be.lessThan',70)
+        cy.wrap(item).invoke('text').then(parseInt).should('be.a', 'number').should('be.greaterThan',30).should('be.lessThan',70).wait(4000)
     })
   })
 
