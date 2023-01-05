@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   //   {productName:"Sudadera",designName:"buah",price:80,image:"https://static.pullandbear.net/2/photos/2022/I/0/2/p/8591/513/800/8591513800_1_1_3.jpg?t=1664869588530"}
   // ];
 
-  newProducts: any
+  newProducts: any = []
   contPageHome = 0
   contPageBusqueda = 0
   flagView = true
@@ -39,9 +39,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getIni()
     //this.argumentservice.currentargument.subscribe(message => this.message = message);
+    
     this._servicio.disparadorDeBusqueda.subscribe(data => {
 
-      console.log('Result Tras disparador...', data.data.data);
       this.newProducts = data.data.data
       this.busqueda = data.data.busqueda
       this.flagView = false
@@ -59,14 +59,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  getIni(){
-    console.log(backURI + "products/home/page/" + this.contPageHome);
-    
+  getIni(){  
     axios.get(backURI + "products/home/page/" + this.contPageHome)
     .then(response => {
         // Obtenemos los datos
         this.newProducts = response.data
-        console.log(this.newProducts);
         this.esNovedad = true
         
         if(this.newProducts.length == 0){
@@ -88,11 +85,7 @@ export class HomeComponent implements OnInit {
     // Home
     if(this.flagView){
       this.esNovedad = true
-
-      console.log('HOME');
-      
       this.contPageHome += 1
-      console.log(backURI + "products/home/page/" + this.contPageHome);
       axios.get(backURI + "products/home/page/" + this.contPageHome)
         .then(response => {
             // Obtenemos los datos
@@ -114,14 +107,7 @@ export class HomeComponent implements OnInit {
     } else{
       // Busqueda
       this.esNovedad = false
-
-      console.log('Busqueda');
-
-      console.log('Valor flag', this.flagView);
-
-      this.contPageBusqueda += 1
-      console.log(backURI + 'products/search/' + this.busqueda + '/' + this.contPageBusqueda);
-      
+      this.contPageBusqueda += 1   
 
       axios.get(backURI + 'products/search/' + this.busqueda + '/' + this.contPageBusqueda)
         .then(response => {
@@ -167,12 +153,9 @@ export class HomeComponent implements OnInit {
 
     } else {
       //Filtro Home
-      console.log('FILTRO');
       
       if(this.tipo == 'Prenda'){
         //Solo se filtra precio
-        console.log('preecio', backURI + 'products/home/' + min + '/'  + max);
-
         axios.get(backURI + 'products/home/' + min + '/'  + max)
           .then(response => {
               // Obtenemos los datos
@@ -191,9 +174,7 @@ export class HomeComponent implements OnInit {
               
           })
       }else{
-        //Se filtra precio + tipo
-        console.log('precio + tipo', backURI + 'products/home/' + min + '/'  + max  + '/' + this.tipoEntero);
-        
+        //Se filtra precio + tipo        
         axios.get(backURI + 'products/home/' + min + '/'  + max  + '/' + this.tipoEntero)
           .then(response => {
               // Obtenemos los datos
@@ -229,23 +210,15 @@ export class HomeComponent implements OnInit {
     return name.includes("Pantalon")
   }
 
-  filterPrenda(tipo:Number){
-    console.log('FILTRO PRENDA');
-    
+  filterPrenda(tipo:Number){    
     this.esBusqueda = true
     this.tipoEntero = tipo
     if(this.precio == 'Precio'){
-      //Solo se filtra prenda
-      console.log('prenda:', backURI + 'products/home/' + tipo);
-      
+      //Solo se filtra prenda      
       axios.get(backURI + 'products/home/' + tipo)
       .then(response => {
           // Obtenemos los datos
-          console.log('Response filterPrenda',response.data);
-          
           this.newProducts = response.data
-          console.log(this.newProducts);
-          
           if(response.data.length == 0){
             this.noHayProductos = true
           } else{
@@ -260,10 +233,7 @@ export class HomeComponent implements OnInit {
           
       })
     }else{
-      //Se filtra prenda + precio
-      
-      console.log('prenda + precio', backURI + 'products/home/' + this._min + '/'  + this._max  + '/' + this.tipoEntero);
-        
+      //Se filtra prenda + precio        
       axios.get(backURI + 'products/home/' + this._min + '/'  + this._max  + '/' + this.tipoEntero)
         .then(response => {
             // Obtenemos los datos

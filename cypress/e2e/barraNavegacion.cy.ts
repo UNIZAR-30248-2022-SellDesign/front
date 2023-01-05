@@ -16,7 +16,7 @@ describe('BarraNavegacionComponent', () => {
   it('Ir al carrito', () => {
     cy.get('.bi-cart').click()
     cy.wait(200)
-    cy.get('[name=textoCarrito]').contains('Mi carrito:')
+    cy.get('[name=textoCarrito]').contains('ningún producto')
     cy.visit('/#/home')
     cy.wait(1000)
   })

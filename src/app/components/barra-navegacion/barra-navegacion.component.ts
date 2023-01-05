@@ -22,10 +22,7 @@ import { BuscadorService } from '../../services/buscador.service';
 
   ngOnInit(): void {
 
-    this._route.params.subscribe((params: Params) => {
-      console.log(params);
-      
-    });
+    this._route.params.subscribe((params: Params) => {});
   }
 
   async buscar(){
@@ -34,9 +31,7 @@ import { BuscadorService } from '../../services/buscador.service';
       await axios.get(backURI + 'products/search/' + this.busqueda + '/' + 0)
       .then(response => {
           // Obtenemos los datos
-          this.resultBusqueda = response.data
-          console.log('ResultBusqueda',this.resultBusqueda);
-          
+          this.resultBusqueda = response.data          
       })
       .catch(e => {
           // Capturamos los errores

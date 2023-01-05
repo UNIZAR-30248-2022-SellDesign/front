@@ -31,7 +31,7 @@ describe('LogginComponent', () => {
   })
   it('Accede a home con usuarios correctos', () => {
     cy.visit('/#/login')
-    cy.get('[name=username]').type('ibon3')
+    cy.get('[name=username]').type('test')
     cy.get('[name=password]').type('Micontraseña2')
     cy.get('.btn-black').click()
     cy.get('strong').contains('NOVEDADES')
