@@ -43,13 +43,15 @@ describe('MisProductosComponent', () => {
     //Editarlo producto
     cy.log('EDITAR PRODUCTO')
     cy.log('--------------')
+    cy.reload()
     cy.wait(300)
-    cy.get('.btn-lg ').first().contains('Editar').click()
+    cy.get('.btn-lg ').contains('Editar').click()
     cy.get('.modal').should('be.visible')
     cy.get('[name=descripcion]').clear().type('Soy un producto EDITADO')
     cy.get('[name=precio]').clear().type('45')
     cy.get('.btn-primary').contains('Guardar').click()
-    cy.wait(400)
+    cy.wait(1000)
+    cy.reload()
     cy.get('.card-text').contains('Camiseta 45€')
 
     //Borrar producto

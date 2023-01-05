@@ -111,6 +111,8 @@ export class ModalEditProductComponent implements OnInit {
     if(precio<5 || precio>100){
       this.errorPrice = true
     }else{
+      console.log("actualizar;", precio, this.tipo, foto, descripcion, idProducto);
+      
       axios.put(backURI + "products/update", {
         // design: nombre,  ????
         price: precio,

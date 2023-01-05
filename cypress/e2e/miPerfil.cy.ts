@@ -94,6 +94,12 @@ describe('PerfilComponent', () => {
     cy.get('label').find('img').should('have.attr', 'src').should('include', 'thumbsnap.com')
   })
 
+  it('Reset foto perfil', () => {
+    // cy.get('.btn-primary').contains('Editar Foto').click()  
+    cy.get('input[type=file]').invoke('show').selectFile('cypress/fixtures/star.png')
+    cy.get('label').find('img').should('have.attr', 'src').should('include', 'thumbsnap.com')
+  })
+
 
   // it('Si no hay favoritos, texto informativo', () => {
   //   cy.get('[name=botonFavorito]').click()
