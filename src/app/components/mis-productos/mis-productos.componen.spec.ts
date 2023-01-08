@@ -45,7 +45,7 @@ describe('MisProductosComponent', () => {
         spyOn(axios,'get').and.returnValue(Promise.resolve({ data: [{value:1}] }));
     
         // Call the getMore method
-        component.ngOnInit();
+        component.getMore();
         tick(1500)
         // Wait for the axios.get call to complete
         //TestBed.get(HttpClientTestingModule).expectOne('backURI + "designs/" + this.idUser + "/" + this.contPagemisDisenos').flush({ data: [] });

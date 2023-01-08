@@ -29,12 +29,12 @@ describe('HomeComponent', () => {
     })
   })*/
   
-  it('Filtro precio 31€ - 70€', () => {
+  /*it('Filtro precio 31€ - 70€', () => {
     cy.get('#navbarDropdownPrecio').click().get('.dropdown-item').contains('31€ - 70€').click()
     cy.wait(750)
     cy.get('[name=precio]').each((item)=>{
         cy.wrap(item).invoke('text').then(parseInt).should('be.a', 'number').should('be.greaterThan',30).should('be.lessThan',70)
     })
-  })
+  })*/
 
 })

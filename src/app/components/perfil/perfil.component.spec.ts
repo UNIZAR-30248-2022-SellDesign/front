@@ -77,7 +77,7 @@ describe('PerfilComponent', () => {
       it('ngOninit', fakeAsync(() => {
         // mock the axios.get function to return a resolved promise with a dummy response
         spyOn(axios, 'get').and.returnValue(Promise.resolve({ data: [{value:1}] }));
-    
+        spyOn(localStorage, 'getItem').and.returnValue('session');
         component.ngOnInit();
         tick(1000)
         // the getMore method should set the noHayFav to true and cargarMasFav to false
